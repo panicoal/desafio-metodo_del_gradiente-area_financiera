@@ -5,7 +5,6 @@ Método de **Gradientes Conjugados Precondicionado (GCP)** aplicado a un problem
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
-![Sin frameworks](https://img.shields.io/badge/frameworks-ninguno-success)
 
 ---
 
@@ -15,16 +14,6 @@ Método de **Gradientes Conjugados Precondicionado (GCP)** aplicado a un problem
 2. [Caso financiero](#caso-financiero)
 3. [Formulación matemática](#formulación-matemática)
 4. [Funcionalidades](#funcionalidades)
-5. [Tecnologías utilizadas](#tecnologías-utilizadas)
-6. [Estructura del proyecto](#estructura-del-proyecto)
-7. [Instalación](#instalación)
-8. [Ejecución local](#ejecución-local)
-9. [Despliegue público](#despliegue-público)
-10. [Arquitectura del código](#arquitectura-del-código)
-11. [Los tres escenarios](#los-tres-escenarios)
-12. [Módulo QA](#módulo-qa)
-13. [Referencias](#referencias)
-14. [Autor](#autor)
 
 ---
 
