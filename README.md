@@ -223,6 +223,3 @@ desafio-metodo_del_gradiente-area_financiera/
 4. **Hestenes, M. R., & Stiefel, E. (1952).** *Methods of conjugate gradients for solving linear systems*. Journal of Research of the National Bureau of Standards, 49(6), 409–436.
 5. **Higham, N. J. (2002).** *Accuracy and Stability of Numerical Algorithms* (2nd ed.). SIAM Publications.
 
----
-
-*Proyecto academico desarrollado para la materia Metodos Numericos (INF373) - Carrera de Informatica / Ingenieria de Sistemas - Universidad Mayor de San Andres (UMSA) - Gestion II / 2026*
