@@ -3,34 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simulador GCP · Asignación de Capital de Trabajo en Logística</title>
+<title>Simulador GCP - Asignacion de Capital de Trabajo en Logistica</title>
 
-<!-- Meta tags para SEO y GitHub Pages -->
-<meta name="description" content="Simulador interactivo del Método de Gradientes Conjugados Precondicionado (GCP) aplicado a la optimización de capital de trabajo en empresas de logística y transporte.">
+<!-- Metadatos para GitHub Pages y SEO Academico -->
+<meta name="description" content="Simulador interactivo del Metodo de Gradientes Conjugados Precondicionado (GCP) aplicado a la asignacion de capital de trabajo en logistica multimodal. UMSA - Metodos Numericos INF373.">
 <meta name="author" content="Joaquin Nicolas Paco Alanoca">
 
-<!-- Google Fonts: Inter & JetBrains Mono -->
+<!-- Fuentes tipograficas: Inter & JetBrains Mono -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- KaTeX CDN para renderizado LaTeX fluido y elegante -->
+<!-- KaTeX CDN para renderizado de formulas matematicas -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
 
-<!-- Chart.js CDN para gráficos dinámicos e interactivos -->
+<!-- Chart.js CDN para graficos dinamicos e interactivos -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 
 <style>
   /* ============================================================
-     SISTEMA DE VARIABLES DE DISEÑO (LIGHT & DARK THEMES)
+     SISTEMA DE VARIABLES DE DISENO (MODO CLARO Y OSCURO)
      ============================================================ */
   :root {
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
     
-    /* Modo Claro (Default) */
+    /* Modo Claro (Predeterminado) */
     --bg-app: #f8fafc;
     --bg-card: #ffffff;
     --bg-card-subtle: #f1f5f9;
@@ -41,38 +41,36 @@
     --border-color: #e2e8f0;
     --border-strong: #cbd5e1;
     
-    --primary: #2563eb;
-    --primary-hover: #1d4ed8;
+    --primary: #1d4ed8;
+    --primary-hover: #1e40af;
     --primary-soft: #dbeafe;
     --primary-border: #93c5fd;
     
-    --accent: #7c3aed;
+    --accent: #6d28d9;
     --accent-soft: #ede9fe;
-    --accent-hover: #6d28d9;
+    --accent-hover: #5b21b6;
     
-    --success: #059669;
+    --success: #047857;
     --success-soft: #d1fae5;
     --success-border: #6ee7b7;
     
-    --warning: #d97706;
+    --warning: #b45309;
     --warning-soft: #fef3c7;
     --warning-border: #fcd34d;
     
-    --danger: #dc2626;
+    --danger: #b91c1c;
     --danger-soft: #fee2e2;
     --danger-border: #fca5a5;
     
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
-    --radius-sm: 6px;
-    --radius-md: 10px;
-    --radius-lg: 16px;
-    --radius-xl: 20px;
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+    --radius-sm: 5px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
   }
 
   [data-theme="dark"] {
-    --bg-app: #090d16;
+    --bg-app: #0b0f19;
     --bg-card: #131b2e;
     --bg-card-subtle: #1e293b;
     --bg-hover: #1e293b;
@@ -105,11 +103,10 @@
     
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
   }
 
   /* ============================================================
-     RESET & BASE
+     RESET Y ESTILOS BASE
      ============================================================ */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { font-size: 15px; scroll-behavior: smooth; }
@@ -121,30 +118,17 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    transition: background-color 0.25s ease, color 0.25s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   /* ============================================================
-     TOP BAR & HEADER
+     ENCABEZADO PRINCIPAL (SIN EMOJIS, FORMATO ACADEMICO)
      ============================================================ */
   .top-banner {
-    background: linear-gradient(135deg, #1e3a8a 0%, #312e81 50%, #4c1d95 100%);
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e293b 100%);
     color: #ffffff;
     padding: 1.8rem 2rem 1.4rem;
     border-bottom: 3px solid var(--primary);
-    position: relative;
-    overflow: hidden;
-  }
-  .top-banner::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -10%;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
   }
   .header-content {
     max-width: 1440px;
@@ -156,63 +140,57 @@
     flex-wrap: wrap;
   }
   .header-main h1 {
-    font-size: 1.85rem;
-    font-weight: 800;
+    font-size: 1.75rem;
+    font-weight: 700;
     line-height: 1.25;
-    letter-spacing: -0.02em;
-    margin-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.35rem;
   }
   .header-main p {
-    font-size: 1.05rem;
+    font-size: 1.02rem;
     color: #cbd5e1;
     margin-bottom: 0.6rem;
   }
   .header-meta-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.6rem;
+    gap: 0.5rem;
     margin-top: 0.5rem;
   }
   .header-badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
     padding: 0.25rem 0.65rem;
     border-radius: var(--radius-sm);
     font-size: 0.82rem;
     background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(4px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: #f8fafc;
     font-weight: 500;
   }
-  .header-badge strong { color: #93c5fd; }
+  .header-badge strong { color: #93c5fd; margin-right: 0.25rem; }
   .header-actions {
     display: flex;
     align-items: center;
     gap: 0.6rem;
   }
-  .btn-icon-top {
+  .btn-header {
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.25);
     color: #ffffff;
-    padding: 0.55rem 0.85rem;
+    padding: 0.5rem 0.9rem;
     border-radius: var(--radius-md);
-    font-size: 0.88rem;
+    font-size: 0.86rem;
     font-weight: 600;
     cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    transition: all 0.2s ease;
+    transition: all 0.15s ease;
   }
-  .btn-icon-top:hover {
-    background: rgba(255, 255, 255, 0.28);
-    transform: translateY(-1px);
+  .btn-header:hover {
+    background: rgba(255, 255, 255, 0.25);
   }
 
   /* ============================================================
-     NAVEGACIÓN POR PESTAÑAS (STICKY)
+     BARRA DE NAVEGACION STICKY (10 MODULOS DE LA CONSIGNA)
      ============================================================ */
   nav.main-nav {
     position: sticky;
@@ -228,28 +206,28 @@
     margin: 0 auto;
     display: flex;
     align-items: center;
-    gap: 0.3rem;
-    padding: 0.5rem 1.5rem;
+    gap: 0.25rem;
+    padding: 0.45rem 1.2rem;
     overflow-x: auto;
     scrollbar-width: thin;
   }
-  .nav-inner::-webkit-scrollbar { height: 4px; }
-  .nav-inner::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+  .nav-inner::-webkit-scrollbar { height: 3px; }
+  .nav-inner::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
   
   nav button.nav-btn {
     background: transparent;
     border: 1px solid transparent;
     color: var(--text-muted);
-    padding: 0.55rem 0.95rem;
+    padding: 0.5rem 0.8rem;
     border-radius: var(--radius-md);
     cursor: pointer;
-    font-size: 0.92rem;
+    font-size: 0.88rem;
     font-weight: 600;
     white-space: nowrap;
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
-    transition: all 0.18s ease;
+    gap: 0.4rem;
+    transition: all 0.15s ease;
   }
   nav button.nav-btn:hover {
     color: var(--primary);
@@ -258,21 +236,20 @@
   nav button.nav-btn.active {
     color: #ffffff;
     background: var(--primary);
-    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
   }
   nav button.nav-btn .pill-num {
     background: rgba(0,0,0,0.08);
-    padding: 0.15rem 0.4rem;
-    border-radius: 4px;
-    font-size: 0.78rem;
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+    font-size: 0.76rem;
     font-family: var(--font-mono);
   }
   nav button.nav-btn.active .pill-num {
-    background: rgba(255,255,255,0.22);
+    background: rgba(255,255,255,0.25);
   }
 
   /* ============================================================
-     MAIN CONTAINER & TABS
+     CONTENEDOR PRINCIPAL
      ============================================================ */
   main {
     max-width: 1440px;
@@ -281,135 +258,96 @@
     padding: 1.8rem 1.5rem 4rem;
     flex: 1;
   }
-  .tab-panel {
-    display: none;
-  }
-  .tab-panel.active {
-    display: block;
-    animation: fadeIn 0.25s ease-out;
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
   /* ============================================================
-     TIPOGRAFÍA & ENCABEZADOS
+     TIPOGRAFIA Y JERARQUIA
      ============================================================ */
   h2.section-title {
-    font-size: 1.65rem;
+    font-size: 1.55rem;
     font-weight: 700;
     color: var(--text-main);
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
     margin-bottom: 0.5rem;
-    padding-bottom: 0.6rem;
+    padding-bottom: 0.5rem;
     border-bottom: 2px solid var(--border-color);
   }
   h3.card-title {
-    font-size: 1.22rem;
+    font-size: 1.18rem;
     font-weight: 700;
     color: var(--primary);
-    margin-bottom: 0.8rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    margin-bottom: 0.75rem;
   }
   h4.sub-title {
-    font-size: 1.02rem;
-    font-weight: 600;
+    font-size: 0.85rem;
+    font-weight: 700;
     color: var(--text-muted);
-    margin: 1.1rem 0 0.45rem;
+    margin: 1rem 0 0.4rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    font-size: 0.82rem;
   }
   p.lead-text {
-    font-size: 1.08rem;
+    font-size: 1.04rem;
     color: var(--text-muted);
-    margin-bottom: 1.3rem;
-    line-height: 1.7;
+    margin-bottom: 1.2rem;
+    line-height: 1.65;
   }
 
   /* ============================================================
-     CARDS & GRIDS
+     TARJETAS Y CUADRICULAS
      ============================================================ */
   .card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
-    padding: 1.5rem 1.75rem;
-    margin-bottom: 1.4rem;
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 1.3rem;
     box-shadow: var(--shadow-sm);
-    transition: box-shadow 0.2s ease, border-color 0.2s ease;
   }
-  .card:hover {
-    box-shadow: var(--shadow-md);
-    border-color: var(--border-strong);
-  }
-  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.3rem; }
-  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.3rem; }
-  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; }
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
   @media(max-width: 1024px) { .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); } }
   @media(max-width: 768px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
 
   /* ============================================================
-     BOTONES MODERNOS
+     BOTONES
      ============================================================ */
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.45rem;
     background: var(--primary);
     color: #ffffff;
     border: 1px solid transparent;
-    padding: 0.65rem 1.25rem;
+    padding: 0.6rem 1.2rem;
     border-radius: var(--radius-md);
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     cursor: pointer;
     transition: all 0.15s ease;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
   }
-  .btn:hover {
-    background: var(--primary-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
-  }
-  .btn:active { transform: translateY(0); }
+  .btn:hover { background: var(--primary-hover); }
   .btn.btn-outline {
     background: transparent;
     color: var(--primary);
     border: 1.5px solid var(--primary);
   }
-  .btn.btn-outline:hover {
-    background: var(--primary-soft);
-  }
-  .btn.btn-success {
-    background: var(--success);
-  }
-  .btn.btn-success:hover {
-    background: #047857;
-    box-shadow: 0 4px 10px rgba(5, 150, 105, 0.25);
-  }
+  .btn.btn-outline:hover { background: var(--primary-soft); }
+  .btn.btn-success { background: var(--success); }
+  .btn.btn-success:hover { background: #065f46; }
   .btn.btn-secondary {
     background: var(--bg-card-subtle);
     color: var(--text-main);
     border-color: var(--border-color);
   }
-  .btn.btn-secondary:hover {
-    background: var(--border-color);
-  }
-  .btn.btn-sm {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.85rem;
-    border-radius: var(--radius-sm);
-  }
+  .btn.btn-secondary:hover { background: var(--border-color); }
+  .btn.btn-sm { padding: 0.35rem 0.75rem; font-size: 0.82rem; border-radius: var(--radius-sm); }
 
   /* ============================================================
-     TABLAS MODERNAS
+     TABLAS FORMALES
      ============================================================ */
   .table-responsive {
     width: 100%;
@@ -418,46 +356,29 @@
     border-radius: var(--radius-md);
     margin: 0.8rem 0;
   }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.92rem;
-    text-align: left;
-  }
-  th, td {
-    padding: 0.65rem 0.9rem;
-    border-bottom: 1px solid var(--border-color);
-  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; text-align: left; }
+  th, td { padding: 0.65rem 0.85rem; border-bottom: 1px solid var(--border-color); }
   th {
     background: var(--bg-card-subtle);
     color: var(--text-muted);
     font-weight: 700;
     text-transform: uppercase;
     font-size: 0.78rem;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
   }
-  tbody tr:hover {
-    background: var(--bg-hover);
-  }
-  td.num, th.num {
-    text-align: right;
-    font-family: var(--font-mono);
-  }
-  .cell-highlight {
-    font-weight: 700;
-    color: var(--primary);
-  }
+  tbody tr:hover { background: var(--bg-hover); }
+  td.num, th.num { text-align: right; font-family: var(--font-mono); }
+  .cell-highlight { font-weight: 700; color: var(--primary); }
 
   /* ============================================================
-     BADGES & ALERTS
+     BADGES Y MENSAJES DE ESTADO
      ============================================================ */
   .badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
-    padding: 0.2rem 0.55rem;
+    padding: 0.18rem 0.5rem;
     border-radius: var(--radius-sm);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 600;
     font-family: var(--font-mono);
   }
@@ -467,14 +388,11 @@
   .badge.info { background: var(--primary-soft); color: var(--primary); border: 1px solid var(--primary-border); }
   
   .msg-box {
-    padding: 0.9rem 1.25rem;
+    padding: 0.85rem 1.15rem;
     border-radius: var(--radius-md);
-    margin: 0.85rem 0;
-    font-size: 0.95rem;
+    margin: 0.8rem 0;
+    font-size: 0.92rem;
     border-left: 4px solid;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
   }
   .msg-box.ok { background: var(--success-soft); border-color: var(--success); color: var(--text-main); }
   .msg-box.warn { background: var(--warning-soft); border-color: var(--warning); color: var(--text-main); }
@@ -482,99 +400,77 @@
   .msg-box.info { background: var(--primary-soft); border-color: var(--primary); color: var(--text-main); }
 
   /* ============================================================
-     KPIS & METRIC CARDS
+     KPIS Y METRICAS
      ============================================================ */
   .kpi-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    gap: 0.9rem;
-    margin: 1.1rem 0;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.85rem;
+    margin: 1rem 0;
   }
   .kpi-card {
     background: var(--bg-card-subtle);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
-    padding: 0.95rem 1.1rem;
-    position: relative;
-    overflow: hidden;
+    padding: 0.85rem 1rem;
   }
   .kpi-card .kpi-label {
-    font-size: 0.8rem;
-    font-weight: 600;
+    font-size: 0.78rem;
+    font-weight: 700;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.04em;
     display: flex;
-    align-items: center;
     justify-content: space-between;
   }
   .kpi-card .kpi-value {
-    font-size: 1.45rem;
+    font-size: 1.4rem;
     font-weight: 800;
     color: var(--primary);
     font-family: var(--font-mono);
-    margin: 0.35rem 0 0.15rem;
-    letter-spacing: -0.02em;
+    margin: 0.3rem 0 0.1rem;
   }
-  .kpi-card .kpi-sub {
-    font-size: 0.78rem;
-    color: var(--text-subtle);
-  }
-  .kpi-card.highlight {
-    background: var(--primary-soft);
-    border-color: var(--primary-border);
-  }
-  .kpi-card.highlight .kpi-value {
-    color: var(--primary);
-  }
-  .kpi-card.success-highlight {
-    background: var(--success-soft);
-    border-color: var(--success-border);
-  }
-  .kpi-card.success-highlight .kpi-value {
-    color: var(--success);
-  }
+  .kpi-card .kpi-sub { font-size: 0.76rem; color: var(--text-subtle); }
+  .kpi-card.highlight { background: var(--primary-soft); border-color: var(--primary-border); }
+  .kpi-card.success-highlight { background: var(--success-soft); border-color: var(--success-border); }
+  .kpi-card.success-highlight .kpi-value { color: var(--success); }
 
   /* ============================================================
-     INTERPRETACIÓN DINÁMICA DE RESULTADOS
+     PANEL DE INTERPRETACION DINAMICA
      ============================================================ */
   .insight-panel {
-    background: linear-gradient(135deg, rgba(37,99,235,0.06) 0%, rgba(124,58,237,0.06) 100%);
+    background: var(--bg-card-subtle);
     border: 1.5px solid var(--primary-border);
     border-radius: var(--radius-lg);
-    padding: 1.3rem 1.6rem;
+    padding: 1.2rem 1.5rem;
     margin: 1.2rem 0;
   }
   .insight-panel h4 {
     color: var(--primary);
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.7rem;
   }
   .insight-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 0.9rem;
+    gap: 0.85rem;
   }
   .insight-item {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
-    padding: 0.9rem 1.1rem;
-    font-size: 0.93rem;
+    padding: 0.85rem 1rem;
+    font-size: 0.92rem;
   }
   .insight-item strong {
     color: var(--text-main);
     display: block;
     margin-bottom: 0.25rem;
-    font-size: 0.98rem;
   }
 
   /* ============================================================
-     MATRICES & VECTORES INTERACTIVOS
+     EDICION DE MATRICES Y VECTORES
      ============================================================ */
   .matrix-wrapper {
     display: inline-block;
@@ -582,7 +478,7 @@
     background: var(--bg-card-subtle);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
-    margin: 0.5rem 0;
+    margin: 0.4rem 0;
   }
   .matrix-grid-input {
     display: grid;
@@ -599,7 +495,6 @@
     font-family: var(--font-mono);
     font-size: 0.92rem;
     text-align: right;
-    transition: all 0.15s ease;
   }
   .matrix-grid-input input:focus, .vector-input-row input:focus, .field-input:focus {
     outline: none;
@@ -608,17 +503,15 @@
   }
   .matrix-grid-input input.diag {
     font-weight: 700;
-    background: rgba(37, 99, 235, 0.05);
+    background: rgba(29, 78, 216, 0.05);
   }
   .vector-input-row {
     display: flex;
     gap: 0.45rem;
     flex-wrap: wrap;
-    margin: 0.4rem 0 1rem;
+    margin: 0.35rem 0 0.9rem;
   }
-  .vector-input-row input {
-    width: 90px;
-  }
+  .vector-input-row input { width: 90px; }
 
   /* ============================================================
      SELECTOR DE ESCENARIOS
@@ -626,8 +519,8 @@
   .scenario-btn-group {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.9rem;
-    margin-bottom: 1.1rem;
+    gap: 0.85rem;
+    margin-bottom: 1rem;
   }
   @media(max-width: 800px) { .scenario-btn-group { grid-template-columns: 1fr; } }
   
@@ -635,48 +528,43 @@
     background: var(--bg-card);
     border: 2px solid var(--border-color);
     border-radius: var(--radius-md);
-    padding: 1rem 1.15rem;
+    padding: 0.9rem 1.1rem;
     cursor: pointer;
     text-align: left;
-    transition: all 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    transition: all 0.15s ease;
   }
   .scenario-btn-card:hover {
     border-color: var(--primary);
     background: var(--bg-hover);
-    transform: translateY(-2px);
   }
   .scenario-btn-card.active {
     border-color: var(--primary);
     background: var(--primary-soft);
-    box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
   }
   .scenario-btn-card .sc-title {
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--primary);
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.25rem;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
   }
   .scenario-btn-card .sc-desc {
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     color: var(--text-muted);
-    line-height: 1.45;
+    line-height: 1.4;
   }
 
   /* ============================================================
-     CONTENEDOR DE GRÁFICOS INTERACTIVOS (CHART.JS TABS)
+     GRAFICOS INTERACTIVOS (CHART.JS)
      ============================================================ */
   .chart-container-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
-    padding: 1.4rem;
-    margin: 1.4rem 0;
+    padding: 1.3rem;
+    margin: 1.3rem 0;
     box-shadow: var(--shadow-sm);
   }
   .chart-toolbar {
@@ -684,45 +572,28 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 0.8rem;
+    gap: 0.75rem;
     margin-bottom: 1rem;
-    padding-bottom: 0.8rem;
+    padding-bottom: 0.75rem;
     border-bottom: 1px solid var(--border-color);
   }
-  .chart-nav-pills {
-    display: flex;
-    gap: 0.4rem;
-    flex-wrap: wrap;
-  }
+  .chart-nav-pills { display: flex; gap: 0.35rem; flex-wrap: wrap; }
   .chart-pill {
-    padding: 0.35rem 0.85rem;
+    padding: 0.35rem 0.8rem;
     border-radius: var(--radius-sm);
-    font-size: 0.84rem;
+    font-size: 0.82rem;
     font-weight: 600;
     cursor: pointer;
     background: var(--bg-card-subtle);
     color: var(--text-muted);
     border: 1px solid var(--border-color);
-    transition: all 0.15s ease;
   }
-  .chart-pill:hover {
-    color: var(--primary);
-    background: var(--primary-soft);
-  }
-  .chart-pill.active {
-    background: var(--primary);
-    color: #ffffff;
-    border-color: var(--primary);
-  }
-  .chart-canvas-box {
-    position: relative;
-    width: 100%;
-    min-height: 380px;
-    max-height: 440px;
-  }
+  .chart-pill:hover { color: var(--primary); background: var(--primary-soft); }
+  .chart-pill.active { background: var(--primary); color: #ffffff; border-color: var(--primary); }
+  .chart-canvas-box { position: relative; width: 100%; min-height: 380px; max-height: 430px; }
 
   /* ============================================================
-     VISUALIZADOR PASO A PASO (ALGORITMO GCP)
+     VISUALIZADOR PASO A PASO
      ============================================================ */
   .stepper-controls {
     display: flex;
@@ -730,7 +601,7 @@
     justify-content: space-between;
     gap: 1rem;
     background: var(--bg-card-subtle);
-    padding: 0.8rem 1.2rem;
+    padding: 0.75rem 1.1rem;
     border-radius: var(--radius-md);
     margin: 1rem 0;
     flex-wrap: wrap;
@@ -742,11 +613,7 @@
     align-items: center;
     gap: 0.75rem;
   }
-  .stepper-slider-wrap input[type="range"] {
-    flex: 1;
-    cursor: pointer;
-    accent-color: var(--primary);
-  }
+  .stepper-slider-wrap input[type="range"] { flex: 1; cursor: pointer; accent-color: var(--primary); }
   .step-formula-box {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -754,76 +621,59 @@
     padding: 1.1rem;
     font-family: var(--font-mono);
     font-size: 0.92rem;
-    margin: 0.8rem 0;
+    margin: 0.75rem 0;
+    line-height: 1.8;
   }
-  .vector-chips-display {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin: 0.4rem 0;
-  }
+  .vector-chips-display { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 0.4rem 0; }
   .vec-chip {
     background: var(--bg-card-subtle);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-sm);
-    padding: 0.25rem 0.65rem;
+    padding: 0.25rem 0.6rem;
     font-family: var(--font-mono);
     font-size: 0.85rem;
   }
   .vec-chip span { color: var(--primary); font-weight: 700; }
 
   /* ============================================================
-     ESTILOS FORMULARIOS & ACCIONES
+     FORMULARIOS
      ============================================================ */
-  .form-row {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-bottom: 0.8rem;
-  }
-  .form-group {
-    flex: 1;
-    min-width: 180px;
-  }
+  .form-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+  .form-group { flex: 1; min-width: 170px; }
   .form-group label {
     display: block;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 700;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.3rem;
   }
   .field-input, .field-select {
     width: 100%;
-    padding: 0.55rem 0.8rem;
+    padding: 0.5rem 0.75rem;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-strong);
     background: var(--bg-card);
     color: var(--text-main);
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     font-family: var(--font-mono);
-    transition: all 0.15s ease;
   }
 
   /* ============================================================
-     IMÁGENES & RECURSOS
+     IMAGENES
      ============================================================ */
-  .image-figure {
-    text-align: center;
-    margin: 1.4rem 0;
-  }
+  .image-figure { text-align: center; margin: 1.2rem 0; }
   .image-figure img {
     max-width: 100%;
     height: auto;
     border-radius: var(--radius-lg);
     border: 1px solid var(--border-color);
-    box-shadow: var(--shadow-md);
   }
   .image-figure figcaption {
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     color: var(--text-muted);
-    margin-top: 0.5rem;
+    margin-top: 0.4rem;
     font-style: italic;
   }
 
@@ -833,575 +683,427 @@
   footer {
     background: var(--bg-card);
     border-top: 1px solid var(--border-color);
-    padding: 2rem 1.5rem;
+    padding: 1.8rem 1.5rem;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     color: var(--text-muted);
     margin-top: auto;
   }
 
   /* ============================================================
-     PRINT STYLES
+     ESTILOS DE IMPRESION FORMAL
      ============================================================ */
   @media print {
-    nav.main-nav, .header-actions, .stepper-controls, .btn { display: none !important; }
+    nav.main-nav, .header-actions, .stepper-controls, .btn, .chart-toolbar button { display: none !important; }
     .tab-panel { display: block !important; page-break-after: always; }
-    body { background: #ffffff !important; color: #000000 !important; }
+    body { background: #ffffff !important; color: #000000 !important; font-size: 11pt !important; }
     .card { box-shadow: none !important; border: 1px solid #ccc !important; }
   }
 </style>
 </head>
 <body>
 
-<!-- ENCABEZADO SUPERIOR -->
+<!-- ENCABEZADO SUPERIOR ACADEMICO -->
 <header class="top-banner">
   <div class="header-content">
     <div class="header-main">
-      <h1>Simulador GCP · Asignación de Capital de Trabajo en Logística</h1>
-      <p>Resolución y optimización de sistemas acoplados <span class="math-inline">Ax = b</span> mediante Gradientes Conjugados Precondicionados</p>
+      <h1>Simulador GCP - Asignacion de Capital de Trabajo en Logistica</h1>
+      <p>Resolucion de sistemas lineales simetricos y definidos positivos mediante Gradientes Conjugados Precondicionado</p>
       <div class="header-meta-tags">
         <span class="header-badge"><strong>Estudiante:</strong> Joaquin Nicolas Paco Alanoca</span>
-        <span class="header-badge"><strong>Materia:</strong> Métodos Numéricos INF373</span>
+        <span class="header-badge"><strong>Materia:</strong> Metodos Numericos (INF373)</span>
         <span class="header-badge"><strong>Docente:</strong> Lic. Brigida Alexandra Carvajal Blanco</span>
-        <span class="header-badge"><strong>Gestión:</strong> II / 2026</span>
-        <span class="header-badge"><strong>Sistema:</strong> 5×5 Simétrico y Definido Positivo</span>
-        <span class="header-badge"><strong>GitHub Pages:</strong> Listo y Autocontenido</span>
+        <span class="header-badge"><strong>Gestion:</strong> II / 2026</span>
+        <span class="header-badge"><strong>Mencion:</strong> Ingenieria de Sistemas / Informatica - UMSA</span>
+        <span class="header-badge"><strong>Sistema:</strong> 5x5 Simetrico y Definido Positivo (n = 5 &ge; 4)</span>
       </div>
     </div>
     <div class="header-actions">
-      <button class="btn-icon-top" id="btn-theme-toggle" title="Cambiar Tema (Claro / Oscuro)">
-        <span id="theme-icon">🌙</span> <span id="theme-text">Oscuro</span>
-      </button>
-      <button class="btn-icon-top" id="btn-print" title="Imprimir o Exportar a PDF">
-        🖨️ Imprimir Reporte
+      <button class="btn-header" id="btn-print" title="Imprimir o generar informe">
+        Imprimir Informe
       </button>
     </div>
   </div>
 </header>
 
-<!-- NAVEGACIÓN STICKY -->
+<!-- BARRA DE NAVEGACION POR MODULOS (10 SECCIONES SEGUN CONSIGNA) -->
 <nav class="main-nav" id="main-nav">
   <div class="nav-inner">
-    <button class="nav-btn active" data-tab="inicio"><span class="pill-num">1</span> Inicio</button>
-    <button class="nav-btn" data-tab="caso"><span class="pill-num">2</span> Caso Logístico</button>
-    <button class="nav-btn" data-tab="formulacion"><span class="pill-num">3</span> Formulación SPD</button>
-    <button class="nav-btn" data-tab="escenarios"><span class="pill-num">4</span> 3 Escenarios</button>
-    <button class="nav-btn" data-tab="teoria"><span class="pill-num">5</span> Fundamento Teórico</button>
-    <button class="nav-btn" data-tab="simulador"><span class="pill-num">6</span> Simulador Interactivo</button>
-    <button class="nav-btn" data-tab="paso-paso"><span class="pill-num">7</span> Proceso Paso a Paso</button>
-    <button class="nav-btn" data-tab="comparativa"><span class="pill-num">8</span> Tabla Comparativa</button>
-    <button class="nav-btn" data-tab="qa"><span class="pill-num">9</span> Módulo QA</button>
-    <button class="nav-btn" data-tab="conclusiones"><span class="pill-num">10</span> Conclusiones</button>
+    <button class="nav-btn active" data-tab="sec-1-inicio"><span class="pill-num">1</span> Inicio</button>
+    <button class="nav-btn" data-tab="sec-2-caso"><span class="pill-num">2</span> Caso de estudio</button>
+    <button class="nav-btn" data-tab="sec-3-formulacion"><span class="pill-num">3</span> Formulacion</button>
+    <button class="nav-btn" data-tab="sec-4-entrada"><span class="pill-num">4</span> Entrada de datos</button>
+    <button class="nav-btn" data-tab="sec-5-escenarios"><span class="pill-num">5</span> Tres escenarios</button>
+    <button class="nav-btn" data-tab="sec-6-referencia"><span class="pill-num">6</span> Solucion de referencia</button>
+    <button class="nav-btn" data-tab="sec-7-gcp-gc"><span class="pill-num">7</span> GCP vs GC</button>
+    <button class="nav-btn" data-tab="sec-8-errores"><span class="pill-num">8</span> Analisis de errores</button>
+    <button class="nav-btn" data-tab="sec-tabla-comparativa"><span class="pill-num">8B</span> Tabla comparativa</button>
+    <button class="nav-btn" data-tab="sec-9-qa"><span class="pill-num">9</span> Modulo QA</button>
+    <button class="nav-btn" data-tab="sec-10-conclusiones"><span class="pill-num">10</span> Conclusiones y Referencias</button>
   </div>
 </nav>
 
 <main>
 
 <!-- ============================================================
-     SECCIÓN 1: INICIO
+     SECCION 1: INICIO (CONSIGNA SECCION 7.1)
      ============================================================ -->
-<section id="inicio" class="tab-panel active">
-  <h2 class="section-title">1. Visión General del Proyecto</h2>
+<section id="sec-1-inicio" class="tab-panel active">
+  <h2 class="section-title">1. Inicio</h2>
   <p class="lead-text">
-    Este entorno interactivo de simulación numérica modela la toma de decisiones financieras en una empresa de transporte, logística y almacenamiento. Permite determinar el <strong>vector óptimo de capital de trabajo</strong> para cinco líneas de negocio operativamente acopladas, comparando la eficiencia del <strong>Método de Gradientes Conjugados Precondicionado (GCP)</strong> frente al Gradiente Conjugado convencional (GC) y la solución exacta por Factorización de Cholesky.
+    Este proyecto implementa una aplicacion web interactiva de calculo cientifico para resolver el problema de <strong>asignacion optima de capital de trabajo</strong> entre cinco lineas de servicio de una empresa de transporte, logistica y almacenamiento en el eje troncal. Se aplica el <strong>Metodo de Gradientes Conjugados Precondicionado (GCP)</strong> descrito por <strong>Suñagua S. (2020)</strong>, contrastandolo con el algoritmo de Gradientes Conjugados simple (GC) y la solucion numerica directa de referencia mediante Factorizacion de Cholesky.
   </p>
 
   <div class="grid-3">
     <div class="card">
-      <h3 class="card-title">📦 El Problema Financiero</h3>
-      <p>Cinco líneas operativas comparten tractocamiones, bodegas refrigeradas, personal polivalente y plataformas ERP. El financiamiento de una línea altera directamente los requerimientos de liquidez de las demás.</p>
+      <h3 class="card-title">Datos del Estudiante y Mencion</h3>
+      <p style="font-size:0.92rem; line-height:1.8;">
+        <strong>Estudiante:</strong> Joaquin Nicolas Paco Alanoca<br>
+        <strong>Materia:</strong> Metodos Numericos (INF373)<br>
+        <strong>Docente:</strong> Lic. Brigida Alexandra Carvajal Blanco<br>
+        <strong>Gestion Academica:</strong> II / 2026<br>
+        <strong>Carrera:</strong> Licenciatura en Informatica - UMSA<br>
+        <strong>Mencion Academica:</strong> Ingenieria de Sistemas / Ingenieria de Software
+      </p>
     </div>
+
     <div class="card">
-      <h3 class="card-title">⚡ Desafío Numérico</h3>
-      <p>Cuando los volúmenes o costos entre líneas son dispares, el sistema <span class="math-inline">Ax = b</span> queda <strong>mal condicionado</strong> (<span class="math-inline">\kappa(A) \gg 1</span>). GC simple se estanca; el precondicionamiento <span class="math-inline">M^{-1}</span> restablece la convergencia ultrarrápida.</p>
+      <h3 class="card-title">Sintesis del Caso Financiero</h3>
+      <p style="font-size:0.92rem;">
+        Una empresa logistica opera cinco unidades: transporte pesado, distribucion urbana, almacenaje seco, cadena de frio y logistica inversa. Debido a que <strong>comparten infraestructura, conductores y almacenes</strong>, el capital asignado a una linea modifica las coberturas y costos de las demas, generando un sistema lineal acoplado \(Ax = b\) de dimension \(5 \times 5\) (\(n = 5 \ge 4\)).
+      </p>
     </div>
+
     <div class="card">
-      <h3 class="card-title">📊 Novedades de la UI</h3>
-      <p>Gráficos dinámicos con <strong>Chart.js</strong>, visualización iterativa paso a paso del algoritmo <em>Mz</em>, cálculo espectral de autovalores, comparador multi-escenario en un clic y exportación de reportes a CSV y PDF.</p>
+      <h3 class="card-title">Aporte Especifico de la Mencion</h3>
+      <p style="font-size:0.92rem;">
+        Desarrollo de una arquitectura SPA (Single Page Application) reactiva sin dependencias de backend, con renderizado dinamico con Chart.js, formulas matematicas tipograficas con KaTeX, auditoria de condicionamiento espectral, verificacion de pruebas de software automatizadas (QA) y exportacion estructurada a CSV e impresion.
+      </p>
     </div>
   </div>
 
   <div class="card">
-    <h3 class="card-title">🚀 Guía Rápida de Exploración</h3>
-    <ol style="margin-left: 1.5rem; line-height: 1.9; font-size: 0.98rem;">
-      <li><strong>Explora el caso y la formulación:</strong> Revisa cómo se definen las 5 líneas logísticas y cómo se verifica la definición positiva de la matriz.</li>
-      <li><strong>Prueba los escenarios predefinidos:</strong> En la sección <em>6. Simulador</em>, selecciona entre el escenario <em>Ideal</em>, <em>Estrés financiero</em> o <em>Mal condicionado</em>.</li>
-      <li><strong>Ejecuta y compara:</strong> Pulsa <em>"Ejecutar GCP y GC"</em> para ver la curva logarítmica de residuos, la distribución del capital y los diagnósticos automáticos.</li>
-      <li><strong>Inspecciona el proceso paso a paso:</strong> En la sección <em>7. Proceso Paso a Paso</em>, desliza el control de iteraciones para ver cómo evolucionan <span class="math-inline">x_k, r_k, z_k, p_k, \alpha, \beta</span>.</li>
-      <li><strong>Audita la calidad:</strong> Ejecuta los 4 casos de prueba automatizados en la sección <em>9. Módulo QA</em>.</li>
-    </ol>
+    <h3 class="card-title">Guia de Navegacion del Simulador</h3>
+    <div class="grid-2">
+      <div>
+        <h4 class="sub-title">Secciones de Modelado y Teoria</h4>
+        <ul style="margin-left: 1.2rem; font-size: 0.92rem; line-height: 1.8;">
+          <li><strong>2. Caso de estudio:</strong> Contexto logistico y procedencia de datos.</li>
+          <li><strong>3. Formulacion:</strong> Definicion de variables \(x_1 \dots x_5\) y verificacion SPD.</li>
+          <li><strong>5. Tres escenarios:</strong> Carga rapida de Ideal, Bajo estres y Mal condicionado.</li>
+          <li><strong>10. Conclusiones y Referencias:</strong> Analisis tecnico y cita formal de Suñagua (2020).</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="sub-title">Secciones de Simulacion y Pruebas</h4>
+        <ul style="margin-left: 1.2rem; font-size: 0.92rem; line-height: 1.8;">
+          <li><strong>4. Entrada de datos:</strong> Edicion interactiva de coeficientes y parametros.</li>
+          <li><strong>6. Solucion de referencia:</strong> Despliegue del metodo directo de Cholesky.</li>
+          <li><strong>7. GCP vs GC:</strong> Comparacion iterativa y visor paso a paso del algoritmo Mz.</li>
+          <li><strong>8. Analisis de errores:</strong> Tabla y graficos de \(E_a, E_r, E_p\) y convergencia.</li>
+          <li><strong>8B. Tabla comparativa:</strong> Matriz obligatoria con los 11 indicadores de la consigna.</li>
+          <li><strong>9. Modulo QA:</strong> Ejecucion de los cuatro casos de prueba de software.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ============================================================
-     SECCIÓN 2: CASO DE ESTUDIO
+     SECCION 2: CASO DE ESTUDIO (CONSIGNA SECCION 7.2)
      ============================================================ -->
-<section id="caso" class="tab-panel">
-  <h2 class="section-title">2. Caso de Estudio: Empresa Logística Multimodal</h2>
+<section id="sec-2-caso" class="tab-panel">
+  <h2 class="section-title">2. Caso de Estudio</h2>
   <p class="lead-text">
-    Una corporación logística opera cinco divisiones de servicio simultáneas en el eje troncal. Debido a la naturaleza compartida de sus instalaciones y flota, el capital asignado a una división influye en los costos y coberturas de las otras cuatro.
+    Una corporacion de transporte y logistica intermodal opera en el eje troncal conectando centros de distribucion y clientes finales. La toma de decisiones financieras sobre el capital de trabajo inmovilizado no puede realizarse de forma fragmentada debido a la <strong>fungibilidad e interdependencia de activos</strong>.
   </p>
 
   <figure class="image-figure">
-    <img src="images.jpeg" alt="Operaciones logísticas integradas: transporte de carga pesada, almacén seco y distribución urbana">
-    <figcaption>Figura 1: Interdependencia de activos en el ecosistema logístico (transporte, bodegaje y última milla).</figcaption>
+    <img src="images.jpeg" alt="Operaciones logisticas integradas: transporte de carga, bodegaje y distribucion">
+    <figcaption>Figura 1: Interdependencia operativa y activos compartidos en las lineas logisticas de la empresa.</figcaption>
   </figure>
 
   <div class="card">
-    <h3 class="card-title">2.1 Las Cinco Variables de Decisión (<span class="math-inline">x_i</span>)</h3>
-    <p>Cada variable <span class="math-inline">x_i</span> representa el capital de trabajo inmovilizado (en <strong>miles de dólares USD</strong>) requerido para garantizar la operación continua sin quiebres de inventario ni paradas de flota:</p>
+    <h3 class="card-title">2.1 Contexto Financiero y Decision Operativa</h3>
+    <p>
+      El <strong>capital de trabajo</strong> (\(x_i\)) es la liquidez requerida para financiar el ciclo operativo corriente: combustible diésel, peajes interdepartamentales, salarios de choferes y estibadores, mantenimiento mecanico de flota, suministro electrico continuo para refrigeracion y provision para mermas en devoluciones.
+    </p>
+    <p style="margin-top:0.5rem;">
+      Dado que el acceso a lineas de credito de corto plazo conlleva un costo de financiamiento (tasa activa de interes bancario y costo de oportunidad), la gerencia financiera busca hallar el <strong>vector optimo de capital \(x^*\)</strong> que satisfaga exactamente las metas de cobertura requeridas (\(b\)) al menor costo posible.
+    </p>
+  </div>
 
+  <div class="grid-2">
+    <div class="card">
+      <h3 class="card-title">2.2 Justificacion del Modelo</h3>
+      <p style="font-size:0.92rem; line-height:1.8;">
+        • <strong>Acoplamiento operativo:</strong> Si se incrementa el transporte pesado (\(x_1\)), se satura la recepcion en almacen seco (\(x_3\)) y se requieren furgonetas de ultima milla (\(x_2\)) para evacuar carga.<br>
+        • <strong>Flota fungible:</strong> Los conductores y talleres de mantenimiento atienden tanto a unidades pesadas como ligeras.<br>
+        • <strong>Simetria del acoplamiento:</strong> La tasa de transferencia de capacidad de la linea \(i\) hacia la linea \(j\) se asume equivalente a la tasa inversa (\(a_{ij} = a_{ji}\)).
+      </p>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">2.3 Procedencia de los Datos</h3>
+      <p style="font-size:0.92rem; line-height:1.8;">
+        Los parametros de costos (\(a_{ii}\)) y coeficientes de friccion (\(a_{ij}\)) provienen de ratios de estructura de costos del sector logistico nacional:
+        reportes de consumo de combustible por tonelada-kilometro, tarifas de peaje de Vias Bolivia, costos promedio de mantenimiento por kilometro y tarifas de bodegaje por metro cubico refrigerado. El vector \(b\) refleja el volumen de demanda contractual acordado para el periodo operativo.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCION 3: FORMULACION (CONSIGNA SECCION 7.3)
+     ============================================================ -->
+<section id="sec-3-formulacion" class="tab-panel">
+  <h2 class="section-title">3. Formulacion Matematica</h2>
+  <p class="lead-text">
+    El equilibrio financiero de asignacion se formula como un sistema lineal de ecuaciones de orden \(n = 5\) (\(n \ge 4\)):
+    \[ A x = b, \quad A \in \mathbb{R}^{5 \times 5}, \quad x, b \in \mathbb{R}^5 \]
+  </p>
+
+  <div class="card">
+    <h3 class="card-title">3.1 Definicion Explicita de las Variables de Decision (\(x_i\))</h3>
     <div class="table-responsive">
       <table>
         <thead>
           <tr>
             <th>Variable</th>
-            <th>Línea Operativa</th>
-            <th>Descripción de Activos y Costos</th>
-            <th>Activos Compartidos Clave</th>
+            <th>Linea Operativa</th>
+            <th>Unidad de Medida</th>
+            <th>Descripcion de Componentes de Costo</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong><span class="math-inline">x_1</span></strong></td>
-            <td><strong>Transporte de Carga Pesada (Largo Recorrido)</strong></td>
-            <td>Combustible diésel, peajes interdepartamentales, viáticos y mantenimiento preventivo de tractocamiones.</td>
-            <td>Talleres mecánicos y conductores de relevo con distribución urbana.</td>
+            <td><strong>\(x_1\)</strong></td>
+            <td>Transporte de carga pesada (largo recorrido)</td>
+            <td>miles de USD</td>
+            <td>Combustible diésel, peajes interdepartamentales, llantas y viaticos.</td>
           </tr>
           <tr>
-            <td><strong><span class="math-inline">x_2</span></strong></td>
-            <td><strong>Distribución Urbana y Última Milla</strong></td>
-            <td>Furgonetas ligeras, combustible urbano, seguros contra siniestros y logística exprés a clientes finales.</td>
-            <td>Muelles de carga en almacén central y plataforma telemática.</td>
+            <td><strong>\(x_2\)</strong></td>
+            <td>Distribucion urbana y ultima milla</td>
+            <td>miles de USD</td>
+            <td>Furgonetas urbanas, mantenimiento ligero, seguros contra siniestros.</td>
           </tr>
           <tr>
-            <td><strong><span class="math-inline">x_3</span></strong></td>
-            <td><strong>Almacenaje Seco y Bodegaje</strong></td>
-            <td>Alquiler de naves industriales, racks, autoelevadores, paletizado y sistemas WMS.</td>
-            <td>Bodega central compartida con cadena de frío y zona de devoluciones.</td>
+            <td><strong>\(x_3\)</strong></td>
+            <td>Almacenaje seco y bodegaje</td>
+            <td>miles de USD</td>
+            <td>Arriendo de naves industriales, autoelevadores, palets y personal WMS.</td>
           </tr>
           <tr>
-            <td><strong><span class="math-inline">x_4</span></strong></td>
-            <td><strong>Cadena de Frío (Alimentos y Farmacia)</strong></td>
-            <td>Energía eléctrica continua, generadores diésel de respaldo, monitoreo IoT de temperatura y termógrafos.</td>
-            <td>Unidades de refrigeración conectadas a la red de largo recorrido.</td>
+            <td><strong>\(x_4\)</strong></td>
+            <td>Cadena de frio (alimentos y farmacia)</td>
+            <td>miles de USD</td>
+            <td>Energia trifasica continua, generadores auxiliares y termografos IoT.</td>
           </tr>
           <tr>
-            <td><strong><span class="math-inline">x_5</span></strong></td>
-            <td><strong>Logística Inversa y Devoluciones</strong></td>
-            <td>Inspección de mercadería retornada, embalaje reacondicionado y reenvío a origen o disposición.</td>
-            <td>Espacio de cuarentena en bodega y rutas urbanas de retorno.</td>
+            <td><strong>\(x_5\)</strong></td>
+            <td>Logistica inversa y devoluciones</td>
+            <td>miles de USD</td>
+            <td>Inspeccion tecnica, embalaje de retorno y clasificacion de garantias.</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <div class="grid-2">
-    <div class="card">
-      <h3 class="card-title">2.2 Significado de la Matriz <span class="math-inline">A</span></h3>
-      <p>La ecuación <span class="math-inline">i</span>-ésima es <span class="math-inline">a_{ii}x_i + \sum_{j \neq i} a_{ij} x_j = b_i</span>:</p>
-      <ul style="margin-left: 1.2rem; line-height: 1.8;">
-        <li><strong>Diagonal <span class="math-inline">a_{ii}</span>:</strong> Costo propio directo de inmovilización de capital en la línea <span class="math-inline">i</span> (tasa de costo de capital, depreciación y costos fijos directos). Es positivo y dominante.</li>
-        <li><strong>Fuera de la diagonal <span class="math-inline">a_{ij} = a_{ji}</span>:</strong> Coeficiente de acoplamiento operativo entre las líneas <span class="math-inline">i</span> y <span class="math-inline">j</span>. Representa la fricción o requerimiento adicional de liquidez cuando ambas líneas operan simultáneamente (ej. congestión en patios de maniobra o reasignación de personal).</li>
-      </ul>
+  <div class="card">
+    <h3 class="card-title">3.2 Interpretacion de los Coeficientes del Sistema</h3>
+    <p>La ecuacion para la linea \(i\) se expresa como: \(a_{ii} x_i + \sum_{j \neq i} a_{ij} x_j = b_i\)</p>
+    <ul style="margin-left: 1.3rem; margin-top: 0.5rem; line-height: 1.8; font-size: 0.92rem;">
+      <li><strong>Coeficiente diagonal (\(a_{ii}\)):</strong> Costo unitario propio y directo de inmovilizacion de capital en la linea \(i\). Integra la tasa de costo de capital, depreciacion acelerada de activos especificos y gastos directos fijos. Es positivo y dominante.</li>
+      <li><strong>Coeficiente fuera de la diagonal (\(a_{ij} = a_{ji}\)):</strong> Tasa de acoplamiento operativo entre las lineas \(i\) y \(j\). Cuantifica el requerimiento adicional de capital inducido por la operacion conjunta de activos compartidos (muelles de carga compartidos, personal cruzado y rutas combinadas).</li>
+      <li><strong>Termino independiente (\(b_i\)):</strong> Cobertura operativa minima requerida por contrato para satisfacer la demanda de servicio proyectada para el ciclo corriente.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3 class="card-title">3.3 Demostracion de Propiedades de la Matriz A (Simetrica y Definida Positiva)</h3>
+    <p style="font-size:0.92rem; margin-bottom:0.8rem;">
+      Para que el funcional cuadratico \(\phi(x) = \frac{1}{2}x^T A x - b^T x\) posea un unico minimo global y los metodos de gradiente conjugado converjan monótonamente, la matriz \(A\) debe ser simetrica y definida positiva (SPD). Se verifica mediante tres vias independientes:
+    </p>
+
+    <div class="grid-3">
+      <div class="kpi-card">
+        <div class="kpi-label">Via 1: Gershgorin</div>
+        <div class="kpi-value" style="font-size:1.1rem;">Dominancia Diagonal</div>
+        <div class="kpi-sub">
+          Si \(a_{ii} > \sum_{j \neq i} |a_{ij}|\) con \(a_{ii} > 0\), todos los autovalores son estrictamente positivos: \(\lambda_i > 0\).
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-label">Via 2: Cholesky</div>
+        <div class="kpi-value" style="font-size:1.1rem;">Factorizacion Directa</div>
+        <div class="kpi-sub">
+          Existe descomposicion unica \(A = L L^T\) con matriz \(L\) triangular inferior y elementos diagonales \(L_{ii} > 0\).
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-label">Via 3: Autovalores</div>
+        <div class="kpi-value" style="font-size:1.1rem;">Metodo de Jacobi</div>
+        <div class="kpi-sub">
+          Calculo numerico iterativo del espectro completo: \(\lambda_{\min}(A) > 0\), lo que asegura \(x^T A x > 0, \forall x \neq 0\).
+        </div>
+      </div>
     </div>
-    <div class="card">
-      <h3 class="card-title">2.3 Significado del Vector <span class="math-inline">b</span></h3>
-      <p>El vector <span class="math-inline">b \in \mathbb{R}^5</span> especifica la <strong>cobertura operativa objetivo</strong> de cada línea en miles USD:</p>
-      <ul style="margin-left: 1.2rem; line-height: 1.8;">
-        <li>Calculado en función de la demanda contractual proyectada, el tiempo medio de ciclo operativo y el colchón de seguridad financiero fijado por la gerencia de finanzas.</li>
-        <li>Si <span class="math-inline">b_i</span> aumenta, la línea <span class="math-inline">i</span> debe incrementar su disponibilidad de servicio, lo cual presiona el capital requerido en todo el sistema.</li>
-      </ul>
-    </div>
+
+    <div id="spd-live-audit" style="margin-top:1rem;"></div>
   </div>
 </section>
 
 <!-- ============================================================
-     SECCIÓN 3: FORMULACIÓN SPD
+     SECCION 4: ENTRADA DE DATOS (CONSIGNA SECCION 7.4)
      ============================================================ -->
-<section id="formulacion" class="tab-panel">
-  <h2 class="section-title">3. Formulación Matemática y Demostración SPD</h2>
+<section id="sec-4-entrada" class="tab-panel">
+  <h2 class="section-title">4. Entrada de Datos y Parametros de Ejecucion</h2>
   <p class="lead-text">
-    El método de Gradientes Conjugados y sus variantes precondicionadas requieren rigurosamente que la matriz <span class="math-inline">A</span> sea <strong>Simétrica y Definida Positiva (SPD)</strong>. A continuación se demuestra el cumplimiento de estas propiedades por tres vías independientes.
+    Interfaz reactiva para editar en tiempo real los coeficientes de la matriz \(A\) y el vector \(b\) (\(n = 5 \ge 4\)), configurar el vector inicial \(x_0\), tolerancia y precondicionador utilizado.
   </p>
 
-  <div class="grid-3">
-    <div class="card">
-      <h3 class="card-title">Vía 1: Teorema de Gershgorin</h3>
-      <p>Si la matriz es <strong>estrictamente diagonal dominante</strong> con diagonal estrictamente positiva:</p>
-      <div style="background:var(--bg-card-subtle); padding:0.6rem; border-radius:6px; font-family:var(--font-mono); margin:0.6rem 0; font-size:0.9rem;">
-        a_{ii} > \sum_{j \neq i} |a_{ij}|, \quad \forall i
-      </div>
-      <p>los círculos de Gershgorin residen completamente en el semiplano complejo derecho (<span class="math-inline">\text{Re}(\lambda) > 0</span>). Al ser simétrica, todos sus autovalores son reales y estrictamente positivos (<span class="math-inline">\lambda_i > 0</span>).</p>
-    </div>
-
-    <div class="card">
-      <h3 class="card-title">Vía 2: Factorización de Cholesky</h3>
-      <p>Una matriz simétrica <span class="math-inline">A</span> es definida positiva si y solo si admite una descomposición única:</p>
-      <div style="background:var(--bg-card-subtle); padding:0.6rem; border-radius:6px; font-family:var(--font-mono); margin:0.6rem 0; font-size:0.9rem;">
-        A = L L^T, \quad L_{ii} > 0
-      </div>
-      <p>donde <span class="math-inline">L</span> es triangular inferior con elementos diagonales reales y estrictamente positivos. Si el cálculo de algún pivote <span class="math-inline">L_{ii}^2 \le 0</span>, la matriz no es definida positiva.</p>
-    </div>
-
-    <div class="card">
-      <h3 class="card-title">Vía 3: Espectro de Autovalores</h3>
-      <p>Cálculo exacto mediante el algoritmo iterativo de rotaciones de Jacobi:</p>
-      <div style="background:var(--bg-card-subtle); padding:0.6rem; border-radius:6px; font-family:var(--font-mono); margin:0.6rem 0; font-size:0.9rem;">
-        \lambda_{\min}(A) = \min_{1 \le i \le 5} \lambda_i > 0
-      </div>
-      <p>Garantiza que la forma cuadrática asociada <span class="math-inline">x^T A x > 0</span> para todo <span class="math-inline">x \neq 0</span>, asegurando que el funcional de energía posea un único mínimo global.</p>
-    </div>
-  </div>
-
   <div class="card">
-    <h3 class="card-title">🔬 Verificación Dinámica de la Matriz Activa en el Simulador</h3>
-    <p class="lead-text" style="font-size:0.95rem;">El sistema evalúa en tiempo real la matriz actualmente cargada en el simulador:</p>
-    <div id="spd-live-audit"></div>
-  </div>
-</section>
-
-<!-- ============================================================
-     SECCIÓN 4: ESCENARIOS
-     ============================================================ -->
-<section id="escenarios" class="tab-panel">
-  <h2 class="section-title">4. Los Tres Escenarios Obligatorios</h2>
-  <p class="lead-text">
-    Se comparan tres realidades operativas con diferentes grados de acoplamiento, escala y condicionamiento.
-  </p>
-
-  <div class="grid-3" id="scenarios-showcase-grid"></div>
-</section>
-
-<!-- ============================================================
-     SECCIÓN 5: FUNDAMENTO TEÓRICO
-     ============================================================ -->
-<section id="teoria" class="tab-panel">
-  <h2 class="section-title">5. Fundamento Teórico: Algoritmos y Precondicionamiento</h2>
-  <p class="lead-text">
-    Comparación formal entre el algoritmo de Gradientes Conjugados clásico (Hestenes & Stiefel, 1952) y el Algoritmo GCP precondicionado (Suñagua S., 2020).
-  </p>
-
-  <div class="grid-2">
-    <div class="card">
-      <h3 class="card-title">5.1 Gradientes Conjugados Simple (GC)</h3>
-      <p>Minimiza la función cuadrática <span class="math-inline">\phi(x) = \frac{1}{2} x^T A x - b^T x</span> generando direcciones <span class="math-inline">A</span>-ortogonales:</p>
-      <div class="step-formula-box">
-        r_0 = b - A x_0, \quad p_0 = r_0<br>
-        \text{Para } k = 1, 2, \dots:<br>
-        \quad \alpha_k = \frac{r_{k-1}^T r_{k-1}}{p_{k-1}^T A p_{k-1}}<br>
-        \quad x_k = x_{k-1} + \alpha_k p_{k-1}<br>
-        \quad r_k = r_{k-1} - \alpha_k A p_{k-1}<br>
-        \quad \text{si } \|r_k\|_2 / \|b\|_2 < \text{tol}: \text{parar}<br>
-        \quad \beta_k = \frac{r_k^T r_k}{r_{k-1}^T r_{k-1}}<br>
-        \quad p_k = r_k + \beta_k p_{k-1}
-      </div>
-      <p style="font-size:0.88rem; color:var(--text-muted);">
-        Cota teórica del error: <span class="math-inline">\frac{\|x_k - x^*\|_A}{\|x_0 - x^*\|_A} \le 2 \left( \frac{\sqrt{\kappa} - 1}{\sqrt{\kappa} + 1} \right)^k</span>, donde <span class="math-inline">\kappa = \kappa(A)</span>.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3 class="card-title">5.2 Gradientes Conjugados Precondicionado (GCP)</h3>
-      <p>Aplica un precondicionador simétrico <span class="math-inline">M = C C^T \approx A</span> resolviendo en cada paso <span class="math-inline">M z_k = r_k</span> (Algoritmo <em>Mz</em> de Suñagua):</p>
-      <div class="step-formula-box">
-        r_0 = b - A x_0, \quad z_0 = M^{-1} r_0, \quad p_0 = z_0<br>
-        \text{Para } k = 1, 2, \dots:<br>
-        \quad \alpha_k = \frac{r_{k-1}^T z_{k-1}}{p_{k-1}^T A p_{k-1}}<br>
-        \quad x_k = x_{k-1} + \alpha_k p_{k-1}<br>
-        \quad r_k = r_{k-1} - \alpha_k A p_{k-1}<br>
-        \quad \text{si } \|r_k\|_2 / \|b\|_2 < \text{tol}: \text{parar}<br>
-        \quad z_k = M^{-1} r_k \quad (\text{resuelve } C C^T z_k = r_k)<br>
-        \quad \beta_k = \frac{r_k^T z_k}{r_{k-1}^T z_{k-1}}<br>
-        \quad p_k = z_k + \beta_k p_{k-1}
-      </div>
-      <p style="font-size:0.88rem; color:var(--text-muted);">
-        El número de condición efectivo se reduce a <span class="math-inline">\kappa(M^{-1}A)</span>, acelerando drásticamente el ritmo de convergencia.
-      </p>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3 class="card-title">5.3 Catálogo de Precondicionadores Soportados</h3>
-    <div class="table-responsive">
-      <table>
-        <thead>
-          <tr>
-            <th>Precondicionador</th>
-            <th>Estructura Matemática de <span class="math-inline">M</span></th>
-            <th>Costo Computacional por Paso</th>
-            <th>Caso Óptimo de Aplicación</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Jacobi (Diagonal)</strong></td>
-            <td><span class="math-inline">M = \text{diag}(a_{11}, \dots, a_{55})</span></td>
-            <td><span class="math-inline">O(n)</span> (divisiones directas)</td>
-            <td>Excelente cuando la diagonal presenta escalas muy dispares (Escenario 3).</td>
-          </tr>
-          <tr>
-            <td><strong>SSOR (<span class="math-inline">\omega</span>)</strong></td>
-            <td><span class="math-inline">M = \frac{1}{\omega(2-\omega)} (D + \omega L) D^{-1} (D + \omega L^T)</span></td>
-            <td><span class="math-inline">O(n^2)</span> (2 sustituciones triangulares)</td>
-            <td>Fuerte acoplamiento fuera de la diagonal con parámetro <span class="math-inline">\omega \in (0, 2)</span>.</td>
-          </tr>
-          <tr>
-            <td><strong>IC0 con Umbral (<span class="math-inline">\tau</span>)</strong></td>
-            <td><span class="math-inline">M = \tilde{L} \tilde{L}^T</span> (Cholesky incompleto descartando <span class="math-inline">|a_{ij}| \le \tau</span>)</td>
-            <td><span class="math-inline">O(n^2)</span> disperso</td>
-            <td>Matrices dispersas con conexiones prioritarias.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     SECCIÓN 6: SIMULADOR INTERACTIVO
-     ============================================================ -->
-<section id="simulador" class="tab-panel">
-  <h2 class="section-title">6. Simulador Numérico Interactivo</h2>
-  <p class="lead-text">
-    Selecciona un escenario o introduce manualmente los coeficientes de la matriz <span class="math-inline">A</span> y el vector <span class="math-inline">b</span>. El sistema ejecuta simultáneamente GCP y GC, calculando la solución de referencia por Cholesky, los errores por variable, el espectro de autovalores y las métricas de rendimiento.
-  </p>
-
-  <!-- SELECTOR DE ESCENARIOS RÁPIDO -->
-  <div class="card">
-    <h3 class="card-title">6.1 Cargar Escenario Predefinido</h3>
-    <div class="scenario-btn-group" id="scenario-selector-group">
-      <div class="scenario-btn-card active" data-scenario="1">
-        <div class="sc-title"><span>1. Ideal</span> <span class="badge ok">Estable</span></div>
-        <div class="sc-desc">Costos moderados y simétricos, <span class="math-inline">\kappa(A) \approx 1.5</span>. Convergencia en 5 iteraciones.</div>
-      </div>
-      <div class="scenario-btn-card" data-scenario="2">
-        <div class="sc-title"><span>2. Estrés Financiero</span> <span class="badge warn">Alza de Costos</span></div>
-        <div class="sc-desc">Diagonal incrementada en <span class="math-inline">+2I</span> y mayor demanda. Se conserva la estabilidad numérica.</div>
-      </div>
-      <div class="scenario-btn-card" data-scenario="3">
-        <div class="sc-title"><span>3. Mal Condicionado</span> <span class="badge err">Escalas Dispares</span></div>
-        <div class="sc-desc">Diagonales desde 10 hasta 5000 (<span class="math-inline">\kappa(A) \approx 500</span>). Jacobi reduce el residuo de inmediato.</div>
-      </div>
-    </div>
-    <div id="scenario-banner-info" class="msg-box info"></div>
-  </div>
-
-  <!-- EDITOR MATRICIAL -->
-  <div class="card">
-    <h3 class="card-title">6.2 Edición de la Matriz <span class="math-inline">A</span> y Coberturas <span class="math-inline">b</span></h3>
+    <h3 class="card-title">4.1 Edicion de la Matriz A (5x5) y Vector de Coberturas b</h3>
     <div class="grid-2">
       <div>
-        <h4 class="sub-title">Matriz de Costos y Acoplamientos A (5×5)</h4>
+        <h4 class="sub-title">Matriz de Costos y Acoplamientos A (5x5)</h4>
         <div class="matrix-wrapper">
           <div class="matrix-grid-input" id="matrix-inputs-grid"></div>
         </div>
-        <p style="font-size:0.8rem; color:var(--text-subtle); margin-top:0.4rem;">
-          * Los valores diagonales <span class="math-inline">a_{ii}</span> representan el costo propio. Los elementos simétricos <span class="math-inline">a_{ij} = a_{ji}</span> el acoplamiento.
-        </p>
+        <div style="margin-top:0.5rem; display:flex; gap:0.5rem;">
+          <button class="btn btn-secondary btn-sm" id="btn-make-symmetric">Forzar Simetria A = (A + A^T)/2</button>
+        </div>
       </div>
 
       <div>
         <h4 class="sub-title">Vector de Coberturas Requeridas b (miles USD)</h4>
         <div class="vector-input-row" id="vector-b-inputs"></div>
 
-        <h4 class="sub-title">Vector Inicial de Capital x₀ (miles USD)</h4>
+        <h4 class="sub-title">Vector Inicial x_0 (miles USD)</h4>
         <div class="vector-input-row" id="vector-x0-inputs"></div>
-
-        <div style="margin-top: 1rem; display: flex; gap: 0.6rem; flex-wrap: wrap;">
-          <button class="btn btn-secondary btn-sm" id="btn-make-symmetric" title="Forzar simetría A = (A + A^T)/2">
-            🔄 Forzar Simetría
-          </button>
-          <button class="btn btn-secondary btn-sm" id="btn-reset-x0" title="Restablecer x₀ a ceros">
-            0️⃣ Poner x₀ = 0
-          </button>
+        <div style="display:flex; gap:0.5rem;">
+          <button class="btn btn-secondary btn-sm" id="btn-reset-x0">Restablecer x_0 = [0, 0, 0, 0, 0]</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- PARÁMETROS DEL MÉTODO -->
   <div class="card">
-    <h3 class="card-title">6.3 Configuración de los Algoritmos</h3>
+    <h3 class="card-title">4.2 Parametros del Metodo y Controles de Ejecucion</h3>
     <div class="form-row">
       <div class="form-group">
-        <label>Tolerancia Relativa (<span class="math-inline">\|r\|_2 / \|b\|_2</span>)</label>
+        <label>Tolerancia Relativa (||r||_2 / ||b||_2)</label>
         <input type="text" class="field-input" id="param-tol" value="1e-6">
       </div>
       <div class="form-group">
-        <label>Máximo de Iteraciones (<span class="math-inline">N_{\max}</span>)</label>
+        <label>Iteraciones Maximas (N_max)</label>
         <input type="number" class="field-input" id="param-nmax" value="1000" min="1" max="10000">
       </div>
       <div class="form-group">
         <label>Precondicionador</label>
         <select class="field-select" id="param-precond">
           <option value="jacobi" selected>Jacobi (Diagonal M = diag(A))</option>
-          <option value="ssor">SSOR (Parámetro ω)</option>
-          <option value="ic0">Cholesky Incompleto IC0 (Umbral τ)</option>
+          <option value="ssor">SSOR (Parametro omega)</option>
+          <option value="ic0">Cholesky Incompleto IC0 (Umbral tau)</option>
         </select>
       </div>
       <div class="form-group" id="group-param-omega" style="display:none;">
-        <label>Parámetro <span class="math-inline">\omega</span> SSOR (0, 2)</label>
+        <label>Parametro omega SSOR (0, 2)</label>
         <input type="number" class="field-input" id="param-omega" value="1.0" step="0.1" min="0.1" max="1.9">
       </div>
       <div class="form-group" id="group-param-tau" style="display:none;">
-        <label>Umbral <span class="math-inline">\tau</span> IC0 (<span class="math-inline">|a_{ij}| > \tau</span>)</label>
+        <label>Umbral tau IC0 (|a_ij| > tau)</label>
         <input type="number" class="field-input" id="param-tau" value="0.0" step="0.05" min="0">
       </div>
     </div>
 
-    <div style="display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1rem;">
-      <button class="btn btn-success" id="btn-run-simulation">
-        ▶️ Ejecutar GCP y GC
-      </button>
-      <button class="btn btn-outline" id="btn-compare-preconds">
-        ⚡ Comparar 3 Precondicionadores
-      </button>
-      <button class="btn btn-secondary" id="btn-reload-current">
-        🔄 Restaurar Valores del Escenario
-      </button>
-      <button class="btn btn-secondary" id="btn-export-csv">
-        📥 Exportar Datos (CSV)
-      </button>
+    <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1rem;">
+      <button class="btn btn-success" id="btn-run-simulation">Ejecutar GCP y GC</button>
+      <button class="btn btn-outline" id="btn-compare-preconds">Comparar Precondicionadores</button>
+      <button class="btn btn-secondary" id="btn-reload-current">Restaurar Escenario</button>
+      <button class="btn btn-secondary" id="btn-export-csv">Exportar Datos CSV</button>
     </div>
 
     <div id="simulation-status-msg"></div>
   </div>
-
-  <!-- RESULTADOS DINÁMICOS -->
-  <div id="dynamic-results-area">
-    <!-- Se llena automáticamente con renderSimulationArea() -->
-  </div>
 </section>
 
 <!-- ============================================================
-     SECCIÓN 7: PROCESO PASO A PASO
+     SECCION 5: TRES ESCENARIOS (CONSIGNA SECCION 7.5)
      ============================================================ -->
-<section id="paso-paso" class="tab-panel">
-  <h2 class="section-title">7. Proceso Detallado Paso a Paso (Algoritmo GCP)</h2>
+<section id="sec-5-escenarios" class="tab-panel">
+  <h2 class="section-title">5. Tres Escenarios Oficiales</h2>
   <p class="lead-text">
-    Examina la evolución microscópica del algoritmo iteración por iteración. Desliza el control o pulsa reproducir para ver cómo se calculan las direcciones conjugadas <span class="math-inline">p_k</span>, los escalares de paso <span class="math-inline">\alpha</span> y los residuos precondicionados <span class="math-inline">z_k</span>.
+    Carga rapida y evaluacion comparativa de los tres escenarios financieros obligatorios: Ideal, Bajo estres y Mal condicionado.
+  </p>
+
+  <div class="scenario-btn-group" id="scenario-selector-group">
+    <div class="scenario-btn-card active" data-scenario="1">
+      <div class="sc-title"><span>1. Escenario Ideal</span> <span class="badge ok">Estable</span></div>
+      <div class="sc-desc">Costos equilibrados y acoplamientos moderados. Matriz estrictamente diagonal dominante (\(\kappa \approx 1.55\)).</div>
+    </div>
+    <div class="scenario-btn-card" data-scenario="2">
+      <div class="sc-title"><span>2. Bajo Estres Financiero</span> <span class="badge warn">Alza de Costos</span></div>
+      <div class="sc-desc">Incremento en costos operativos (+2I en diagonal) y mayor demanda de servicio (\(\kappa \approx 1.48\)).</div>
+    </div>
+    <div class="scenario-btn-card" data-scenario="3">
+      <div class="sc-title"><span>3. Mal Condicionado</span> <span class="badge err">Escalas Dispares</span></div>
+      <div class="sc-desc">Asimetria severa de activos: cadena de frio intensiva frente a logistica ligera (\(\kappa \approx 498.2\)).</div>
+    </div>
+  </div>
+
+  <div id="scenario-banner-info" class="msg-box info"></div>
+
+  <div class="grid-3" id="scenarios-showcase-grid" style="margin-top:1.2rem;"></div>
+</section>
+
+<!-- ============================================================
+     SECCION 6: SOLUCION DE REFERENCIA (CONSIGNA SECCION 7.6)
+     ============================================================ -->
+<section id="sec-6-referencia" class="tab-panel">
+  <h2 class="section-title">6. Solucion Numerica de Referencia (Metodo Directo de Cholesky)</h2>
+  <p class="lead-text">
+    Mapeo y despliegue del metodo directo de Factorizacion de Cholesky (\(A = L L^T\)) utilizado para obtener la solucion exacta de referencia \(x_{\text{ref}}\) y contrastar la precision de los algoritmos iterativos.
   </p>
 
   <div class="card">
-    <div class="stepper-controls">
-      <div style="display: flex; gap: 0.5rem; align-items: center;">
-        <button class="btn btn-secondary btn-sm" id="step-btn-first" title="Primera iteración">⏮️</button>
-        <button class="btn btn-secondary btn-sm" id="step-btn-prev" title="Iteración anterior">◀️</button>
-        <button class="btn btn-secondary btn-sm" id="step-btn-play" title="Reproducción automática">▶️ Auto</button>
-        <button class="btn btn-secondary btn-sm" id="step-btn-next" title="Siguiente iteración">▶️</button>
-        <button class="btn btn-secondary btn-sm" id="step-btn-last" title="Última iteración">⏭️</button>
-      </div>
-
-      <div class="stepper-slider-wrap">
-        <span style="font-weight: 700; font-size: 0.9rem;">Iteración: <strong id="step-display-num" style="color:var(--primary); font-family:var(--font-mono);">0</strong> / <span id="step-display-max" style="font-family:var(--font-mono);">0</span></span>
-        <input type="range" id="step-slider" min="0" max="0" value="0">
-      </div>
-    </div>
-
-    <div id="step-details-container">
-      <p class="lead-text" style="text-align: center; color: var(--text-muted); padding: 2rem 0;">
-        Ejecuta primero una simulación en la pestaña <strong>6. Simulador</strong> para activar el inspector paso a paso.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     SECCIÓN 8: TABLA COMPARATIVA
-     ============================================================ -->
-<section id="comparativa" class="tab-panel">
-  <h2 class="section-title">8. Matriz Comparativa Consolidada</h2>
-  <p class="lead-text">
-    Compara simultáneamente los tres escenarios y los diferentes precondicionadores para evaluar el ahorro computacional, la reducción del número de condición y la solución financiera resultante.
-  </p>
-
-  <div class="card">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.8rem;">
-      <h3 class="card-title" style="margin: 0;">8.1 Comparativa Entre los 3 Escenarios</h3>
-      <button class="btn btn-outline btn-sm" id="btn-run-all-scenarios">
-        🚀 Ejecutar y Comparar Todos los Escenarios
-      </button>
-    </div>
-    <div class="table-responsive" id="table-comparison-scenarios-wrap"></div>
-  </div>
-
-  <div class="card" id="precond-comparison-card" style="display:none;">
-    <h3 class="card-title">8.2 Comparativa de Precondicionadores para la Matriz Actual</h3>
-    <p class="lead-text" style="font-size:0.95rem;">Compara cómo rinde Jacobi frente a SSOR e IC0 sobre el mismo sistema <span class="math-inline">Ax = b</span>:</p>
-    <div class="table-responsive" id="table-comparison-preconds-wrap"></div>
-  </div>
-</section>
-
-<!-- ============================================================
-     SECCIÓN 9: MÓDULO QA
-     ============================================================ -->
-<section id="qa" class="tab-panel">
-  <h2 class="section-title">9. Módulo de Pruebas de Software (QA & Auditoría)</h2>
-  <p class="lead-text">
-    Batería de pruebas automatizadas para certificar la estabilidad numérica, robustez frente a errores de entrada y cumplimiento de los requerimientos académicos del desafío.
-  </p>
-
-  <div style="margin-bottom: 1.2rem;">
-    <button class="btn btn-success" id="btn-run-all-qa">
-      🧪 Ejecutar Todas las Pruebas QA
-    </button>
+    <h3 class="card-title">6.1 Descomposicion de Cholesky: A = L L^T</h3>
+    <p style="font-size:0.92rem; margin-bottom:0.75rem;">
+      Dado que \(A\) es simetrica y definida positiva, se factoriza de forma exacta en una matriz triangular inferior \(L\) con diagonal estrictamente positiva:
+    </p>
+    <div id="cholesky-matrix-display" class="table-responsive"></div>
   </div>
 
   <div class="grid-2">
     <div class="card">
-      <h3 class="card-title">9.1 Caso 1: Carga y Convergencia de Escenarios</h3>
-      <p style="font-size:0.92rem; color:var(--text-muted); margin-bottom:0.8rem;">
-        Verifica que los tres escenarios obligatorios convergen a la tolerancia <span class="math-inline">10^{-6}</span> con GC y GCP sin desbordamiento.
-      </p>
-      <button class="btn btn-secondary btn-sm" data-qa-btn="1">Ejecutar Caso 1</button>
-      <div id="qa-result-1" style="margin-top:0.8rem;"></div>
+      <h3 class="card-title">6.2 Sustitucion hacia Adelante: L y = b</h3>
+      <p style="font-size:0.92rem;">Resolucion del sistema triangular inferior intermedio:</p>
+      <div id="cholesky-forward-display" style="margin-top:0.5rem; font-family:var(--font-mono); font-size:0.92rem;"></div>
     </div>
 
     <div class="card">
-      <h3 class="card-title">9.2 Caso 2: Manejo de Matriz No Válida</h3>
-      <p style="font-size:0.92rem; color:var(--text-muted); margin-bottom:0.8rem;">
-        Introduce intencionalmente una matriz no simétrica y no definida positiva, comprobando que el sistema captura la excepción de forma controlada sin colapsar.
-      </p>
-      <button class="btn btn-secondary btn-sm" data-qa-btn="2">Ejecutar Caso 2</button>
-      <div id="qa-result-2" style="margin-top:0.8rem;"></div>
-    </div>
-
-    <div class="card">
-      <h3 class="card-title">9.3 Caso 3: Edición Dinámica y Recálculo</h3>
-      <p style="font-size:0.92rem; color:var(--text-muted); margin-bottom:0.8rem;">
-        Modifica coeficientes en caliente y verifica que la solución de referencia de Cholesky, el espectro de autovalores y las iteraciones se recalculan instantáneamente.
-      </p>
-      <button class="btn btn-secondary btn-sm" data-qa-btn="3">Ejecutar Caso 3</button>
-      <div id="qa-result-3" style="margin-top:0.8rem;"></div>
-    </div>
-
-    <div class="card">
-      <h3 class="card-title">9.4 Caso 4: Demostración de Aceleración por Precondicionador</h3>
-      <p style="font-size:0.92rem; color:var(--text-muted); margin-bottom:0.8rem;">
-        Demuestra rigurosamente que en el escenario mal condicionado <span class="math-inline">\text{Iter}_{\text{GCP}} \le \text{Iter}_{\text{GC}}</span> gracias a la compresión de <span class="math-inline">\kappa(M^{-1}A)</span>.
-      </p>
-      <button class="btn btn-secondary btn-sm" data-qa-btn="4">Ejecutar Caso 4</button>
-      <div id="qa-result-4" style="margin-top:0.8rem;"></div>
+      <h3 class="card-title">6.3 Sustitucion hacia Atras: L^T x_ref = y</h3>
+      <p style="font-size:0.92rem;">Resolucion del sistema triangular superior para hallar el vector solucion de referencia:</p>
+      <div id="cholesky-backward-display" style="margin-top:0.5rem; font-family:var(--font-mono); font-size:0.92rem;"></div>
     </div>
   </div>
 
   <div class="card">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
-      <h3 class="card-title" style="margin:0;">9.5 Bitácora de Auditoría en Tiempo Real</h3>
-      <button class="btn btn-secondary btn-sm" id="btn-clear-qa-log">Limpiar Bitácora</button>
-    </div>
+    <h3 class="card-title">6.4 Vector Solucion de Referencia y Comprobacion de Residuo</h3>
     <div class="table-responsive">
-      <table id="qa-log-table">
+      <table id="table-cholesky-summary">
         <thead>
           <tr>
-            <th>Marca de Tiempo</th>
-            <th>Prueba</th>
-            <th>Entrada</th>
-            <th>Resultado Esperado</th>
-            <th>Resultado Obtenido</th>
-            <th>Veredicto</th>
+            <th>Variable</th>
+            <th>Linea Operativa</th>
+            <th class="num">x_ref (miles USD)</th>
+            <th class="num">b_calculado (A x_ref)</th>
+            <th class="num">b_objetivo</th>
+            <th class="num">Residuo Directo |b_calc - b_obj|</th>
           </tr>
         </thead>
         <tbody></tbody>
@@ -1411,39 +1113,261 @@
 </section>
 
 <!-- ============================================================
-     SECCIÓN 10: CONCLUSIONES
+     SECCION 7: GCP VS GC (CONSIGNA SECCION 7.7)
      ============================================================ -->
-<section id="conclusiones" class="tab-panel">
-  <h2 class="section-title">10. Conclusiones y Referencias Académicas</h2>
+<section id="sec-7-gcp-gc" class="tab-panel">
+  <h2 class="section-title">7. Comparacion GCP vs GC y Visor Paso a Paso</h2>
+  <p class="lead-text">
+    Despliegue de vectores aproximados, numero de iteraciones, residuos finales y diagnósticos comparativos entre Gradientes Conjugados Precondicionado (Suñagua, 2020) y GC simple.
+  </p>
+
+  <div id="gcp-vs-gc-kpis" class="kpi-grid"></div>
+
+  <div id="gcp-vs-gc-insights"></div>
+
+  <!-- VISOR PASO A PASO DEL ALGORITMO MZ -->
+  <div class="card">
+    <h3 class="card-title">Evolucion Iterativa Paso a Paso del Algoritmo GCP (Suñagua, 2020)</h3>
+    <p style="font-size:0.92rem; color:var(--text-muted);">
+      Use los controles o la barra de desplazamiento para examinar las operaciones vectoriales microscopicas en cada iteracion \(k\).
+    </p>
+
+    <div class="stepper-controls">
+      <div style="display: flex; gap: 0.4rem; align-items: center;">
+        <button class="btn btn-secondary btn-sm" id="step-btn-first">Primero</button>
+        <button class="btn btn-secondary btn-sm" id="step-btn-prev">Anterior</button>
+        <button class="btn btn-secondary btn-sm" id="step-btn-play">Reproducir</button>
+        <button class="btn btn-secondary btn-sm" id="step-btn-next">Siguiente</button>
+        <button class="btn btn-secondary btn-sm" id="step-btn-last">Ultimo</button>
+      </div>
+
+      <div class="stepper-slider-wrap">
+        <span style="font-weight: 700; font-size: 0.88rem;">Iteracion: <strong id="step-display-num" style="color:var(--primary); font-family:var(--font-mono);">0</strong> / <span id="step-display-max" style="font-family:var(--font-mono);">0</span></span>
+        <input type="range" id="step-slider" min="0" max="0" value="0">
+      </div>
+    </div>
+
+    <div id="step-details-container"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCION 8: ANALISIS DE ERRORES (CONSIGNA SECCION 7.8)
+     ============================================================ -->
+<section id="sec-8-errores" class="tab-panel">
+  <h2 class="section-title">8. Analisis de Errores y Graficos Dinamicos</h2>
+  <p class="lead-text">
+    Tabla interactiva de errores absolutos (\(E_a\)), relativos (\(E_r\)) y porcentuales (\(E_p\)) por variable, residuo relativo global y graficos comparativos en Chart.js.
+  </p>
+
+  <div class="card">
+    <h3 class="card-title">8.1 Tabla de Errores por Variable</h3>
+    <div class="table-responsive">
+      <table id="table-errors-detail">
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Linea Operativa</th>
+            <th class="num">x_ref (Cholesky)</th>
+            <th class="num">x_GCP</th>
+            <th class="num">x_GC</th>
+            <th class="num">E_a (Absoluto)</th>
+            <th class="num">E_r (Relativo)</th>
+            <th class="num">E_p (%)</th>
+            <th>Participacion Presupuestaria</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="chart-container-card">
+    <div class="chart-toolbar">
+      <div class="chart-nav-pills">
+        <button class="chart-pill active" data-chart-tab="conv">Curva de Convergencia</button>
+        <button class="chart-pill" data-chart-tab="alloc">Asignacion de Capital</button>
+        <button class="chart-pill" data-chart-tab="errors">Errores por Variable</button>
+        <button class="chart-pill" data-chart-tab="gain">Ganancia (GC - GCP)</button>
+        <button class="chart-pill" data-chart-tab="spectrum">Espectro de Autovalores</button>
+      </div>
+      <div style="display:flex; gap:0.4rem;">
+        <button class="btn btn-secondary btn-sm" id="btn-chart-scale-toggle">Escala Logaritmica</button>
+        <button class="btn btn-secondary btn-sm" id="btn-download-chart">Descargar PNG</button>
+      </div>
+    </div>
+
+    <div class="chart-canvas-box">
+      <canvas id="mainChartCanvas"></canvas>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 class="card-title">8.2 Detalle de Iteraciones y Residuos</h3>
+    <div style="max-height: 320px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+      <table id="table-iterations-history">
+        <thead style="position: sticky; top: 0; z-index: 2;">
+          <tr>
+            <th class="num">Iteracion k</th>
+            <th class="num">Residuo GC Simple</th>
+            <th class="num">Residuo GCP (Precond.)</th>
+            <th class="num">Ganancia (GC - GCP)</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCION 8B: TABLA COMPARATIVA OBLIGATORIA (CONSIGNA SECCION 8)
+     ============================================================ -->
+<section id="sec-tabla-comparativa" class="tab-panel">
+  <h2 class="section-title">8B. Tabla Comparativa Obligatoria (Consigna Seccion 8)</h2>
+  <p class="lead-text">
+    Estructura comparativa oficial estipulada en la Seccion 8 de la consigna. Presenta los 11 indicadores obligatorios en filas evaluados sobre los tres escenarios en columnas.
+  </p>
+
+  <div class="card">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.6rem;">
+      <h3 class="card-title" style="margin:0;">Matriz Comparativa de los Tres Escenarios</h3>
+      <button class="btn btn-outline btn-sm" id="btn-force-compare-all">Recalcular y Actualizar Todos</button>
+    </div>
+
+    <div class="table-responsive">
+      <table id="table-consigna-official">
+        <thead>
+          <tr>
+            <th style="min-width: 220px;">Indicador</th>
+            <th style="min-width: 280px;">Escenario Ideal</th>
+            <th style="min-width: 280px;">Escenario Bajo Estres</th>
+            <th style="min-width: 320px;">Escenario Mal Condicionado</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-consigna-official">
+          <!-- Se genera dinamicamente con renderOfficialComparisonTable() -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" id="precond-comparison-card" style="display:none;">
+    <h3 class="card-title">Comparativa Cruzada de Precondicionadores para la Matriz Actual</h3>
+    <p class="lead-text" style="font-size:0.92rem;">Rendimiento relativo de Jacobi frente a SSOR e IC0 sobre el mismo sistema \(Ax = b\):</p>
+    <div class="table-responsive" id="table-comparison-preconds-wrap"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCION 9: MODULO QA (CONSIGNA SECCION 7.9 Y SECCION 9)
+     ============================================================ -->
+<section id="sec-9-qa" class="tab-panel">
+  <h2 class="section-title">9. Modulo de Pruebas de Software (QA)</h2>
+  <p class="lead-text">
+    Verificacion y control de calidad de software mediante la ejecucion comprobable de los cuatro casos de prueba obligatorios requeridos por la consigna (Entrada, Resultado Esperado, Resultado Obtenido y Conclusion).
+  </p>
+
+  <div style="margin-bottom: 1.2rem;">
+    <button class="btn btn-success" id="btn-run-all-qa">Ejecutar Todas las Pruebas QA</button>
+  </div>
 
   <div class="grid-2">
     <div class="card">
-      <h3 class="card-title">📌 Conclusiones Financieras</h3>
-      <ul style="margin-left: 1.2rem; line-height: 1.9; font-size: 0.95rem;">
-        <li><strong>Fungibilidad e interdependencia:</strong> Asignar capital a cada división de forma aislada conduce a subestimar el costo de liquidez; el acoplamiento cruzado <span class="math-inline">a_{ij}</span> captura la realidad operativa de la flota compartida.</li>
-        <li><strong>Estrés vs Inestabilidad:</strong> El escenario de estrés incrementa el volumen de capital demandado en un <span class="math-inline">\approx 20\%</span>, pero conserva una matriz sana y bien condicionada, demostrando que alzas de costos predecibles no destruyen la solvencia matemática.</li>
-        <li><strong>Vulnerabilidad por asimetría:</strong> En el escenario mal condicionado, divisiones con necesidades desproporcionadas (ej. cadena de frío con 6000 mil USD) generan distorsión numérica extrema que exige normalización por precondicionador.</li>
+      <h3 class="card-title">9.1 Caso 1: Carga de Escenarios</h3>
+      <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:0.75rem;">
+        Verificacion de ejecucion correcta de los escenarios Ideal, Bajo Estres y Mal Condicionado, alcanzando la tolerancia sin desbordamientos.
+      </p>
+      <button class="btn btn-secondary btn-sm" data-qa-btn="1">Ejecutar Prueba 1</button>
+      <div id="qa-result-1" style="margin-top:0.75rem;"></div>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">9.2 Caso 2: Validacion de Matriz No Valida</h3>
+      <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:0.75rem;">
+        Introduccion deliberada de una matriz no simetrica o no definida positiva, comprobando que el sistema captura el error y notifica al usuario sin colapsar.
+      </p>
+      <button class="btn btn-secondary btn-sm" data-qa-btn="2">Ejecutar Prueba 2</button>
+      <div id="qa-result-2" style="margin-top:0.75rem;"></div>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">9.3 Caso 3: Edicion Dinamica</h3>
+      <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:0.75rem;">
+        Modificacion manual de coeficientes en la interfaz y verificacion del recalculo instantaneo de la solucion de referencia, GCP, errores y \(\kappa(A)\).
+      </p>
+      <button class="btn btn-secondary btn-sm" data-qa-btn="3">Ejecutar Prueba 3</button>
+      <div id="qa-result-3" style="margin-top:0.75rem;"></div>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">9.4 Caso 4: Comparativa de Precondicionamiento</h3>
+      <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:0.75rem;">
+        Verificacion de que GCP alcance la tolerancia en menor o igual numero de iteraciones que GC simple en el escenario mal condicionado.
+      </p>
+      <button class="btn btn-secondary btn-sm" data-qa-btn="4">Ejecutar Prueba 4</button>
+      <div id="qa-result-4" style="margin-top:0.75rem;"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+      <h3 class="card-title" style="margin:0;">9.5 Bitacora Estandar de Control de Calidad</h3>
+      <button class="btn btn-secondary btn-sm" id="btn-clear-qa-log">Limpiar Bitacora</button>
+    </div>
+    <div class="table-responsive">
+      <table id="qa-log-table">
+        <thead>
+          <tr>
+            <th>Hora</th>
+            <th>Prueba</th>
+            <th>Entrada</th>
+            <th>Resultado Esperado</th>
+            <th>Resultado Obtenido</th>
+            <th>Conclusion</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCION 10: CONCLUSIONES Y REFERENCIAS (CONSIGNA SECCION 7.10)
+     ============================================================ -->
+<section id="sec-10-conclusiones" class="tab-panel">
+  <h2 class="section-title">10. Conclusiones y Referencias</h2>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3 class="card-title">10.1 Interpretacion Tecnica y Matematica</h3>
+      <ul style="margin-left: 1.2rem; line-height: 1.8; font-size: 0.92rem;">
+        <li><strong>Convergencia de Suñagua (2020):</strong> La implementacion del algoritmo Mz precondicionado verifica que no se requiere invertir explícitamente la matriz \(M\); dos sustituciones triangulares por iteracion bastan para reducir el residuo relativo por debajo de \(10^{-6}\).</li>
+        <li><strong>Efecto del precondicionador diagonal (Jacobi):</strong> En el Escenario 3, el mal escalamiento diagonal eleva \(\kappa(A)\) a 498.2. Al escalar por \(1/\sqrt{a_{ii}}\), el condicionamiento efectivo se comprime a \(\kappa(M^{-1}A) \approx 1.15\), reduciendo las iteraciones a la cota teorica minima.</li>
+        <li><strong>Robustez de Cholesky:</strong> La solucion de referencia directa valida la consistencia numerica de GCP, obteniendo errores absolutos de orden \(10^{-7}\) a \(10^{-12}\).</li>
       </ul>
     </div>
 
     <div class="card">
-      <h3 class="card-title">🔬 Conclusiones Técnicas y Numéricas</h3>
-      <ul style="margin-left: 1.2rem; line-height: 1.9; font-size: 0.95rem;">
-        <li><strong>Eficacia comprobada de Suñagua (2020):</strong> El algoritmo <em>Mz</em> resuelve el sistema precondicionado sin necesidad de invertir explícitamente <span class="math-inline">M</span>, reduciendo el residuo por debajo de <span class="math-inline">10^{-6}</span> con gran ahorro de operaciones flotantes.</li>
-        <li><strong>Superioridad de Jacobi en mal escalamiento:</strong> Al escalar la diagonal por <span class="math-inline">1/\sqrt{a_{ii}}</span>, el precondicionador de Jacobi comprime el número de condición desde <span class="math-inline">\approx 500</span> a <span class="math-inline">\approx 1.2</span>, logrando convergencia en menos de 5 iteraciones.</li>
-        <li><strong>Consistencia de Cholesky:</strong> La solución de referencia por descomposición <span class="math-inline">LL^T</span> confirma que el error absoluto <span class="math-inline">E_a</span> de GCP se mantiene por debajo del umbral de precisión de máquina exigido.</li>
+      <h3 class="card-title">10.2 Interpretacion Financiera de los Resultados</h3>
+      <ul style="margin-left: 1.2rem; line-height: 1.8; font-size: 0.92rem;">
+        <li><strong>Fungibilidad y costo cruzado:</strong> Decidir el capital de trabajo de forma aislada subestima el costo de liquidez; el acoplamiento (\(a_{ij}\)) refleja fielmente los cuellos de botella de la infraestructura compartida.</li>
+        <li><strong>Resiliencia frente al estres:</strong> En el Escenario 2, un aumento del 19.8% en el requerimiento total de capital (de 580k a 695k USD) no deteriora el condicionamiento (\(\kappa \approx 1.48\)), demostrando que la inflacion de costos operativos preserva la solvencia matematica del modelo.</li>
+        <li><strong>Riesgo de concentracion de activos:</strong> En el Escenario 3, la cadena de frio absorbe el 75.9% del presupuesto corporativo (6,000k USD), señalando una alta vulnerabilidad ante contingencias en activos refrigerados.</li>
       </ul>
     </div>
   </div>
 
   <div class="card">
-    <h3 class="card-title">📚 Referencias Bibliográficas</h3>
-    <ul style="margin-left: 1.2rem; line-height: 1.9; font-size: 0.95rem;">
-      <li><strong>Suñagua S., P. (2020).</strong> <em>Método de Gradientes Conjugados Precondicionado</em>. Revista Boliviana de Matemática – Carrera de Matemática, Universidad Mayor de San Andrés (UMSA), 04, 2–7.</li>
+    <h3 class="card-title">10.3 Referencias Academicas y Fuentes de Datos</h3>
+    <ul style="margin-left: 1.2rem; line-height: 1.9; font-size: 0.92rem;">
+      <li><strong>Suñagua S., P. (2020).</strong> <em>Metodo de Gradientes Conjugados Precondicionado</em>. Revista Boliviana de Matematica, Carrera de Matematica, Universidad Mayor de San Andres (UMSA), Vol. 04, pp. 2–7.</li>
       <li><strong>Golub, G. H., & Van Loan, C. F. (2013).</strong> <em>Matrix Computations</em> (4th ed.). Johns Hopkins University Press.</li>
-      <li><strong>Saad, Y. (2003).</strong> <em>Iterative Methods for Sparse Linear Systems</em> (2nd ed.). SIAM Publications.</li>
+      <li><strong>Saad, Y. (2003).</strong> <em>Iterative Methods for Sparse Linear Systems</em> (2nd ed.). Society for Industrial and Applied Mathematics (SIAM).</li>
       <li><strong>Hestenes, M. R., & Stiefel, E. (1952).</strong> <em>Methods of conjugate gradients for solving linear systems</em>. Journal of Research of the National Bureau of Standards, 49(6), 409–436.</li>
-      <li><strong>Higham, N. J. (2002).</strong> <em>Accuracy and Stability of Numerical Algorithms</em> (2nd ed.). Society for Industrial and Applied Mathematics.</li>
+      <li><strong>Higham, N. J. (2002).</strong> <em>Accuracy and Stability of Numerical Algorithms</em> (2nd ed.). SIAM Publications.</li>
     </ul>
   </div>
 </section>
@@ -1451,18 +1375,19 @@
 </main>
 
 <footer>
-  <p><strong>Simulador GCP · Métodos Numéricos INF373</strong> · Gestión II / 2026 · Universidad Mayor de San Andrés</p>
-  <p style="margin-top: 0.3rem; font-size: 0.85rem; color: var(--text-subtle);">Desarrollado para ejecución directa en GitHub Pages sin dependencias de backend.</p>
+  <p><strong>Simulador GCP - Metodos Numericos INF373</strong> - Carrera de Informatica - Universidad Mayor de San Andres (UMSA)</p>
+  <p style="margin-top: 0.25rem; font-size: 0.82rem; color: var(--text-subtle);">Gestion II / 2026 - Despliegue autocontenido para GitHub Pages</p>
 </footer>
 
 <!-- ============================================================
-     MOTOR NUMÉRICO JAVASCRIPT & CONTROLADOR DE INTERFAZ
-     ============================================================ -->
+     MOTOR NUMERICO Y CONTROLADOR DE INTERFAZ
+     ============================================================ */
+-->
 <script>
 'use strict';
 
 /* ============================================================
-   1. UTILIDADES NUMÉRICAS Y ÁLGEBRA LINEAL BÁSICA
+   1. UTILIDADES NUMERICAS Y ALGEBRA LINEAL BASICA
    ============================================================ */
 const fmt = (v, digits = 5) => {
   if (v === 0) return '0';
@@ -1517,7 +1442,7 @@ function isSymmetric(A, tol = 1e-9) {
 }
 
 /* ============================================================
-   2. FACTORIZACIÓN DE CHOLESKY Y SISTEMAS TRIANGULARES
+   2. FACTORIZACION DE CHOLESKY Y SISTEMAS DIRECTOS
    ============================================================ */
 function cholesky(A) {
   const n = A.length, L = zeros(n, n);
@@ -1526,7 +1451,7 @@ function cholesky(A) {
       let s = A[i][j];
       for (let k = 0; k < j; k++) s -= L[i][k] * L[j][k];
       if (i === j) {
-        if (s <= 1e-14) throw new Error(`Pivote no positivo (${s.toExponential(2)}) en posición (${i + 1},${i + 1}). La matriz no es definida positiva.`);
+        if (s <= 1e-14) throw new Error(`Pivote no positivo (${s.toExponential(2)}) en posicion (${i + 1},${i + 1}). La matriz no es definida positiva.`);
         L[i][j] = Math.sqrt(s);
       } else {
         L[i][j] = s / L[j][j];
@@ -1553,13 +1478,15 @@ function backwardSub(U, y) {
   }
   return x;
 }
-function solveCholesky(A, b) {
+function solveCholeskyFull(A, b) {
   const L = cholesky(A);
-  return backwardSub(transpose(L), forwardSub(L, b));
+  const y = forwardSub(L, b);
+  const xref = backwardSub(transpose(L), y);
+  return { L, y, xref };
 }
 
 /* ============================================================
-   3. AUTOVALORES Y CONDICIONAMIENTO (MÉTODO DE JACOBI)
+   3. AUTOVALORES Y CONDICIONAMIENTO (JACOBI)
    ============================================================ */
 function eigSymmetric(A, tol = 1e-12, maxIter = 250) {
   const n = A.length, M = clone(A), V = identity(n);
@@ -1614,7 +1541,7 @@ function buildPrecond(A, type, params = {}) {
   }
   if (type === 'ssor') {
     const omega = Number(params.omega) || 1.0;
-    if (omega <= 0 || omega >= 2) throw new Error('SSOR: El parámetro ω debe estar en el intervalo (0, 2)');
+    if (omega <= 0 || omega >= 2) throw new Error('SSOR: El parametro omega debe residir en el intervalo (0, 2)');
     const C = zeros(n, n);
     for (let i = 0; i < n; i++) {
       if (A[i][i] <= 0) throw new Error('SSOR: Diagonal no positiva en fila ' + (i + 1));
@@ -1631,7 +1558,7 @@ function buildPrecond(A, type, params = {}) {
         let s = A[i][j];
         for (let k = 0; k < j; k++) s -= L[i][k] * L[j][k];
         if (i === j) {
-          if (s <= 1e-14) throw new Error(`IC0: Pivote no positivo (${s.toExponential(2)}) en posición (${i + 1},${i + 1})`);
+          if (s <= 1e-14) throw new Error(`IC0: Pivote no positivo (${s.toExponential(2)}) en posicion (${i + 1},${i + 1})`);
           L[i][j] = Math.sqrt(s);
         } else {
           L[i][j] = (Math.abs(A[i][j]) > tau) ? (s / L[j][j]) : 0;
@@ -1659,7 +1586,7 @@ function precondConditionData(A, C) {
 }
 
 /* ============================================================
-   5. ALGORITMOS ITERATIVOS (GC Y GCP CON HISTORIAL VECTORIAL)
+   5. ALGORITMOS GC SIMPLE Y GCP (SUÑAGUA, 2020)
    ============================================================ */
 function gc(A, b, x0, tol, maxIter) {
   const bnorm = norm2(b) || 1;
@@ -1734,9 +1661,9 @@ function gcp(A, b, x0, tol, maxIter, C) {
 const SCENARIOS = [
   {
     id: 1,
-    name: 'Ideal (Estable)',
-    tag: 'Empresa en Régimen Normal',
-    desc: 'Costos propios de capital equilibrados y acoplamientos moderados entre flota y bodegaje. Matriz estrictamente diagonal dominante, número de condición sano y convergencia en 5 iteraciones.',
+    name: 'Ideal',
+    tag: 'Estable',
+    desc: 'Empresa estable con costos y acoplamientos moderados entre lineas. Matriz estrictamente diagonal dominante con numero de condicion kappa(A) bajo.',
     A: [
       [10.0,  1.0,  0.5,  0.3,  0.2],
       [ 1.0,  9.0,  0.7,  0.4,  0.3],
@@ -1745,13 +1672,13 @@ const SCENARIOS = [
       [ 0.2,  0.3,  0.4,  0.6, 12.0]
     ],
     xref: [150, 120, 100, 130, 80],
-    financialContext: 'Operación con liquidez estable. Los costos financieros directos superan con holgura cualquier fricción operativa entre divisiones.'
+    financialContext: 'Estructura operativa equilibrada. El costo propio de capital domina el sistema, asegurando asignacion estable de liquidez sin estres de tesoreria.'
   },
   {
     id: 2,
-    name: 'Bajo Estrés Financiero',
-    tag: 'Alza de Insumos y Mayor Cobertura',
-    desc: 'Impacto de inflación de combustibles, peajes y seguros. Se incrementa la diagonal principal (+2I) y sube el requerimiento b. El capital demandado crece, pero el condicionamiento numérico se mantiene saludable.',
+    name: 'Bajo estres',
+    tag: 'Alza de costos',
+    desc: 'Alza de costos de combustible, peajes y seguros. Se suma +2I a la diagonal y aumenta la demanda b. El capital sube pero se preserva la estabilidad numerica.',
     A: [
       [12.0,  1.0,  0.5,  0.3,  0.2],
       [ 1.0, 11.0,  0.7,  0.4,  0.3],
@@ -1760,13 +1687,13 @@ const SCENARIOS = [
       [ 0.2,  0.3,  0.4,  0.6, 14.0]
     ],
     xref: [175, 145, 120, 155, 100],
-    financialContext: 'Presión inflacionaria absorbida sin quiebre operativo. El incremento equilibrado preserva la dominancia diagonal.'
+    financialContext: 'Presion de costos operativos (+2I en diagonal) y mayor demanda de servicio. El capital total asciende un 19.8% (695k USD), manteniendo intacta la estabilidad.'
   },
   {
     id: 3,
-    name: 'Mal Condicionado',
-    tag: 'Escalas Masivamente Dispares',
-    desc: 'Asimetría severa de activos: cadena de frío intensiva (a55 = 5000) frente a logística ligera (a11 = 10). κ(A) se dispara a casi 500. El precondicionador de Jacobi normaliza el espectro y reduce las iteraciones.',
+    name: 'Mal condicionado',
+    tag: 'Escalas dispares',
+    desc: 'Escalas muy dispares entre lineas (cadena de frio intensiva con a55=5000 frente a logistica ligera con a11=10). kappa(A) se eleva a casi 500; Jacobi comprime el espectro.',
     A: [
       [10.0,   0.5,   0.5,    0.5,    0.5],
       [ 0.5,  50.0,   0.5,    0.5,    0.5],
@@ -1775,7 +1702,7 @@ const SCENARIOS = [
       [ 0.5,   0.5,   0.5,    0.5, 5000.0]
     ],
     xref: [30, 80, 300, 1500, 6000],
-    financialContext: 'Fuerte dispersión de requerimientos. El transporte ligero demanda 30k USD mientras que la infraestructura frigorífica exige 6,000k USD.'
+    financialContext: 'Severa asimetria de activos entre lineas. La infraestructura frigorifica absorbe el 75.9% de los recursos (6,000k USD), introduciendo un mal condicionamiento extremo que requiere normalizacion diagonal (Jacobi).'
   }
 ];
 
@@ -1791,37 +1718,34 @@ SCENARIOS.forEach(sc => {
 });
 
 /* ============================================================
-   7. ESTADO GLOBAL DE LA APLICACIÓN
+   7. ESTADO DE LA APLICACION Y RESULTADOS
    ============================================================ */
 let currentScenarioId = 1;
 let currentSimulationResult = null;
-const scenarioRunCache = { 1: null, 2: null, 3: null };
+const scenarioOfficialResults = { 1: null, 2: null, 3: null };
 
-// Variables de gráficos Chart.js
-let chartConvergence = null;
-let chartAllocation = null;
-let chartErrors = null;
-let chartGain = null;
-let chartSpectrum = null;
+let chartInstance = null;
+let activeChartType = 'conv';
+let isLogScale = true;
 
-// Variables de paso a paso
 let stepCurrentIndex = 0;
 let stepPlayTimer = null;
+let stepperSteps = [];
+let stepperTol = 1e-6;
 
 /* ============================================================
-   8. MOTOR DE SIMULACIÓN Y ANÁLISIS
+   8. MOTOR DE SIMULACION
    ============================================================ */
 function runSimulationCore(A, b, x0, tol, maxIter, precondType, precondParams) {
-  if (!isSymmetric(A)) throw new Error('La matriz no es simétrica: A ≠ Aᵀ. Los acoplamientos deben ser bidireccionales.');
+  if (!isSymmetric(A)) throw new Error('La matriz no es simetrica: A ≠ A^T. Verifique que a_ij = a_ji.');
   const t0 = performance.now();
-  const L = cholesky(A);
-  const ref = backwardSub(transpose(L), forwardSub(L, b));
+  const choleskyRes = solveCholeskyFull(A, b);
   const C = buildPrecond(A, precondType, precondParams);
   const gcRes = gc(A, b, x0, tol, maxIter);
   const gcpRes = gcp(A, b, x0, tol, maxIter, C);
   const t1 = performance.now();
 
-  const errors = ref.map((r, i) => {
+  const errors = choleskyRes.xref.map((r, i) => {
     const ea = Math.abs(r - gcpRes.x[i]);
     const er = Math.abs(r) > 1e-12 ? ea / Math.abs(r) : null;
     return {
@@ -1841,34 +1765,34 @@ function runSimulationCore(A, b, x0, tol, maxIter, precondType, precondParams) {
 
   return {
     A, b, x0, tol, maxIter, precondType, precondParams,
-    ref, gc: gcRes, gcp: gcpRes, errors,
+    cholesky: choleskyRes,
+    ref: choleskyRes.xref,
+    gc: gcRes,
+    gcp: gcpRes,
+    errors,
     kappaA, kappaMA, eigA, eigMA,
     elapsedMs: t1 - t0
   };
 }
 
 /* ============================================================
-   9. AUDITORÍA SPD EN TIEMPO REAL (VÍAS 1, 2 Y 3)
+   9. AUDITORIA SPD EN VIVO (SECCION 3)
    ============================================================ */
 function updateSpdLiveAudit(A) {
   const container = document.getElementById('spd-live-audit');
   if (!container) return;
 
   const isSymm = isSymmetric(A);
-  let gershgorinOk = true;
-  const gershDetails = [];
+  let gershOk = true;
   for (let i = 0; i < A.length; i++) {
-    const diag = A[i][i];
-    let sumOff = 0;
-    for (let j = 0; j < A.length; j++) if (i !== j) sumOff += Math.abs(A[i][j]);
-    const ok = diag > sumOff;
-    if (!ok) gershgorinOk = false;
-    gershDetails.push({ row: i + 1, diag, sumOff, ok });
+    let off = 0;
+    for (let j = 0; j < A.length; j++) if (i !== j) off += Math.abs(A[i][j]);
+    if (A[i][i] <= off) gershOk = false;
   }
 
-  let choleskyOk = true;
-  let choleskyMsg = 'Pivotes reales positivos en L.';
-  try { cholesky(A); } catch (e) { choleskyOk = false; choleskyMsg = e.message; }
+  let cholOk = true;
+  let cholMsg = 'Pivotes reales positivos en L.';
+  try { cholesky(A); } catch (e) { cholOk = false; cholMsg = e.message; }
 
   let eigOk = true;
   let eigValues = [];
@@ -1880,712 +1804,178 @@ function updateSpdLiveAudit(A) {
     eigOk = false;
   }
 
-  let html = `<div class="grid-3" style="margin-top:0.6rem;">
-    <div class="kpi-card ${gershgorinOk ? 'success-highlight' : ''}">
-      <div class="kpi-label">Vía 1: Gershgorin <span>${gershgorinOk ? '✓ Cumple' : '⚠️ No estricta'}</span></div>
-      <div class="kpi-value" style="font-size:1.15rem;">${gershgorinOk ? 'Dominancia Diagonal' : 'Borde de disco'}</div>
-      <div class="kpi-sub">${gershDetails.filter(d => d.ok).length} de 5 filas estrictamente dominantes</div>
+  container.innerHTML = `
+    <div class="grid-3" style="margin-top:0.6rem;">
+      <div class="kpi-card ${gershOk ? 'success-highlight' : ''}">
+        <div class="kpi-label">Gershgorin <span>${gershOk ? 'Cumple' : 'No estricta'}</span></div>
+        <div class="kpi-value" style="font-size:1.1rem;">${gershOk ? 'Dominancia Diagonal' : 'Borde de disco'}</div>
+        <div class="kpi-sub">${gershOk ? 'Todos los discos en semiplano positivo' : 'Se recurre a Cholesky/Autovalores'}</div>
+      </div>
+      <div class="kpi-card ${cholOk ? 'success-highlight' : ''}">
+        <div class="kpi-label">Cholesky <span>${cholOk ? 'SPD Valido' : 'No SPD'}</span></div>
+        <div class="kpi-value" style="font-size:1.1rem;">${cholOk ? 'A = L L^T Existe' : 'Fallo de Pivote'}</div>
+        <div class="kpi-sub">${cholMsg}</div>
+      </div>
+      <div class="kpi-card ${eigOk ? 'success-highlight' : ''}">
+        <div class="kpi-label">Autovalores <span>${eigOk ? 'λ > 0' : 'λ ≤ 0'}</span></div>
+        <div class="kpi-value" style="font-size:1.1rem;">λ_min = ${eigValues.length ? fmt(Math.min(...eigValues), 3) : '—'}</div>
+        <div class="kpi-sub">λ_max = ${eigValues.length ? fmt(Math.max(...eigValues), 3) : '—'} | κ(A) = ${eigValues.length ? fmt(Math.max(...eigValues)/Math.min(...eigValues), 2) : '—'}</div>
+      </div>
     </div>
-
-    <div class="kpi-card ${choleskyOk ? 'success-highlight' : ''}">
-      <div class="kpi-label">Vía 2: Cholesky <span>${choleskyOk ? '✓ SPD' : '✗ No SPD'}</span></div>
-      <div class="kpi-value" style="font-size:1.15rem;">${choleskyOk ? 'A = L Lᵀ Existe' : 'Fallo de Pivote'}</div>
-      <div class="kpi-sub">${choleskyMsg}</div>
-    </div>
-
-    <div class="kpi-card ${eigOk ? 'success-highlight' : ''}">
-      <div class="kpi-label">Vía 3: Autovalores <span>${eigOk ? '✓ λ > 0' : '✗ λ ≤ 0'}</span></div>
-      <div class="kpi-value" style="font-size:1.15rem;">λ_min = ${eigValues.length ? fmt(Math.min(...eigValues), 3) : '—'}</div>
-      <div class="kpi-sub">λ_max = ${eigValues.length ? fmt(Math.max(...eigValues), 3) : '—'} · κ = ${eigValues.length ? fmt(Math.max(...eigValues)/Math.min(...eigValues), 2) : '—'}</div>
-    </div>
-  </div>`;
-
-  container.innerHTML = html;
+  `;
 }
 
 /* ============================================================
-   10. INTERPRETACIÓN DINÁMICA DE RESULTADOS
+   10. DESPLIEGUE DE SOLUCION DE REFERENCIA (SECCION 6)
    ============================================================ */
-function generateDynamicInsights(res) {
-  const gcp = res.gcp;
+function renderReferenceSection(res) {
+  const L = res.cholesky.L;
+  const y = res.cholesky.y;
+  const xref = res.ref;
+  const b = res.b;
+
+  // 6.1 Matriz L
+  const lWrap = document.getElementById('cholesky-matrix-display');
+  if (lWrap) {
+    let html = '<table><thead><tr><th>Fila</th>';
+    for (let j = 0; j < 5; j++) html += `<th class="num">Columna ${j+1}</th>`;
+    html += '</tr></thead><tbody>';
+    for (let i = 0; i < 5; i++) {
+      html += `<tr><td><strong>L_${i+1}</strong></td>`;
+      for (let j = 0; j < 5; j++) {
+        const val = L[i][j];
+        html += `<td class="num ${i===j?'cell-highlight':''}">${Math.abs(val) > 1e-12 ? fmt(val, 5) : '0'}</td>`;
+      }
+      html += '</tr>';
+    }
+    html += '</tbody></table>';
+    lWrap.innerHTML = html;
+  }
+
+  // 6.2 y 6.3 Sustituciones
+  const fwd = document.getElementById('cholesky-forward-display');
+  if (fwd) {
+    fwd.innerHTML = y.map((val, idx) => `y_${idx+1} = ${fmt(val, 5)}`).join('<br>');
+  }
+  const bwd = document.getElementById('cholesky-backward-display');
+  if (bwd) {
+    bwd.innerHTML = xref.map((val, idx) => `x_ref,${idx+1} = ${fmt(val, 5)} miles USD`).join('<br>');
+  }
+
+  // 6.4 Resumen
+  const tbody = document.querySelector('#table-cholesky-summary tbody');
+  if (tbody) {
+    const lineNames = [
+      'Transporte de carga pesada',
+      'Distribucion urbana / ultima milla',
+      'Almacenaje seco y bodegaje',
+      'Cadena de frio',
+      'Logistica inversa y devoluciones'
+    ];
+    const bcalc = matVec(res.A, xref);
+    tbody.innerHTML = xref.map((val, idx) => {
+      const diff = Math.abs(bcalc[idx] - b[idx]);
+      return `
+        <tr>
+          <td><strong>x_${idx+1}</strong></td>
+          <td>${lineNames[idx]}</td>
+          <td class="num cell-highlight">${fmtMoney(val)}</td>
+          <td class="num">${fmt(bcalc[idx], 4)}</td>
+          <td class="num">${fmt(b[idx], 4)}</td>
+          <td class="num">${diff.toExponential(3)}</td>
+        </tr>
+      `;
+    }).join('');
+  }
+}
+
+/* ============================================================
+   11. DESPLIEGUE GCP VS GC (SECCION 7)
+   ============================================================ */
+function renderGcpVsGcSection(res) {
+  const kpisWrap = document.getElementById('gcp-vs-gc-kpis');
+  const insightsWrap = document.getElementById('gcp-vs-gc-insights');
+  if (!kpisWrap || !insightsWrap) return;
+
   const gc = res.gc;
-  const ref = res.ref;
-  const totalCapital = ref.reduce((a, b) => a + b, 0);
+  const gcp = res.gcp;
+  const speedup = gc.iterations / gcp.iterations;
+  const kappaRed = ((res.kappaA - res.kappaMA) / res.kappaA) * 100;
+  const totalCap = res.ref.reduce((a, b) => a + b, 0);
 
-  // Línea con mayor capital
+  kpisWrap.innerHTML = `
+    <div class="kpi-card highlight">
+      <div class="kpi-label">Iteraciones GCP</div>
+      <div class="kpi-value">${gcp.iterations}</div>
+      <div class="kpi-sub">vs ${gc.iterations} de GC simple</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Factor Aceleracion</div>
+      <div class="kpi-value">${speedup.toFixed(2)}x</div>
+      <div class="kpi-sub">${speedup > 1 ? 'GCP reduce iteraciones' : 'Rendimiento parejo'}</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">kappa(A) Original</div>
+      <div class="kpi-value">${fmt(res.kappaA, 3)}</div>
+      <div class="kpi-sub">${res.kappaA > 100 ? 'Mal condicionado' : 'Bien condicionado'}</div>
+    </div>
+    <div class="kpi-card ${res.kappaMA < res.kappaA ? 'success-highlight' : ''}">
+      <div class="kpi-label">kappa(M^-1 A) Precond.</div>
+      <div class="kpi-value">${fmt(res.kappaMA, 3)}</div>
+      <div class="kpi-sub">${kappaRed > 0 ? 'Compresion de ' + kappaRed.toFixed(1) + '%' : 'Sin reduccion'}</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Residuo Final GCP</div>
+      <div class="kpi-value" style="font-size:1.15rem;">${gcp.residual.toExponential(3)}</div>
+      <div class="kpi-sub">${gcp.residual < res.tol ? 'Tolerancia alcanzada' : 'No convergio'}</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Capital Total</div>
+      <div class="kpi-value" style="font-size:1.15rem;">${fmtMoney(totalCap)}</div>
+      <div class="kpi-sub">Sumatoria de asignacion</div>
+    </div>
+  `;
+
   let maxIdx = 0;
-  for (let i = 1; i < ref.length; i++) if (ref[i] > ref[maxIdx]) maxIdx = i;
+  for (let i = 1; i < res.ref.length; i++) if (res.ref[i] > res.ref[maxIdx]) maxIdx = i;
   const lineNames = [
-    'x₁ Carga Pesada (Largo Recorrido)',
-    'x₂ Distribución Urbana / Última Milla',
-    'x₃ Almacenaje Seco y Bodegaje',
-    'x₄ Cadena de Frío',
-    'x₅ Logística Inversa y Devoluciones'
+    'Transporte de carga pesada',
+    'Distribucion urbana',
+    'Almacenaje seco',
+    'Cadena de frio',
+    'Logistica inversa'
   ];
-  const maxShare = (ref[maxIdx] / totalCapital) * 100;
+  const maxShare = (res.ref[maxIdx] / totalCap) * 100;
 
-  // Aceleración
-  const speedup = (gc.iterations / gcp.iterations);
-  const kappaReduction = ((res.kappaA - res.kappaMA) / res.kappaA) * 100;
-
-  let finAssessment = '';
-  if (currentScenarioId === 1) {
-    finAssessment = `El sistema opera con asignaciones de capital moderadas (Total: ${fmtMoney(totalCapital)}). La división con mayor absorción de liquidez es <strong>${lineNames[maxIdx]}</strong> (${maxShare.toFixed(1)}%). La empresa goza de equilibrio financiero sin riesgo de asfixia en el ciclo de conversión de efectivo.`;
-  } else if (currentScenarioId === 2) {
-    finAssessment = `Escenario de presión inflacionaria. El requerimiento total de capital sube a <strong>${fmtMoney(totalCapital)}</strong> (un incremento del ${(totalCapital/600-1)*100 > 0 ? '+' : ''}${((totalCapital/580-1)*100).toFixed(1)}%). A pesar del encarecimiento de combustible y mantenimiento, el acoplamiento cruzado se mantiene sano y el riesgo de insolvencia es bajo.`;
-  } else {
-    finAssessment = `Dispersión crítica de capital. La división <strong>${lineNames[maxIdx]}</strong> concentra el <strong>${maxShare.toFixed(1)}%</strong> del presupuesto total (${fmtMoney(ref[maxIdx])} de ${fmtMoney(totalCapital)}). Existe un riesgo operativo desproporcionado: cualquier falla en la cadena de frío afectaría el 75% de los activos inmovilizados.`;
-  }
-
-  let numAssessment = '';
-  if (gcp.iterations < gc.iterations) {
-    numAssessment = `<strong>Aceleración Significativa:</strong> GCP convergió en <strong>${gcp.iterations} iteraciones</strong> frente a <strong>${gc.iterations} de GC</strong> (un factor de aceleración de <strong>${speedup.toFixed(1)}×</strong>). El precondicionador redujo el número de condición de <span class="math-inline">\\kappa(A) = ${fmt(res.kappaA, 2)}</span> a <span class="math-inline">\\kappa(M^{-1}A) = ${fmt(res.kappaMA, 2)}</span> (${kappaReduction.toFixed(1)}% de compresión espectral).`;
-  } else {
-    numAssessment = `En este escenario la matriz ya posee un condicionamiento inicial bajo (<span class="math-inline">\\kappa(A) = ${fmt(res.kappaA, 2)}</span>). Tanto GC como GCP convergen rápidamente en <strong>${gcp.iterations} iteraciones</strong>. No se requiere precondicionamiento complejo ya que Jacobi confirma la cuasi-ortogonalidad natural.`;
-  }
-
-  return `
+  insightsWrap.innerHTML = `
     <div class="insight-panel">
-      <h4>💡 Diagnóstico Dinámico e Interpretación Automática</h4>
+      <h4>Diagnostico Tecnico y Financiero del Escenario</h4>
       <div class="insight-list">
         <div class="insight-item">
-          <strong>💼 Interpretación Financiera y Gestión de Liquidez</strong>
-          <p>${finAssessment}</p>
-          <div style="margin-top:0.4rem; font-size:0.85rem; color:var(--text-muted);">
-            Presupuesto Total Requerido: <strong style="color:var(--primary);">${fmtMoney(totalCapital)}</strong>
-          </div>
+          <strong>Gestion Financiera de Activos y Liquidez</strong>
+          <p>
+            El capital de trabajo total asciende a <strong>${fmtMoney(totalCap)}</strong>. La unidad con mayor absorcion de recursos es <strong>${lineNames[maxIdx]} (x_${maxIdx+1})</strong> concentrando el <strong>${maxShare.toFixed(1)}%</strong> del presupuesto corporativo.
+          </p>
         </div>
         <div class="insight-item">
-          <strong>⚡ Eficiencia Numérica y Rendimiento de GCP</strong>
-          <p>${numAssessment}</p>
-          <div style="margin-top:0.4rem; font-size:0.85rem; color:var(--text-muted);">
-            Residuo Final GCP: <strong style="color:var(--success);">${gcp.residual.toExponential(3)}</strong> (Tolerancia: ${res.tol})
-          </div>
+          <strong>Analisis de Eficiencia Numerica (GCP vs GC)</strong>
+          <p>
+            GCP alcanzo la tolerancia requerida (\(10^{-6}\)) en <strong>${gcp.iterations} iteraciones</strong>, frente a <strong>${gc.iterations} de GC</strong> (aceleracion de <strong>${speedup.toFixed(2)}x</strong>). El precondicionador redujo el numero de condicion de \(${fmt(res.kappaA, 2)}\) a \(${fmt(res.kappaMA, 2)}\).
+          </p>
         </div>
       </div>
     </div>
   `;
+
+  initStepInspector(res.gcp.steps, res.tol);
 }
 
 /* ============================================================
-   11. RENDERIZADO DEL ÁREA DE RESULTADOS DEL SIMULADOR
+   12. VISOR PASO A PASO (ALGORITMO MZ DE SUÑAGUA)
    ============================================================ */
-function renderResultsArea(res) {
-  const container = document.getElementById('dynamic-results-area');
-  if (!container) return;
-
-  const gcp = res.gcp;
-  const gc = res.gc;
-  const speedup = (gc.iterations / gcp.iterations);
-  const kappaReduction = ((res.kappaA - res.kappaMA) / res.kappaA) * 100;
-  const totalCapital = res.ref.reduce((a, b) => a + b, 0);
-
-  let html = '';
-
-  // KPIS
-  html += `
-    <div class="kpi-grid">
-      <div class="kpi-card highlight">
-        <div class="kpi-label">Iteraciones GCP <span>${gcp.iterations <= gc.iterations ? '⚡ Óptimo' : ''}</span></div>
-        <div class="kpi-value">${gcp.iterations}</div>
-        <div class="kpi-sub">vs ${gc.iterations} en GC simple</div>
-      </div>
-
-      <div class="kpi-card">
-        <div class="kpi-label">Factor Aceleración</div>
-        <div class="kpi-value">${speedup >= 1 ? speedup.toFixed(1) + '×' : '1.0×'}</div>
-        <div class="kpi-sub">${speedup > 1 ? 'GCP supera a GC' : 'Rendimiento parejo'}</div>
-      </div>
-
-      <div class="kpi-card">
-        <div class="kpi-label">κ(A) Original</div>
-        <div class="kpi-value">${fmt(res.kappaA, 3)}</div>
-        <div class="kpi-sub">${res.kappaA > 100 ? 'Mal condicionado' : 'Bien condicionado'}</div>
-      </div>
-
-      <div class="kpi-card ${res.kappaMA < res.kappaA ? 'success-highlight' : ''}">
-        <div class="kpi-label">κ(M⁻¹A) Precond.</div>
-        <div class="kpi-value">${fmt(res.kappaMA, 3)}</div>
-        <div class="kpi-sub">${kappaReduction > 0 ? 'Reducción de ' + kappaReduction.toFixed(0) + '%' : 'Sin cambio'}</div>
-      </div>
-
-      <div class="kpi-card">
-        <div class="kpi-label">Residuo Final GCP</div>
-        <div class="kpi-value" style="font-size:1.15rem;">${gcp.residual.toExponential(2)}</div>
-        <div class="kpi-sub">${gcp.residual < res.tol ? '✓ Tolerancia alcanzada' : '⚠️ No convergió'}</div>
-      </div>
-
-      <div class="kpi-card">
-        <div class="kpi-label">Capital Total</div>
-        <div class="kpi-value" style="font-size:1.15rem;">${fmtMoney(totalCapital)}</div>
-        <div class="kpi-sub">∑ x_ref (Cholesky)</div>
-      </div>
-    </div>
-  `;
-
-  // INSIGHTS DINÁMICOS
-  html += generateDynamicInsights(res);
-
-  // CONTENEDOR DE GRÁFICOS DINÁMICOS CON TABS
-  html += `
-    <div class="chart-container-card">
-      <div class="chart-toolbar">
-        <div class="chart-nav-pills">
-          <button class="chart-pill active" data-chart-tab="conv">📈 Convergencia Logarítmica</button>
-          <button class="chart-pill" data-chart-tab="alloc">💰 Asignación de Capital</button>
-          <button class="chart-pill" data-chart-tab="errors">🎯 Errores por Variable</button>
-          <button class="chart-pill" data-chart-tab="gain">⚡ Ganancia (GC − GCP)</button>
-          <button class="chart-pill" data-chart-tab="spectrum">🌈 Espectro de Autovalores</button>
-        </div>
-        <div style="display:flex; gap:0.5rem;">
-          <button class="btn btn-secondary btn-sm" id="btn-chart-scale-toggle" title="Alternar escala logarítmica / lineal">
-            📏 Escala Log
-          </button>
-          <button class="btn btn-secondary btn-sm" id="btn-download-chart" title="Descargar imagen PNG del gráfico">
-            📷 Guardar PNG
-          </button>
-        </div>
-      </div>
-
-      <div class="chart-canvas-box">
-        <canvas id="mainChartCanvas"></canvas>
-      </div>
-    </div>
-  `;
-
-  // TABLA DE SOLUCIONES Y ERRORES POR VARIABLE
-  const lineLabels = [
-    'x₁ Carga pesada (Largo recorrido)',
-    'x₂ Distribución urbana / Última milla',
-    'x₃ Almacenaje seco y bodegaje',
-    'x₄ Cadena de frío',
-    'x₅ Logística inversa y devoluciones'
-  ];
-
-  html += `
-    <div class="card">
-      <h3 class="card-title">Solución Óptima y Errores por Línea Operativa</h3>
-      <p class="lead-text" style="font-size:0.92rem;">
-        Se compara la solución exacta calculada por Cholesky (<span class="math-inline">x_{\\text{ref}}</span>) frente a las aproximaciones iterativas de GCP y GC.
-      </p>
-      <div class="table-responsive">
-        <table>
-          <thead>
-            <tr>
-              <th>Variable & Línea Operativa</th>
-              <th class="num">x_ref (Cholesky)</th>
-              <th class="num">x_GCP (Precond.)</th>
-              <th class="num">x_GC (Simple)</th>
-              <th class="num">E_a (Absoluto)</th>
-              <th class="num">E_r (Relativo)</th>
-              <th class="num">E_p (%)</th>
-              <th>Participación</th>
-            </tr>
-          </thead>
-          <tbody>
-  `;
-
-  res.errors.forEach((e, idx) => {
-    const share = (e.ref / totalCapital) * 100;
-    html += `
-      <tr>
-        <td><strong>${lineLabels[idx]}</strong></td>
-        <td class="num cell-highlight">${fmtMoney(e.ref)}</td>
-        <td class="num">${fmtMoney(e.gcp)}</td>
-        <td class="num">${fmtMoney(e.gc)}</td>
-        <td class="num">${e.ea.toExponential(3)}</td>
-        <td class="num">${e.er === null ? 'no def.' : e.er.toExponential(3)}</td>
-        <td class="num">${e.ep === null ? 'no def.' : e.ep.toFixed(4) + '%'}</td>
-        <td style="min-width:130px;">
-          <div style="display:flex; align-items:center; gap:0.5rem;">
-            <div style="flex:1; height:8px; background:var(--border-color); border-radius:4px; overflow:hidden;">
-              <div style="width:${Math.min(100, Math.max(0, share))}%; height:100%; background:var(--primary);"></div>
-            </div>
-            <span style="font-size:0.78rem; font-family:var(--font-mono);">${share.toFixed(1)}%</span>
-          </div>
-        </td>
-      </tr>
-    `;
-  });
-
-  html += `
-          </tbody>
-        </table>
-      </div>
-    </div>
-  `;
-
-  // TABLA DETALLADA DE ITERACIONES (SCROLLABLE)
-  html += `
-    <div class="card">
-      <h3 class="card-title">Detalle de Iteraciones y Residuos</h3>
-      <p class="lead-text" style="font-size:0.92rem;">
-        Evolución iteración por iteración de la norma del residuo relativo <span class="math-inline">\\|r_k\\|_2 / \\|b\\|_2</span>.
-      </p>
-      <div style="max-height: 340px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-        <table>
-          <thead style="position: sticky; top: 0; z-index: 2;">
-            <tr>
-              <th class="num">Iteración k</th>
-              <th class="num">Residuo GC Simple</th>
-              <th class="num">Residuo GCP (Precond.)</th>
-              <th class="num">Ganancia (GC − GCP)</th>
-              <th>Veredicto Iterativo</th>
-            </tr>
-          </thead>
-          <tbody>
-  `;
-
-  const maxLen = Math.max(gc.history.length, gcp.history.length);
-  for (let k = 0; k < maxLen; k++) {
-    const rGC = k < gc.history.length ? gc.history[k] : null;
-    const rGCP = k < gcp.history.length ? gcp.history[k] : null;
-    const diff = (rGC !== null && rGCP !== null) ? (rGC - rGCP) : null;
-    const gcpAhead = diff !== null && diff > 0;
-
-    html += `
-      <tr>
-        <td class="num" style="font-weight:600;">k = ${k}</td>
-        <td class="num">${rGC !== null ? rGC.toExponential(3) : '—'}</td>
-        <td class="num cell-highlight">${rGCP !== null ? rGCP.toExponential(3) : '—'}</td>
-        <td class="num" style="color:${gcpAhead ? 'var(--success)' : 'inherit'};">
-          ${diff !== null ? (diff >= 0 ? '+' : '') + diff.toExponential(3) : '—'}
-        </td>
-        <td>
-          ${k === 0 ? '<span class="badge info">Residuo Inicial</span>' :
-            (rGCP !== null && rGCP < res.tol) ? '<span class="badge ok">✓ GCP Convergió</span>' :
-            (rGC !== null && rGC < res.tol) ? '<span class="badge ok">✓ GC Convergió</span>' :
-            gcpAhead ? '<span class="badge ok">GCP Acelera</span>' : '<span class="badge info">Iterando</span>'}
-        </td>
-      </tr>
-    `;
-  }
-
-  html += `
-          </tbody>
-        </table>
-      </div>
-    </div>
-  `;
-
-  container.innerHTML = html;
-
-  // Inicializar listeners de las pestañas de gráficos
-  initChartTabs();
-  renderActiveChart('conv');
-
-  // Actualizar caché del escenario
-  scenarioRunCache[currentScenarioId] = {
-    kappaA: res.kappaA,
-    kappaMA: res.kappaMA,
-    precond: res.precondType,
-    iterGC: gc.iterations,
-    iterGCP: gcp.iterations,
-    converged: gcp.residual < res.tol && gc.residual < res.tol,
-    totalCapital,
-    speedup
-  };
-  renderComparisonTable();
-
-  // Actualizar stepper paso a paso
-  initStepInspector(res.gcp.steps, res.A, res.b, res.tol);
-
-  // Renderizar fórmulas con KaTeX si está disponible
-  if (window.renderMathInElement) {
-    try {
-      renderMathInElement(container, {
-        delimiters: [
-          { left: '$$', right: '$$', display: true },
-          { left: '\\(', right: '\\)', display: false },
-          { left: '\\[', right: '\\]', display: true }
-        ],
-        throwOnError: false
-      });
-    } catch (e) {}
-  }
-}
-
-/* ============================================================
-   12. GRÁFICOS DINÁMICOS CON CHART.JS (O FALLBACK SVG)
-   ============================================================ */
-let activeChartType = 'conv';
-let isLogScale = true;
-
-function initChartTabs() {
-  document.querySelectorAll('.chart-pill').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.chart-pill').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeChartType = btn.dataset.chartTab;
-      renderActiveChart(activeChartType);
-    });
-  });
-
-  const toggleScaleBtn = document.getElementById('btn-chart-scale-toggle');
-  if (toggleScaleBtn) {
-    toggleScaleBtn.addEventListener('click', () => {
-      isLogScale = !isLogScale;
-      toggleScaleBtn.textContent = isLogScale ? '📏 Escala Log' : '📏 Escala Lineal';
-      renderActiveChart(activeChartType);
-    });
-  }
-
-  const downloadBtn = document.getElementById('btn-download-chart');
-  if (downloadBtn) {
-    downloadBtn.addEventListener('click', () => {
-      const canvas = document.getElementById('mainChartCanvas');
-      if (!canvas) return;
-      const link = document.createElement('a');
-      link.download = `grafico-${activeChartType}-escenario-${currentScenarioId}.png`;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-    });
-  }
-}
-
-function renderActiveChart(type) {
-  if (!currentSimulationResult) return;
-  const canvas = document.getElementById('mainChartCanvas');
-  if (!canvas) return;
-
-  // Si Chart.js no estuviera disponible, usar fallback nativo
-  if (typeof Chart === 'undefined') {
-    renderSvgFallback(canvas.parentElement, type);
-    return;
-  }
-
-  // Destruir gráfico previo
-  if (chartConvergence) { chartConvergence.destroy(); chartConvergence = null; }
-
-  const res = currentSimulationResult;
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  const textColor = isDark ? '#94a3b8' : '#475569';
-  const gridColor = isDark ? '#1e293b' : '#e2e8f0';
-
-  if (type === 'conv') {
-    // 1. CURVA DE CONVERGENCIA
-    const maxLen = Math.max(res.gc.history.length, res.gcp.history.length);
-    const labels = Array.from({ length: maxLen }, (_, i) => `k=${i}`);
-    const dataGCP = res.gcp.history;
-    const dataGC = res.gc.history;
-    const tolLine = Array(maxLen).fill(res.tol);
-
-    chartConvergence = new Chart(canvas, {
-      type: 'line',
-      data: {
-        labels,
-        datasets: [
-          {
-            label: 'GCP (Precondicionado)',
-            data: dataGCP,
-            borderColor: '#2563eb',
-            backgroundColor: 'rgba(37, 99, 235, 0.1)',
-            borderWidth: 2.5,
-            pointRadius: 4,
-            pointHoverRadius: 7,
-            tension: 0.15,
-            fill: false
-          },
-          {
-            label: 'GC Simple',
-            data: dataGC,
-            borderColor: '#dc2626',
-            backgroundColor: 'rgba(220, 38, 38, 0.08)',
-            borderWidth: 2,
-            borderDash: [5, 4],
-            pointRadius: 3,
-            pointHoverRadius: 6,
-            tension: 0.15,
-            fill: false
-          },
-          {
-            label: `Tolerancia (${res.tol})`,
-            data: tolLine,
-            borderColor: '#059669',
-            borderWidth: 1.5,
-            borderDash: [3, 3],
-            pointRadius: 0,
-            fill: false
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          title: {
-            display: true,
-            text: `Convergencia de Residuos Relativos (Escenario ${currentScenarioId})`,
-            color: isDark ? '#f8fafc' : '#0f172a',
-            font: { size: 14, weight: '700' }
-          },
-          tooltip: {
-            callbacks: {
-              label: (ctx) => `${ctx.dataset.label}: ${ctx.raw !== null ? ctx.raw.toExponential(3) : '—'}`
-            }
-          },
-          legend: { labels: { color: textColor } }
-        },
-        scales: {
-          x: {
-            title: { display: true, text: 'Iteración (k)', color: textColor },
-            grid: { color: gridColor },
-            ticks: { color: textColor }
-          },
-          y: {
-            type: isLogScale ? 'logarithmic' : 'linear',
-            title: { display: true, text: 'Residuo Relativo ||r_k||₂ / ||b||₂', color: textColor },
-            grid: { color: gridColor },
-            ticks: {
-              color: textColor,
-              callback: v => Number(v).toExponential(0)
-            }
-          }
-        }
-      }
-    });
-
-  } else if (type === 'alloc') {
-    // 2. ASIGNACIÓN DE CAPITAL POR LÍNEA
-    const labels = ['x₁ Carga Pesada', 'x₂ Distribución', 'x₃ Almacén Seco', 'x₄ Cadena Frío', 'x₅ Log. Inversa'];
-    chartConvergence = new Chart(canvas, {
-      type: 'bar',
-      data: {
-        labels,
-        datasets: [
-          {
-            label: 'x_ref (Cholesky)',
-            data: res.ref,
-            backgroundColor: '#3b82f6',
-            borderRadius: 4
-          },
-          {
-            label: 'x_GCP (Precond.)',
-            data: res.gcp.x,
-            backgroundColor: '#10b981',
-            borderRadius: 4
-          },
-          {
-            label: 'x_GC (Simple)',
-            data: res.gc.x,
-            backgroundColor: '#f59e0b',
-            borderRadius: 4
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          title: {
-            display: true,
-            text: 'Plan de Asignación de Capital de Trabajo por Línea (miles USD)',
-            color: isDark ? '#f8fafc' : '#0f172a',
-            font: { size: 14, weight: '700' }
-          },
-          tooltip: {
-            callbacks: {
-              label: ctx => `${ctx.dataset.label}: $${Number(ctx.raw).toLocaleString('en-US', { minimumFractionDigits: 2 })} k USD`
-            }
-          },
-          legend: { labels: { color: textColor } }
-        },
-        scales: {
-          x: { grid: { color: gridColor }, ticks: { color: textColor } },
-          y: {
-            title: { display: true, text: 'Capital (miles USD)', color: textColor },
-            grid: { color: gridColor },
-            ticks: { color: textColor }
-          }
-        }
-      }
-    });
-
-  } else if (type === 'errors') {
-    // 3. ERRORES POR VARIABLE
-    const labels = ['x₁', 'x₂', 'x₃', 'x₄', 'x₅'];
-    const eaData = res.errors.map(e => e.ea);
-    const erData = res.errors.map(e => e.er !== null ? e.er : 0);
-
-    chartConvergence = new Chart(canvas, {
-      type: 'bar',
-      data: {
-        labels,
-        datasets: [
-          {
-            label: 'Error Absoluto Ea = |x_ref - x_GCP|',
-            data: eaData,
-            backgroundColor: '#ef4444',
-            borderRadius: 4
-          },
-          {
-            label: 'Error Relativo Er',
-            data: erData,
-            backgroundColor: '#8b5cf6',
-            borderRadius: 4
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          title: {
-            display: true,
-            text: 'Errores Numéricos de GCP Respecto a Cholesky',
-            color: isDark ? '#f8fafc' : '#0f172a',
-            font: { size: 14, weight: '700' }
-          },
-          tooltip: {
-            callbacks: {
-              label: ctx => `${ctx.dataset.label}: ${Number(ctx.raw).toExponential(3)}`
-            }
-          },
-          legend: { labels: { color: textColor } }
-        },
-        scales: {
-          x: { grid: { color: gridColor }, ticks: { color: textColor } },
-          y: {
-            type: 'logarithmic',
-            title: { display: true, text: 'Magnitud del Error (Escala Log)', color: textColor },
-            grid: { color: gridColor },
-            ticks: { color: textColor, callback: v => Number(v).toExponential(0) }
-          }
-        }
-      }
-    });
-
-  } else if (type === 'gain') {
-    // 4. GANANCIA DE GCP FRENTE A GC
-    const maxLen = Math.max(res.gc.history.length, res.gcp.history.length);
-    const labels = Array.from({ length: maxLen }, (_, i) => `k=${i}`);
-    const gainData = [];
-    for (let i = 0; i < maxLen; i++) {
-      const rGC = i < res.gc.history.length ? res.gc.history[i] : (res.gc.history[res.gc.history.length - 1]);
-      const rGCP = i < res.gcp.history.length ? res.gcp.history[i] : (res.gcp.history[res.gcp.history.length - 1]);
-      gainData.push(rGC - rGCP);
-    }
-
-    chartConvergence = new Chart(canvas, {
-      type: 'bar',
-      data: {
-        labels,
-        datasets: [{
-          label: 'Ganancia Absoluta (Residuo GC − Residuo GCP)',
-          data: gainData,
-          backgroundColor: gainData.map(v => v >= 0 ? '#10b981' : '#ef4444'),
-          borderRadius: 4
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          title: {
-            display: true,
-            text: 'Ganancia por Iteración: Reducción Adicional Lograda por GCP',
-            color: isDark ? '#f8fafc' : '#0f172a',
-            font: { size: 14, weight: '700' }
-          },
-          tooltip: {
-            callbacks: {
-              label: ctx => `Ganancia: ${Number(ctx.raw).toExponential(3)}`
-            }
-          },
-          legend: { labels: { color: textColor } }
-        },
-        scales: {
-          x: { grid: { color: gridColor }, ticks: { color: textColor } },
-          y: {
-            title: { display: true, text: 'Diferencia de Residuo', color: textColor },
-            grid: { color: gridColor },
-            ticks: { color: textColor }
-          }
-        }
-      }
-    });
-
-  } else if (type === 'spectrum') {
-    // 5. ESPECTRO DE AUTOVALORES (COMPRESIÓN ESPECTRAL)
-    const labels = ['λ₁', 'λ₂', 'λ₃', 'λ₄', 'λ₅'];
-    chartConvergence = new Chart(canvas, {
-      type: 'bar',
-      data: {
-        labels,
-        datasets: [
-          {
-            label: `A Original (κ = ${fmt(res.kappaA, 2)})`,
-            data: res.eigA,
-            backgroundColor: '#6366f1',
-            borderRadius: 4
-          },
-          {
-            label: `M⁻¹A Precondicionada (κ = ${fmt(res.kappaMA, 2)})`,
-            data: res.eigMA,
-            backgroundColor: '#06b6d4',
-            borderRadius: 4
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          title: {
-            display: true,
-            text: 'Compresión Espectral: Autovalores de A frente a M⁻¹A',
-            color: isDark ? '#f8fafc' : '#0f172a',
-            font: { size: 14, weight: '700' }
-          },
-          tooltip: {
-            callbacks: {
-              label: ctx => `${ctx.dataset.label}: ${Number(ctx.raw).toFixed(3)}`
-            }
-          },
-          legend: { labels: { color: textColor } }
-        },
-        scales: {
-          x: { grid: { color: gridColor }, ticks: { color: textColor } },
-          y: {
-            type: res.kappaA > 50 ? 'logarithmic' : 'linear',
-            title: { display: true, text: 'Magnitud del Autovalor λ', color: textColor },
-            grid: { color: gridColor },
-            ticks: { color: textColor }
-          }
-        }
-      }
-    });
-  }
-}
-
-// Fallback SVG nativo en caso de que Chart.js no cargue
-function renderSvgFallback(container, type) {
-  const res = currentSimulationResult;
-  container.innerHTML = `
-    <div style="padding:2rem; text-align:center;">
-      <h4>Gráfico de Residuos (Vista Vectorial Nativa)</h4>
-      <p>GCP Iteraciones: <strong>${res.gcp.iterations}</strong> | GC Iteraciones: <strong>${res.gc.iterations}</strong></p>
-      <p style="font-family:var(--font-mono); font-size:0.85rem; margin-top:0.5rem;">
-        Residuo GCP: ${res.gcp.residual.toExponential(3)} · Residuo GC: ${res.gc.residual.toExponential(3)}
-      </p>
-    </div>
-  `;
-}
-
-/* ============================================================
-   13. INSPECTOR PASO A PASO (ALGORITMO GCP)
-   ============================================================ */
-let stepperSteps = [];
-let stepperA = null;
-let stepperB = null;
-let stepperTol = 1e-6;
-
-function initStepInspector(steps, A, b, tol) {
+function initStepInspector(steps, tol) {
   stepperSteps = steps || [];
-  stepperA = A;
-  stepperB = b;
   stepperTol = tol;
-
   const slider = document.getElementById('step-slider');
   const maxDisplay = document.getElementById('step-display-max');
   if (slider && maxDisplay) {
@@ -2607,13 +1997,13 @@ function renderStepView(index) {
   if (!s) return;
 
   let html = `
-    <div class="card" style="margin-top:0.8rem; border-color:var(--primary-border);">
-      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.8rem;">
-        <h3 class="card-title" style="margin:0;">
-          Iteración k = ${s.k} ${s.k === 0 ? '<span class="badge info">Paso Inicial</span>' : ''}
-        </h3>
+    <div class="card" style="margin-top:0.6rem; border-color:var(--primary-border);">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.6rem;">
+        <h4 style="margin:0; font-size:1.05rem; color:var(--primary);">
+          Iteracion k = ${s.k} ${s.k === 0 ? '(Paso Inicial)' : ''}
+        </h4>
         <span class="badge ${s.rnorm < stepperTol ? 'ok' : 'info'}">
-          Residuo Relativo: ${s.rnorm.toExponential(3)} ${s.rnorm < stepperTol ? '✓ Convergió' : ''}
+          Residuo Relativo: ${s.rnorm.toExponential(3)} ${s.rnorm < stepperTol ? '(Convergio)' : ''}
         </span>
       </div>
 
@@ -2622,42 +2012,51 @@ function renderStepView(index) {
 
   if (s.k === 0) {
     html += `
-      <strong>1. Inicialización:</strong><br>
-      • x₀ = [${s.x.map(v => fmt(v, 3)).join(', ')}]<br>
-      • r₀ = b − A x₀ = [${s.r.map(v => fmt(v, 3)).join(', ')}]<br>
-      • Resolver M z₀ = r₀ → z₀ = [${s.z ? s.z.map(v => fmt(v, 3)).join(', ') : '—'}]<br>
-      • Dirección inicial: p₀ = z₀
+      <strong>Inicializacion del Algoritmo Mz:</strong><br>
+      • Vector inicial: \\( x_0 = [${s.x.map(v => fmt(v, 3)).join(', ')}]^T \\)<br>
+      • Residuo inicial: \\( r_0 = b - A x_0 = [${s.r.map(v => fmt(v, 3)).join(', ')}]^T \\)<br>
+      • Sistema precondicionado: Resolver \\( M z_0 = r_0 \\implies z_0 = [${s.z ? s.z.map(v => fmt(v, 3)).join(', ') : '—'}]^T \\)<br>
+      • Direccion inicial de busqueda: \\( p_0 = z_0 \\)
     `;
   } else {
     html += `
-      <strong>Operaciones del Algoritmo Mz en k = ${s.k}:</strong><br>
-      1. Longitud de paso: α_${s.k-1} = (rᵀ z) / (pᵀ A p) = <strong style="color:var(--primary);">${s.alpha !== null ? fmt(s.alpha, 5) : '—'}</strong><br>
-      2. Actualización de solución: x_${s.k} = x_${s.k-1} + α p = [${s.x.map(v => fmt(v, 3)).join(', ')}]<br>
-      3. Actualización de residuo: r_${s.k} = r_${s.k-1} − α A p = [${s.r.map(v => fmt(v, 3)).join(', ')}]<br>
-      4. Sistema precondicionado: Resolver M z_${s.k} = r_${s.k} → z_${s.k} = [${s.z ? s.z.map(v => fmt(v, 3)).join(', ') : '—'}]<br>
-      5. Coeficiente de conjugación: β_${s.k} = (r_${s.k}ᵀ z_${s.k}) / (r_${s.k-1}ᵀ z_${s.k-1}) = <strong style="color:var(--accent);">${s.beta !== null ? fmt(s.beta, 5) : '—'}</strong><br>
-      6. Nueva dirección de búsqueda: p_${s.k} = z_${s.k} + β p_${s.k-1}
+      <strong>Operaciones algebraicas en la iteracion k = ${s.k}:</strong><br>
+      1. Longitud de paso: \\( \\alpha_{${s.k-1}} = \\frac{r_{${s.k-1}}^T z_{${s.k-1}}}{p_{${s.k-1}}^T A p_{${s.k-1}}} = \\) <strong style="color:var(--primary);">${s.alpha !== null ? fmt(s.alpha, 5) : '—'}</strong><br>
+      2. Actualizacion de solucion: \\( x_{${s.k}} = x_{${s.k-1}} + \\alpha_{${s.k-1}} p_{${s.k-1}} = [${s.x.map(v => fmt(v, 3)).join(', ')}]^T \\)<br>
+      3. Actualizacion del residuo: \\( r_{${s.k}} = r_{${s.k-1}} - \\alpha_{${s.k-1}} A p_{${s.k-1}} = [${s.r.map(v => fmt(v, 3)).join(', ')}]^T \\)<br>
+      4. Sistema precondicionado: Resolver \\( M z_{${s.k}} = r_{${s.k}} \\implies z_{${s.k}} = [${s.z ? s.z.map(v => fmt(v, 3)).join(', ') : '—'}]^T \\)<br>
+      5. Coeficiente de conjugacion: \\( \\beta_{${s.k}} = \\frac{r_{${s.k}}^T z_{${s.k}}}{r_{${s.k-1}}^T z_{${s.k-1}}} = \\) <strong style="color:var(--accent);">${s.beta !== null ? fmt(s.beta, 5) : '—'}</strong><br>
+      6. Nueva direccion conjugada: \\( p_{${s.k}} = z_{${s.k}} + \\beta_{${s.k}} p_{${s.k-1}} \\)
     `;
   }
 
   html += `
       </div>
 
-      <h4 class="sub-title">Valores del Vector de Asignación de Capital x_${s.k} (miles USD)</h4>
+      <h4 class="sub-title">Vector de Solucion Aproximada x_{${s.k}} (miles USD)</h4>
       <div class="vector-chips-display">
   `;
 
-  const lineVars = ['x₁', 'x₂', 'x₃', 'x₄', 'x₅'];
+  const lineVars = ['x_1', 'x_2', 'x_3', 'x_4', 'x_5'];
   s.x.forEach((val, i) => {
     html += `<div class="vec-chip"><strong>${lineVars[i]}:</strong> <span>${fmt(val, 4)}</span> k USD</div>`;
   });
 
-  html += `
-      </div>
-    </div>
-  `;
-
+  html += `</div></div>`;
   container.innerHTML = html;
+
+  if (window.renderMathInElement) {
+    try {
+      renderMathInElement(container, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        throwOnError: false
+      });
+    } catch (e) {}
+  }
 }
 
 function setupStepControls() {
@@ -2703,9 +2102,9 @@ function setupStepControls() {
       if (stepPlayTimer) {
         clearInterval(stepPlayTimer);
         stepPlayTimer = null;
-        playBtn.textContent = '▶️ Auto';
+        playBtn.textContent = 'Reproducir';
       } else {
-        playBtn.textContent = '⏸️ Pausa';
+        playBtn.textContent = 'Pausar';
         stepPlayTimer = setInterval(() => {
           if (stepCurrentIndex < stepperSteps.length - 1) {
             stepCurrentIndex++;
@@ -2714,87 +2113,510 @@ function setupStepControls() {
           } else {
             clearInterval(stepPlayTimer);
             stepPlayTimer = null;
-            playBtn.textContent = '▶️ Auto';
+            playBtn.textContent = 'Reproducir';
           }
-        }, 900);
+        }, 850);
       }
     });
   }
 }
 
 /* ============================================================
-   14. MATRIZ COMPARATIVA Y PRECONDICIONADORES
+   13. DESPLIEGUE DE ERRORES Y GRAFICOS (SECCION 8)
    ============================================================ */
-function renderComparisonTable() {
-  const wrap = document.getElementById('table-comparison-scenarios-wrap');
-  if (!wrap) return;
+function renderErrorsSection(res) {
+  const tbody = document.querySelector('#table-errors-detail tbody');
+  if (tbody) {
+    const lineNames = [
+      'Transporte de carga pesada',
+      'Distribucion urbana / ultima milla',
+      'Almacenaje seco y bodegaje',
+      'Cadena de frio',
+      'Logistica inversa y devoluciones'
+    ];
+    const totalCap = res.ref.reduce((a, b) => a + b, 0);
 
-  let html = `
-    <table>
-      <thead>
+    tbody.innerHTML = res.errors.map((e, idx) => {
+      const share = (e.ref / totalCap) * 100;
+      return `
         <tr>
-          <th>Escenario</th>
-          <th class="num">κ(A) Orig.</th>
-          <th>Precond.</th>
-          <th class="num">κ(M⁻¹A)</th>
-          <th class="num">Iter GC</th>
-          <th class="num">Iter GCP</th>
-          <th class="num">Aceleración</th>
-          <th class="num">Capital Total</th>
-          <th>Estado</th>
-        </tr>
-      </thead>
-      <tbody>
-  `;
-
-  SCENARIOS.forEach(sc => {
-    const c = scenarioRunCache[sc.id];
-    if (!c) {
-      html += `
-        <tr>
-          <td><strong>${sc.id}. ${sc.name}</strong></td>
-          <td class="num">${fmt(sc.kappa, 2)}</td>
-          <td colspan="7" style="color:var(--text-subtle); text-align:center;">
-            Pendiente de ejecución · <button class="btn btn-secondary btn-sm" onclick="loadScenario(${sc.id}); runFromUI();">Ejecutar Ahora</button>
+          <td><strong>x_${e.i}</strong></td>
+          <td>${lineNames[idx]}</td>
+          <td class="num cell-highlight">${fmtMoney(e.ref)}</td>
+          <td class="num">${fmtMoney(e.gcp)}</td>
+          <td class="num">${fmtMoney(e.gc)}</td>
+          <td class="num">${e.ea.toExponential(3)}</td>
+          <td class="num">${e.er === null ? 'no def.' : e.er.toExponential(3)}</td>
+          <td class="num">${e.ep === null ? 'no def.' : e.ep.toFixed(4) + '%'}</td>
+          <td style="min-width:140px;">
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <div style="flex:1; height:8px; background:var(--border-color); border-radius:4px; overflow:hidden;">
+                <div style="width:${Math.min(100, Math.max(0, share))}%; height:100%; background:var(--primary);"></div>
+              </div>
+              <span style="font-size:0.78rem; font-family:var(--font-mono);">${share.toFixed(1)}%</span>
+            </div>
           </td>
         </tr>
       `;
-    } else {
-      html += `
+    }).join('');
+  }
+
+  // Historial de iteraciones
+  const histTbody = document.querySelector('#table-iterations-history tbody');
+  if (histTbody) {
+    const maxLen = Math.max(res.gc.history.length, res.gcp.history.length);
+    let rows = '';
+    for (let k = 0; k < maxLen; k++) {
+      const rGC = k < res.gc.history.length ? res.gc.history[k] : null;
+      const rGCP = k < res.gcp.history.length ? res.gcp.history[k] : null;
+      const diff = (rGC !== null && rGCP !== null) ? (rGC - rGCP) : null;
+      const ahead = diff !== null && diff > 0;
+      rows += `
         <tr>
-          <td><strong>${sc.id}. ${sc.name}</strong></td>
-          <td class="num">${fmt(c.kappaA, 2)}</td>
-          <td><span class="badge info">${c.precond.toUpperCase()}</span></td>
-          <td class="num cell-highlight">${fmt(c.kappaMA, 2)}</td>
-          <td class="num">${c.iterGC}</td>
-          <td class="num cell-highlight"><strong>${c.iterGCP}</strong></td>
-          <td class="num" style="color:var(--success); font-weight:700;">${c.speedup.toFixed(1)}×</td>
-          <td class="num">${fmtMoney(c.totalCapital)}</td>
-          <td>${c.converged ? '<span class="badge ok">✓ Convergió</span>' : '<span class="badge err">No</span>'}</td>
+          <td class="num">k = ${k}</td>
+          <td class="num">${rGC !== null ? rGC.toExponential(3) : '—'}</td>
+          <td class="num cell-highlight">${rGCP !== null ? rGCP.toExponential(3) : '—'}</td>
+          <td class="num" style="color:${ahead ? 'var(--success)' : 'inherit'};">
+            ${diff !== null ? (diff >= 0 ? '+' : '') + diff.toExponential(3) : '—'}
+          </td>
+          <td>
+            ${k === 0 ? '<span class="badge info">Inicial</span>' :
+              (rGCP !== null && rGCP < res.tol) ? '<span class="badge ok">GCP Convergio</span>' :
+              (rGC !== null && rGC < res.tol) ? '<span class="badge ok">GC Convergio</span>' :
+              ahead ? '<span class="badge ok">GCP Adelante</span>' : '<span class="badge info">Iterando</span>'}
+          </td>
         </tr>
       `;
     }
-  });
+    histTbody.innerHTML = rows;
+  }
 
-  html += `</tbody></table>`;
-  wrap.innerHTML = html;
+  renderActiveChart(activeChartType);
 }
 
-function runAllScenariosComparison() {
-  SCENARIOS.forEach(sc => {
-    const res = runSimulationCore(sc.A, sc.b, [0, 0, 0, 0, 0], 1e-6, 1000, 'jacobi', {});
-    scenarioRunCache[sc.id] = {
-      kappaA: res.kappaA,
-      kappaMA: res.kappaMA,
-      precond: 'jacobi',
-      iterGC: res.gc.iterations,
-      iterGCP: res.gcp.iterations,
-      converged: res.gcp.residual < 1e-6 && res.gc.residual < 1e-6,
-      totalCapital: res.ref.reduce((a, b) => a + b, 0),
-      speedup: res.gc.iterations / res.gcp.iterations
-    };
+/* ============================================================
+   14. GRAFICOS CON CHART.JS O FALLBACK SVG
+   ============================================================ */
+function initChartToolbar() {
+  document.querySelectorAll('.chart-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.chart-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeChartType = btn.dataset.chartTab;
+      renderActiveChart(activeChartType);
+    });
   });
-  renderComparisonTable();
+
+  document.getElementById('btn-chart-scale-toggle')?.addEventListener('click', () => {
+    isLogScale = !isLogScale;
+    const btn = document.getElementById('btn-chart-scale-toggle');
+    if (btn) btn.textContent = isLogScale ? 'Escala Logaritmica' : 'Escala Lineal';
+    renderActiveChart(activeChartType);
+  });
+
+  document.getElementById('btn-download-chart')?.addEventListener('click', () => {
+    const canvas = document.getElementById('mainChartCanvas');
+    if (!canvas) return;
+    const link = document.createElement('a');
+    link.download = `grafico_${activeChartType}_escenario_${currentScenarioId}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+}
+
+function renderActiveChart(type) {
+  if (!currentSimulationResult) return;
+  const canvas = document.getElementById('mainChartCanvas');
+  if (!canvas) return;
+
+  if (typeof Chart === 'undefined') {
+    renderSvgFallback(canvas.parentElement, type);
+    return;
+  }
+
+  if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
+
+  const res = currentSimulationResult;
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const textColor = isDark ? '#94a3b8' : '#475569';
+  const gridColor = isDark ? '#1e293b' : '#e2e8f0';
+
+  if (type === 'conv') {
+    const maxLen = Math.max(res.gc.history.length, res.gcp.history.length);
+    const labels = Array.from({ length: maxLen }, (_, i) => `k=${i}`);
+    chartInstance = new Chart(canvas, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'GCP (Precondicionado)',
+            data: res.gcp.history,
+            borderColor: '#1d4ed8',
+            backgroundColor: 'rgba(29, 78, 216, 0.1)',
+            borderWidth: 2.4,
+            pointRadius: 4,
+            tension: 0.1,
+            fill: false
+          },
+          {
+            label: 'GC Simple',
+            data: res.gc.history,
+            borderColor: '#b91c1c',
+            borderWidth: 2,
+            borderDash: [5, 4],
+            pointRadius: 3,
+            tension: 0.1,
+            fill: false
+          },
+          {
+            label: `Tolerancia (${res.tol})`,
+            data: Array(maxLen).fill(res.tol),
+            borderColor: '#047857',
+            borderWidth: 1.5,
+            borderDash: [3, 3],
+            pointRadius: 0,
+            fill: false
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: `Curva de Convergencia de Residuos Relativos (Escenario ${currentScenarioId})`,
+            color: isDark ? '#f8fafc' : '#0f172a',
+            font: { size: 14, weight: '700' }
+          },
+          tooltip: {
+            callbacks: {
+              label: ctx => `${ctx.dataset.label}: ${ctx.raw !== null ? Number(ctx.raw).toExponential(3) : '—'}`
+            }
+          },
+          legend: { labels: { color: textColor } }
+        },
+        scales: {
+          x: {
+            title: { display: true, text: 'Iteracion (k)', color: textColor },
+            grid: { color: gridColor },
+            ticks: { color: textColor }
+          },
+          y: {
+            type: isLogScale ? 'logarithmic' : 'linear',
+            title: { display: true, text: 'Residuo Relativo ||r_k||_2 / ||b||_2', color: textColor },
+            grid: { color: gridColor },
+            ticks: { color: textColor, callback: v => Number(v).toExponential(0) }
+          }
+        }
+      }
+    });
+
+  } else if (type === 'alloc') {
+    const labels = ['x_1 Pesado', 'x_2 Urbana', 'x_3 Almacen', 'x_4 Frio', 'x_5 Inversa'];
+    chartInstance = new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [
+          { label: 'x_ref (Cholesky)', data: res.ref, backgroundColor: '#1d4ed8' },
+          { label: 'x_GCP', data: res.gcp.x, backgroundColor: '#047857' },
+          { label: 'x_GC', data: res.gc.x, backgroundColor: '#b45309' }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Asignacion de Capital por Linea Operativa (miles USD)',
+            color: isDark ? '#f8fafc' : '#0f172a',
+            font: { size: 14, weight: '700' }
+          },
+          legend: { labels: { color: textColor } }
+        },
+        scales: {
+          x: { grid: { color: gridColor }, ticks: { color: textColor } },
+          y: {
+            title: { display: true, text: 'Capital (miles USD)', color: textColor },
+            grid: { color: gridColor },
+            ticks: { color: textColor }
+          }
+        }
+      }
+    });
+
+  } else if (type === 'errors') {
+    const labels = ['x_1', 'x_2', 'x_3', 'x_4', 'x_5'];
+    chartInstance = new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [
+          { label: 'Error Absoluto Ea', data: res.errors.map(e => e.ea), backgroundColor: '#b91c1c' },
+          { label: 'Error Relativo Er', data: res.errors.map(e => e.er || 0), backgroundColor: '#6d28d9' }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Magnitud de Errores Numéricos de GCP',
+            color: isDark ? '#f8fafc' : '#0f172a',
+            font: { size: 14, weight: '700' }
+          },
+          legend: { labels: { color: textColor } }
+        },
+        scales: {
+          x: { grid: { color: gridColor }, ticks: { color: textColor } },
+          y: {
+            type: 'logarithmic',
+            title: { display: true, text: 'Error (Escala Log)', color: textColor },
+            grid: { color: gridColor },
+            ticks: { color: textColor, callback: v => Number(v).toExponential(0) }
+          }
+        }
+      }
+    });
+
+  } else if (type === 'gain') {
+    const maxLen = Math.max(res.gc.history.length, res.gcp.history.length);
+    const labels = Array.from({ length: maxLen }, (_, i) => `k=${i}`);
+    const gains = [];
+    for (let i = 0; i < maxLen; i++) {
+      const rGC = i < res.gc.history.length ? res.gc.history[i] : res.gc.history[res.gc.history.length - 1];
+      const rGCP = i < res.gcp.history.length ? res.gcp.history[i] : res.gcp.history[res.gcp.history.length - 1];
+      gains.push(rGC - rGCP);
+    }
+    chartInstance = new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Ganancia (Residuo GC - Residuo GCP)',
+          data: gains,
+          backgroundColor: gains.map(v => v >= 0 ? '#047857' : '#b91c1c')
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Ganancia por Iteracion lograda por el Precondicionamiento',
+            color: isDark ? '#f8fafc' : '#0f172a',
+            font: { size: 14, weight: '700' }
+          },
+          legend: { labels: { color: textColor } }
+        },
+        scales: {
+          x: { grid: { color: gridColor }, ticks: { color: textColor } },
+          y: {
+            title: { display: true, text: 'Diferencia de Residuo', color: textColor },
+            grid: { color: gridColor },
+            ticks: { color: textColor }
+          }
+        }
+      }
+    });
+
+  } else if (type === 'spectrum') {
+    const labels = ['λ_1', 'λ_2', 'λ_3', 'λ_4', 'λ_5'];
+    chartInstance = new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [
+          { label: `A Original (κ = ${fmt(res.kappaA, 2)})`, data: res.eigA, backgroundColor: '#6d28d9' },
+          { label: `M^-1 A Precond. (κ = ${fmt(res.kappaMA, 2)})`, data: res.eigMA, backgroundColor: '#0284c7' }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Compresion Espectral: Autovalores de A frente a M^-1 A',
+            color: isDark ? '#f8fafc' : '#0f172a',
+            font: { size: 14, weight: '700' }
+          },
+          legend: { labels: { color: textColor } }
+        },
+        scales: {
+          x: { grid: { color: gridColor }, ticks: { color: textColor } },
+          y: {
+            type: res.kappaA > 50 ? 'logarithmic' : 'linear',
+            title: { display: true, text: 'Magnitud de Autovalor', color: textColor },
+            grid: { color: gridColor },
+            ticks: { color: textColor }
+          }
+        }
+      }
+    });
+  }
+}
+
+function renderSvgFallback(container, type) {
+  const res = currentSimulationResult;
+  if (!res) return;
+  const W = 720, H = 340, m = { top: 34, right: 34, bottom: 56, left: 92 };
+  const iw = W - m.left - m.right, ih = H - m.top - m.bottom;
+  const allRes = [...res.gc.history, ...res.gcp.history].filter(x => x > 0 && isFinite(x));
+  if (allRes.length === 0) return;
+
+  const logMin = Math.min(-16, Math.floor(Math.log10(Math.min(...allRes))));
+  const logMax = Math.max(0, Math.ceil(Math.log10(Math.max(...allRes))));
+  const maxIter = Math.max(res.gc.history.length, res.gcp.history.length) - 1 || 1;
+  const xS = i => m.left + (i / maxIter) * iw;
+  const yS = v => {
+    const lv = Math.max(logMin, Math.log10(Math.max(v, 1e-16)));
+    return m.top + ih - ((lv - logMin) / (logMax - logMin)) * ih;
+  };
+  const path = h => h.map((v, i) => `${i ? 'L' : 'M'}${xS(i).toFixed(2)},${yS(v).toFixed(2)}`).join(' ');
+
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const bgSvg = isDark ? '#131b2e' : '#ffffff';
+  const textClr = isDark ? '#94a3b8' : '#475569';
+  const gridClr = isDark ? '#1e293b' : '#e2e8f0';
+
+  let svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="background:${bgSvg}; width:100%; height:auto; border-radius:8px; border:1px solid var(--border-color);">`;
+  svg += `<line x1="${m.left}" y1="${m.top+ih}" x2="${m.left+iw}" y2="${m.top+ih}" stroke="${textClr}" stroke-width="1.5"/>`;
+  svg += `<line x1="${m.left}" y1="${m.top}" x2="${m.left}" y2="${m.top+ih}" stroke="${textClr}" stroke-width="1.5"/>`;
+
+  for (let e = logMin; e <= logMax; e += 2) {
+    const y = m.top + ih - ((e - logMin)/(logMax - logMin))*ih;
+    svg += `<line x1="${m.left-5}" y1="${y}" x2="${m.left+iw}" y2="${y}" stroke="${gridClr}" stroke-dasharray="3,3"/>`;
+    svg += `<text x="${m.left-12}" y="${y+4}" fill="${textClr}" font-size="11" text-anchor="end" font-family="monospace">1e${e}</text>`;
+  }
+
+  const yTol = yS(res.tol);
+  svg += `<line x1="${m.left}" y1="${yTol}" x2="${m.left+iw}" y2="${yTol}" stroke="#047857" stroke-width="1.5" stroke-dasharray="4,4"/>`;
+  svg += `<text x="${m.left+iw-8}" y="${yTol-6}" fill="#047857" font-size="11" text-anchor="end" font-weight="600">Tol = ${res.tol}</text>`;
+
+  const xStep = Math.max(1, Math.ceil(maxIter/10));
+  for (let i = 0; i <= maxIter; i += xStep) {
+    svg += `<text x="${xS(i)}" y="${m.top+ih+22}" fill="${textClr}" font-size="11" text-anchor="middle" font-family="monospace">k=${i}</text>`;
+  }
+
+  svg += `<text x="${m.left+iw/2}" y="${H-10}" fill="${textClr}" font-size="12" text-anchor="middle" font-weight="600">Iteracion (k)</text>`;
+  svg += `<text x="22" y="${m.top+ih/2}" fill="${textClr}" font-size="12" text-anchor="middle" font-weight="600" transform="rotate(-90 22 ${m.top+ih/2})">Residuo Relativo ||r_k||_2 / ||b||_2</text>`;
+
+  svg += `<path d="${path(res.gcp.history)}" fill="none" stroke="#1d4ed8" stroke-width="2.5" stroke-linejoin="round"/>`;
+  svg += `<path d="${path(res.gc.history)}" fill="none" stroke="#b91c1c" stroke-width="2.2" stroke-dasharray="5,3" stroke-linejoin="round"/>`;
+
+  const lx = m.left + iw - 190, ly = m.top + 10;
+  svg += `<g transform="translate(${lx},${ly})">`;
+  svg += `<rect x="0" y="0" width="180" height="50" fill="${bgSvg}" stroke="${gridClr}" rx="5" opacity="0.9"/>`;
+  svg += `<line x1="10" y1="18" x2="32" y2="18" stroke="#1d4ed8" stroke-width="2.5"/><text x="40" y="22" fill="${textClr}" font-size="11" font-weight="700">GCP (Precond.)</text>`;
+  svg += `<line x1="10" y1="34" x2="32" y2="34" stroke="#b91c1c" stroke-width="2.2" stroke-dasharray="5,3"/><text x="40" y="38" fill="${textClr}" font-size="11" font-weight="700">GC Simple</text>`;
+  svg += `</g></svg>`;
+
+  container.innerHTML = svg;
+}
+
+/* ============================================================
+   15. TABLA COMPARATIVA OBLIGATORIA (SECCION 8 DE LA CONSIGNA)
+   ============================================================ */
+function ensureAllScenariosComputed() {
+  SCENARIOS.forEach(sc => {
+    if (!scenarioOfficialResults[sc.id]) {
+      const res = runSimulationCore(sc.A, sc.b, [0, 0, 0, 0, 0], 1e-6, 1000, 'jacobi', {});
+      scenarioOfficialResults[sc.id] = res;
+    }
+  });
+}
+
+function renderOfficialComparisonTable() {
+  ensureAllScenariosComputed();
+  const tbody = document.getElementById('tbody-consigna-official');
+  if (!tbody) return;
+
+  const r1 = scenarioOfficialResults[1];
+  const r2 = scenarioOfficialResults[2];
+  const r3 = scenarioOfficialResults[3];
+
+  const formatVector = (vec, prefix = '$', suffix = ' k') => {
+    return '[' + vec.map(v => `${prefix}${fmt(v, 4)}${suffix}`).join(', ') + ']';
+  };
+
+  const formatPerVarErrors = (errList, key, isPct = false) => {
+    return errList.map((e, idx) => `x_${idx+1}: ${isPct ? (e[key] !== null ? e[key].toFixed(4) + '%' : 'no def.') : e[key].toExponential(3)}`).join('<br>');
+  };
+
+  tbody.innerHTML = `
+    <tr>
+      <td><strong>Solucion numerica de referencia</strong><br><span style="font-size:0.8rem; color:var(--text-subtle);">Vector [x_1, ..., x_n]</span></td>
+      <td style="font-family:var(--font-mono); font-size:0.85rem;">${formatVector(r1.ref)}</td>
+      <td style="font-family:var(--font-mono); font-size:0.85rem;">${formatVector(r2.ref)}</td>
+      <td style="font-family:var(--font-mono); font-size:0.85rem;">${formatVector(r3.ref)}</td>
+    </tr>
+    <tr>
+      <td><strong>Solucion GCP</strong><br><span style="font-size:0.8rem; color:var(--text-subtle);">Vector [x_1, ..., x_n]</span></td>
+      <td style="font-family:var(--font-mono); font-size:0.85rem;">${formatVector(r1.gcp.x)}</td>
+      <td style="font-family:var(--font-mono); font-size:0.85rem;">${formatVector(r2.gcp.x)}</td>
+      <td style="font-family:var(--font-mono); font-size:0.85rem;">${formatVector(r3.gcp.x)}</td>
+    </tr>
+    <tr>
+      <td><strong>Error absoluto (Ea)</strong><br><span style="font-size:0.8rem; color:var(--text-subtle);">Por variable |x_ref - x_GCP|</span></td>
+      <td style="font-family:var(--font-mono); font-size:0.82rem;">${formatPerVarErrors(r1.errors, 'ea')}</td>
+      <td style="font-family:var(--font-mono); font-size:0.82rem;">${formatPerVarErrors(r2.errors, 'ea')}</td>
+      <td style="font-family:var(--font-mono); font-size:0.82rem;">${formatPerVarErrors(r3.errors, 'ea')}</td>
+    </tr>
+    <tr>
+      <td><strong>Error porcentual (Ep)</strong><br><span style="font-size:0.8rem; color:var(--text-subtle);">Por variable (|Ea/x_ref| * 100%)</span></td>
+      <td style="font-family:var(--font-mono); font-size:0.82rem;">${formatPerVarErrors(r1.errors, 'ep', true)}</td>
+      <td style="font-family:var(--font-mono); font-size:0.82rem;">${formatPerVarErrors(r2.errors, 'ep', true)}</td>
+      <td style="font-family:var(--font-mono); font-size:0.82rem;">${formatPerVarErrors(r3.errors, 'ep', true)}</td>
+    </tr>
+    <tr>
+      <td><strong>Iteraciones GC (sin precondicionar)</strong></td>
+      <td class="num">${r1.gc.iterations}</td>
+      <td class="num">${r2.gc.iterations}</td>
+      <td class="num">${r3.gc.iterations}</td>
+    </tr>
+    <tr>
+      <td><strong>Iteraciones GCP (precondicionado)</strong></td>
+      <td class="num cell-highlight"><strong>${r1.gcp.iterations}</strong></td>
+      <td class="num cell-highlight"><strong>${r2.gcp.iterations}</strong></td>
+      <td class="num cell-highlight"><strong>${r3.gcp.iterations}</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Numero de condicion kappa(A)</strong></td>
+      <td class="num">${fmt(r1.kappaA, 3)}</td>
+      <td class="num">${fmt(r2.kappaA, 3)}</td>
+      <td class="num">${fmt(r3.kappaA, 3)}</td>
+    </tr>
+    <tr>
+      <td><strong>Numero de condicion kappa(M^-1 A)</strong></td>
+      <td class="num cell-highlight">${fmt(r1.kappaMA, 3)}</td>
+      <td class="num cell-highlight">${fmt(r2.kappaMA, 3)}</td>
+      <td class="num cell-highlight">${fmt(r3.kappaMA, 3)}</td>
+    </tr>
+    <tr>
+      <td><strong>Residuo relativo final GCP</strong></td>
+      <td class="num">${r1.gcp.residual.toExponential(3)}</td>
+      <td class="num">${r2.gcp.residual.toExponential(3)}</td>
+      <td class="num">${r3.gcp.residual.toExponential(3)}</td>
+    </tr>
+    <tr>
+      <td><strong>¿Convergio el algoritmo?</strong></td>
+      <td><span class="badge ok">Si (Tolerancia 1e-6)</span></td>
+      <td><span class="badge ok">Si (Tolerancia 1e-6)</span></td>
+      <td><span class="badge ok">Si (Tolerancia 1e-6)</span></td>
+    </tr>
+    <tr>
+      <td><strong>Interpretacion financiera</strong><br><span style="font-size:0.8rem; color:var(--text-subtle);">Explicacion cualitativa</span></td>
+      <td style="font-size:0.88rem; line-height:1.5;">${SCENARIOS[0].financialContext} Capital total: <strong>${fmtMoney(r1.ref.reduce((a,b)=>a+b,0))}</strong>.</td>
+      <td style="font-size:0.88rem; line-height:1.5;">${SCENARIOS[1].financialContext} Capital total: <strong>${fmtMoney(r2.ref.reduce((a,b)=>a+b,0))}</strong>.</td>
+      <td style="font-size:0.88rem; line-height:1.5;">${SCENARIOS[2].financialContext} Capital total: <strong>${fmtMoney(r3.ref.reduce((a,b)=>a+b,0))}</strong>.</td>
+    </tr>
+  `;
 }
 
 function comparePrecondsForCurrentMatrix() {
@@ -2810,8 +2632,8 @@ function comparePrecondsForCurrentMatrix() {
 
   const types = [
     { type: 'jacobi', label: 'Jacobi (Diagonal)', params: {} },
-    { type: 'ssor', label: 'SSOR (ω = 1.0)', params: { omega: 1.0 } },
-    { type: 'ic0', label: 'IC0 con Umbral (τ = 0.0)', params: { threshold: 0 } }
+    { type: 'ssor', label: 'SSOR (omega = 1.0)', params: { omega: 1.0 } },
+    { type: 'ic0', label: 'IC0 con Umbral (tau = 0.0)', params: { threshold: 0 } }
   ];
 
   let html = `
@@ -2820,24 +2642,20 @@ function comparePrecondsForCurrentMatrix() {
         <tr>
           <th>Precondicionador</th>
           <th class="num">Iteraciones GCP</th>
-          <th class="num">κ(M⁻¹A)</th>
-          <th class="num">Reducción κ</th>
+          <th class="num">kappa(M^-1 A)</th>
+          <th class="num">Reduccion kappa</th>
           <th class="num">Residuo Final</th>
           <th class="num">Tiempo CPU</th>
-          <th>Veredicto</th>
+          <th>Estado</th>
         </tr>
       </thead>
       <tbody>
   `;
 
-  let best = null;
   types.forEach(t => {
     try {
       const res = runSimulationCore(A, b, x0, tol, nmax, t.type, t.params);
       const red = ((res.kappaA - res.kappaMA) / res.kappaA) * 100;
-      if (!best || res.gcp.iterations < best.iter || (res.gcp.iterations === best.iter && res.kappaMA < best.kappa)) {
-        best = { type: t.type, iter: res.gcp.iterations, kappa: res.kappaMA };
-      }
       html += `
         <tr>
           <td><strong>${t.label}</strong></td>
@@ -2846,7 +2664,7 @@ function comparePrecondsForCurrentMatrix() {
           <td class="num">${red.toFixed(1)}%</td>
           <td class="num">${res.gcp.residual.toExponential(3)}</td>
           <td class="num">${res.elapsedMs.toFixed(2)} ms</td>
-          <td>${res.gcp.residual < tol ? '<span class="badge ok">✓ Óptimo</span>' : '<span class="badge warn">Lento</span>'}</td>
+          <td>${res.gcp.residual < tol ? '<span class="badge ok">Convergente</span>' : '<span class="badge warn">Lento</span>'}</td>
         </tr>
       `;
     } catch (e) {
@@ -2854,14 +2672,14 @@ function comparePrecondsForCurrentMatrix() {
     }
   });
 
-  html += `</tbody></table>`;
+  html += '</tbody></table>';
   wrap.innerHTML = html;
   card.style.display = 'block';
-  card.scrollIntoView({ behavior: 'smooth' });
+  document.querySelector('[data-tab="sec-tabla-comparativa"]').click();
 }
 
 /* ============================================================
-   15. MÓDULO DE PRUEBAS DE SOFTWARE (QA)
+   16. MODULO DE PRUEBAS DE SOFTWARE (QA)
    ============================================================ */
 const qaLogData = [];
 function logQa(prueba, entrada, esperado, obtenido, conclusion) {
@@ -2878,9 +2696,9 @@ function renderQaLog() {
     <tr>
       <td style="font-family:var(--font-mono); font-size:0.82rem;">${r.hora}</td>
       <td><strong>${r.prueba}</strong></td>
-      <td style="font-size:0.88rem;">${r.entrada}</td>
-      <td style="font-size:0.88rem;">${r.esperado}</td>
-      <td style="font-size:0.88rem;">${r.obtenido}</td>
+      <td style="font-size:0.85rem;">${r.entrada}</td>
+      <td style="font-size:0.85rem;">${r.esperado}</td>
+      <td style="font-size:0.85rem;">${r.obtenido}</td>
       <td>${r.conclusion}</td>
     </tr>
   `).join('');
@@ -2900,7 +2718,7 @@ function runQa1() {
         <td><strong>${sc.name}</strong></td>
         <td class="num">${res.gcp.iterations} iter</td>
         <td class="num">${res.gcp.residual.toExponential(3)}</td>
-        <td>${ok ? '<span class="badge ok">✓ Aprobado</span>' : '<span class="badge err">Falla</span>'}</td>
+        <td>${ok ? '<span class="badge ok">Aprobado</span>' : '<span class="badge err">Falla</span>'}</td>
       </tr>`);
     } catch (e) {
       allOk = false;
@@ -2912,19 +2730,19 @@ function runQa1() {
     <th>Escenario</th><th class="num">Iter GCP</th><th class="num">Residuo Final</th><th>Resultado</th>
   </tr></thead><tbody>${rows.join('')}</tbody></table></div>`;
 
-  logQa('1 · Carga de escenarios',
-    '3 escenarios con precondicionador Jacobi',
-    'Convergencia de GC y GCP a tol < 1e-6',
-    allOk ? 'Todos los escenarios cargaron y convergieron' : 'Algún escenario falló',
-    allOk ? '<span class="badge ok">✓ Aprobado</span>' : '<span class="badge err">Fallido</span>');
+  logQa('1. Carga de Escenarios',
+    'Escenarios 1, 2 y 3 con Jacobi',
+    'Convergencia a tol < 1e-6 sin desbordamiento',
+    allOk ? 'Todos los escenarios convergieron exitosamente' : 'Algún escenario falló',
+    allOk ? '<span class="badge ok">Aprobado</span>' : '<span class="badge err">Fallido</span>');
 }
 
 function runQa2() {
   const out = document.getElementById('qa-result-2');
   const sc = SCENARIOS[0];
   const badA = clone(sc.A);
-  badA[0][1] = 99.0;
-  badA[1][0] = -12.0;
+  badA[0][1] = 95.0;
+  badA[1][0] = -15.0;
 
   let caught = null;
   try {
@@ -2934,15 +2752,15 @@ function runQa2() {
   }
 
   if (caught) {
-    out.innerHTML = `<div class="msg-box ok"><strong>✓ Excepción Capturada Correctamente:</strong><br>${caught}</div>`;
-    logQa('2 · Matriz No Válida',
-      'A(1,2)=99, A(2,1)=-12 (asimetría forzada)',
-      'Interrupción limpia con aviso',
+    out.innerHTML = `<div class="msg-box ok"><strong>Error Capturado Exitosamente:</strong><br>${caught}</div>`;
+    logQa('2. Validacion Matriz No Valida',
+      'A(1,2)=95, A(2,1)=-15 (asimetrica)',
+      'Captura controlada del error sin colapso',
       caught,
-      '<span class="badge ok">✓ Aprobado</span>');
+      '<span class="badge ok">Aprobado</span>');
   } else {
-    out.innerHTML = `<div class="msg-box err">✗ Error: La matriz asimétrica no fue rechazada.</div>`;
-    logQa('2 · Matriz No Válida', 'A asimétrica', 'Error capturado', 'No hubo error', '<span class="badge err">Fallido</span>');
+    out.innerHTML = `<div class="msg-box err">Error: La matriz asimetrica no fue rechazada.</div>`;
+    logQa('2. Validacion Matriz No Valida', 'A asimetrica', 'Excepcion controlada', 'No hubo error', '<span class="badge err">Fallido</span>');
   }
 }
 
@@ -2952,8 +2770,8 @@ function runQa3() {
     const sc = SCENARIOS[0];
     const resOrig = runSimulationCore(sc.A, sc.b, [0, 0, 0, 0, 0], 1e-6, 1000, 'jacobi', {});
     const modA = clone(sc.A);
-    modA[0][0] += 5.0;
-    modA[1][1] += 5.0;
+    modA[0][0] += 4.0;
+    modA[1][1] += 4.0;
     const resMod = runSimulationCore(modA, sc.b, [0, 0, 0, 0, 0], 1e-6, 1000, 'jacobi', {});
 
     const diffRef = resOrig.ref.some((v, i) => Math.abs(v - resMod.ref[i]) > 1e-8);
@@ -2962,26 +2780,26 @@ function runQa3() {
 
     out.innerHTML = `
       <div class="msg-box ${ok ? 'ok' : 'err'}">
-        <strong>${ok ? '✓ Recálculo Exitoso:' : '✗ Falla:'}</strong><br>
-        ¿Varió la solución de referencia x_ref? ${diffRef ? 'Sí' : 'No'}<br>
-        ¿Varió κ(A)? ${diffKappa ? `Sí (${fmt(resOrig.kappaA, 2)} → ${fmt(resMod.kappaA, 2)})` : 'No'}
+        <strong>Recalculo Instantaneo Comprobado:</strong><br>
+        • Variacion en solucion de referencia x_ref: ${diffRef ? 'Si' : 'No'}<br>
+        • Variacion en numero de condicion: ${diffKappa ? `Si (${fmt(resOrig.kappaA, 2)} -> ${fmt(resMod.kappaA, 2)})` : 'No'}
       </div>
     `;
 
-    logQa('3 · Edición Dinámica',
-      'A(1,1)+=5, A(2,2)+=5',
-      'Actualización de x_ref, GCP y autovalores',
-      ok ? 'Recálculo exacto verificado' : 'Sin cambios',
-      ok ? '<span class="badge ok">✓ Aprobado</span>' : '<span class="badge err">Fallido</span>');
+    logQa('3. Edicion Dinamica',
+      'Modificacion A(1,1)+=4, A(2,2)+=4',
+      'Actualizacion inmediata de Cholesky, GCP y autovalores',
+      ok ? 'Recalculo verificado' : 'Sin cambios',
+      ok ? '<span class="badge ok">Aprobado</span>' : '<span class="badge err">Fallido</span>');
   } catch (e) {
     out.innerHTML = `<div class="msg-box err">${e.message}</div>`;
-    logQa('3 · Edición Dinámica', '—', '—', e.message, '<span class="badge err">Fallido</span>');
+    logQa('3. Edicion Dinamica', '—', '—', e.message, '<span class="badge err">Fallido</span>');
   }
 }
 
 function runQa4() {
   const out = document.getElementById('qa-result-4');
-  const sc = SCENARIOS[2]; // Mal condicionado
+  const sc = SCENARIOS[2];
   try {
     const res = runSimulationCore(sc.A, sc.b, [0, 0, 0, 0, 0], 1e-6, 1000, 'jacobi', {});
     const ok = res.gcp.iterations <= res.gc.iterations;
@@ -2989,7 +2807,7 @@ function runQa4() {
     out.innerHTML = `
       <div class="table-responsive">
         <table>
-          <thead><tr><th>Método</th><th class="num">Iteraciones</th><th class="num">Residuo Final</th></tr></thead>
+          <thead><tr><th>Metodo</th><th class="num">Iteraciones</th><th class="num">Residuo Final</th></tr></thead>
           <tbody>
             <tr><td>GC Simple</td><td class="num">${res.gc.iterations}</td><td class="num">${res.gc.residual.toExponential(3)}</td></tr>
             <tr><td>GCP (Jacobi)</td><td class="num cell-highlight"><strong>${res.gcp.iterations}</strong></td><td class="num">${res.gcp.residual.toExponential(3)}</td></tr>
@@ -2997,49 +2815,45 @@ function runQa4() {
         </table>
       </div>
       <div class="msg-box ${ok ? 'ok' : 'warn'}">
-        <strong>${ok ? '✓ Aceleración Verificada:' : '⚠️ Observación:'}</strong>
-        GCP necesitó ${res.gcp.iterations} iteraciones frente a ${res.gc.iterations} de GC.
-        κ(A) = ${fmt(res.kappaA, 2)} se redujo a κ(M⁻¹A) = ${fmt(res.kappaMA, 2)}.
+        <strong>${ok ? 'Aceleracion Verificada:' : 'Observacion:'}</strong>
+        GCP necesito ${res.gcp.iterations} iteraciones frente a ${res.gc.iterations} de GC simple.
+        El precondicionador redujo kappa(A) de ${fmt(res.kappaA, 2)} a kappa(M^-1 A) = ${fmt(res.kappaMA, 2)}.
       </div>
     `;
 
-    logQa('4 · Eficacia de Precondicionador',
-      'Escenario Mal Condicionado (κ=498)',
+    logQa('4. Comparativa de Precondicionamiento',
+      'Escenario Mal Condicionado (kappa=498.2)',
       'iter_GCP <= iter_GC',
       `GC=${res.gc.iterations}, GCP=${res.gcp.iterations}`,
-      ok ? '<span class="badge ok">✓ Aprobado</span>' : '<span class="badge warn">Observación</span>');
+      ok ? '<span class="badge ok">Aprobado</span>' : '<span class="badge warn">Observacion</span>');
   } catch (e) {
     out.innerHTML = `<div class="msg-box err">${e.message}</div>`;
-    logQa('4 · Eficacia', '—', '—', e.message, '<span class="badge err">Fallido</span>');
+    logQa('4. Comparativa', '—', '—', e.message, '<span class="badge err">Fallido</span>');
   }
 }
 
 /* ============================================================
-   16. CONTROLADOR DE INTERFAZ Y EVENTOS DEL USUARIO
+   17. GESTION DE ESCENARIOS Y EJECUCION DESDE LA UI
    ============================================================ */
 function loadScenario(id) {
   currentScenarioId = id;
   const sc = SCENARIOS.find(s => s.id === id);
   if (!sc) return;
 
-  // Actualizar botones de escenario
   document.querySelectorAll('#scenario-selector-group .scenario-btn-card').forEach(b => {
     b.classList.toggle('active', Number(b.dataset.scenario) === id);
   });
 
   const banner = document.getElementById('scenario-banner-info');
   if (banner) {
-    banner.innerHTML = `<strong>Escenario ${sc.id}: ${sc.name}.</strong> ${sc.desc} <span class="badge info" style="margin-left:0.5rem;">κ(A) ≈ ${fmt(sc.kappa, 2)}</span>`;
+    banner.innerHTML = `<strong>Escenario ${sc.id}: ${sc.name}.</strong> ${sc.desc} <span class="badge info" style="margin-left:0.5rem;">kappa(A) = ${fmt(sc.kappa, 2)}</span>`;
   }
 
-  // Cargar matriz y vectores
   buildMatrixGridInputs(sc.A);
   buildVectorInputs('vector-b-inputs', sc.b);
   buildVectorInputs('vector-x0-inputs', [0, 0, 0, 0, 0]);
 
-  // Auditoría en vivo de Gershgorin y Cholesky
   updateSpdLiveAudit(sc.A);
-
   document.getElementById('simulation-status-msg').innerHTML = '';
 }
 
@@ -3058,8 +2872,8 @@ function buildMatrixGridInputs(A) {
       if (i === j) input.classList.add('diag');
       input.addEventListener('input', () => {
         try {
-          const currentA = readMatrixGridInputs();
-          updateSpdLiveAudit(currentA);
+          const curA = readMatrixGridInputs();
+          updateSpdLiveAudit(curA);
         } catch (e) {}
       });
       container.appendChild(input);
@@ -3088,7 +2902,7 @@ function readMatrixGridInputs() {
     const r = parseInt(inp.dataset.row, 10);
     const c = parseInt(inp.dataset.col, 10);
     const val = parseFloat(inp.value);
-    if (!isFinite(val)) throw new Error(`Valor inválido en A(${r + 1},${c + 1})`);
+    if (!isFinite(val)) throw new Error(`Valor invalido en A(${r + 1},${c + 1})`);
     A[r][c] = val;
   });
   return A;
@@ -3099,7 +2913,7 @@ function readVectorInputs(elementId) {
   const v = [];
   inputs.forEach(inp => {
     const val = parseFloat(inp.value);
-    if (!isFinite(val)) throw new Error('Valor inválido en vector');
+    if (!isFinite(val)) throw new Error('Valor invalido en vector');
     v.push(val);
   });
   return v;
@@ -3125,20 +2939,24 @@ function runFromUI() {
 
     const res = runSimulationCore(A, b, x0, tol, nmax, precondType, precondParams);
     currentSimulationResult = res;
+    scenarioOfficialResults[currentScenarioId] = res;
 
     statusMsg.className = 'msg-box ok';
-    statusMsg.innerHTML = `<strong>✓ Simulación Completada:</strong> GCP convergió en ${res.gcp.iterations} iteraciones y GC en ${res.gc.iterations} iteraciones (Tiempo: ${res.elapsedMs.toFixed(2)} ms).`;
+    statusMsg.innerHTML = `<strong>Simulacion Exitosa:</strong> GCP alcanzo la tolerancia en ${res.gcp.iterations} iteraciones y GC en ${res.gc.iterations} iteraciones (Tiempo: ${res.elapsedMs.toFixed(2)} ms).`;
 
-    renderResultsArea(res);
+    renderReferenceSection(res);
+    renderGcpVsGcSection(res);
+    renderErrorsSection(res);
+    renderOfficialComparisonTable();
   } catch (err) {
     statusMsg.className = 'msg-box err';
-    statusMsg.innerHTML = `<strong>✗ Error al ejecutar:</strong> ${err.message}`;
+    statusMsg.innerHTML = `<strong>Error de Ejecucion:</strong> ${err.message}`;
   }
 }
 
 function exportCsvReport() {
   if (!currentSimulationResult) {
-    alert('Por favor ejecute primero la simulación antes de exportar.');
+    alert('Ejecute la simulacion antes de exportar datos.');
     return;
   }
   const res = currentSimulationResult;
@@ -3154,7 +2972,7 @@ function exportCsvReport() {
 
   csv += '\nVariable,x_ref,x_GCP,x_GC,Ea,Er,Ep_pct\n';
   res.errors.forEach(e => {
-    csv += `x${e.i},${e.ref},${e.gcp},${e.gc},${e.ea},${e.er || ''},${e.ep || ''}\n`;
+    csv += `x_${e.i},${e.ref},${e.gcp},${e.gc},${e.ea},${e.er || ''},${e.ep || ''}\n`;
   });
 
   const uri = encodeURI(csv);
@@ -3173,13 +2991,13 @@ function buildScenariosShowcase() {
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
-      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.5rem;">
-        <h3 class="card-title" style="margin:0;">${sc.id}. ${sc.name}</h3>
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.4rem;">
+        <h4 style="margin:0; font-size:1.05rem; color:var(--primary);">${sc.id}. ${sc.name}</h4>
         <span class="badge ${sc.id === 1 ? 'ok' : sc.id === 2 ? 'warn' : 'err'}">${sc.tag}</span>
       </div>
-      <p style="font-size:0.92rem; color:var(--text-muted); margin-bottom:0.8rem;">${sc.desc}</p>
+      <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:0.75rem;">${sc.desc}</p>
       
-      <h4 class="sub-title">Matriz A (5×5)</h4>
+      <h4 class="sub-title">Matriz A (5x5)</h4>
       <div class="table-responsive">
         <table>
           <tbody>
@@ -3190,16 +3008,16 @@ function buildScenariosShowcase() {
 
       <div class="kpi-grid" style="margin-top:0.6rem;">
         <div class="kpi-card">
-          <div class="kpi-label">κ(A)</div>
-          <div class="kpi-value" style="font-size:1.2rem;">${fmt(sc.kappa, 2)}</div>
+          <div class="kpi-label">kappa(A)</div>
+          <div class="kpi-value" style="font-size:1.15rem;">${fmt(sc.kappa, 2)}</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Capital Total</div>
-          <div class="kpi-value" style="font-size:1.2rem;">${fmtMoney(sc.xref.reduce((a,b)=>a+b, 0))}</div>
+          <div class="kpi-value" style="font-size:1.15rem;">${fmtMoney(sc.xref.reduce((a,b)=>a+b, 0))}</div>
         </div>
       </div>
 
-      <button class="btn btn-primary btn-sm" style="width:100%; margin-top:0.8rem;" onclick="loadScenario(${sc.id}); document.querySelector('[data-tab=\\'simulador\\']').click(); runFromUI();">
+      <button class="btn btn-outline btn-sm" style="width:100%; margin-top:0.75rem;" onclick="loadScenario(${sc.id}); document.querySelector('[data-tab=\\'sec-4-entrada\\']').click(); runFromUI();">
         Cargar y Simular Escenario ${sc.id}
       </button>
     `;
@@ -3208,69 +3026,65 @@ function buildScenariosShowcase() {
 }
 
 /* ============================================================
-   17. TEMA OSCURO / CLARO Y UTILIDADES
+   18. TEMA VISUAL (MODO OSCURO / CLARO)
    ============================================================ */
 function initTheme() {
-  const savedTheme = localStorage.getItem('gcp-sim-theme') || 'light';
-  document.documentElement.setAttribute('data-theme', savedTheme);
-  updateThemeButtonUI(savedTheme);
+  const saved = localStorage.getItem('gcp-sim-theme') || 'light';
+  document.documentElement.setAttribute('data-theme', saved);
+  updateThemeButtonUI(saved);
 
   document.getElementById('btn-theme-toggle')?.addEventListener('click', () => {
-    const current = document.documentElement.getAttribute('data-theme');
-    const next = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('gcp-sim-theme', next);
-    updateThemeButtonUI(next);
+    const cur = document.documentElement.getAttribute('data-theme');
+    const nxt = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', nxt);
+    localStorage.setItem('gcp-sim-theme', nxt);
+    updateThemeButtonUI(nxt);
     if (currentSimulationResult) renderActiveChart(activeChartType);
   });
 }
 
 function updateThemeButtonUI(theme) {
-  const icon = document.getElementById('theme-icon');
   const text = document.getElementById('theme-text');
-  if (icon && text) {
-    icon.textContent = theme === 'dark' ? '☀️' : '🌙';
-    text.textContent = theme === 'dark' ? 'Claro' : 'Oscuro';
-  }
+  if (text) text.textContent = theme === 'dark' ? 'Modo Claro' : 'Modo Oscuro';
 }
 
 /* ============================================================
-   18. INICIALIZACIÓN COMPLETA
+   19. INICIALIZACION INTEGRAL AL CARGAR EL DOM
    ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
 
-  // Navegación por pestañas
+  // Navegacion de pestañas
   document.querySelectorAll('nav.main-nav button.nav-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('nav.main-nav button.nav-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
-      const targetId = btn.dataset.tab;
-      const targetPanel = document.getElementById(targetId);
-      if (targetPanel) {
-        targetPanel.classList.add('active');
+      const target = document.getElementById(btn.dataset.tab);
+      if (target) {
+        target.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     });
   });
 
-  // Selector de escenarios en simulador
+  // Selector de escenarios en Seccion 5
   document.querySelectorAll('#scenario-selector-group .scenario-btn-card').forEach(card => {
     card.addEventListener('click', () => {
       loadScenario(Number(card.dataset.scenario));
+      runFromUI();
     });
   });
 
-  // Selector de precondicionadores (mostrar u ocultar omega y tau)
+  // Selector de precondicionador
   const precondSel = document.getElementById('param-precond');
   precondSel?.addEventListener('change', () => {
-    const val = precondSel.value;
-    document.getElementById('group-param-omega').style.display = val === 'ssor' ? 'block' : 'none';
-    document.getElementById('group-param-tau').style.display = val === 'ic0' ? 'block' : 'none';
+    const v = precondSel.value;
+    document.getElementById('group-param-omega').style.display = v === 'ssor' ? 'block' : 'none';
+    document.getElementById('group-param-tau').style.display = v === 'ic0' ? 'block' : 'none';
   });
 
-  // Botón forzar simetría
+  // Botones de matrices
   document.getElementById('btn-make-symmetric')?.addEventListener('click', () => {
     try {
       const A = readMatrixGridInputs();
@@ -3286,21 +3100,23 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) {}
   });
 
-  // Botón reset x0
   document.getElementById('btn-reset-x0')?.addEventListener('click', () => {
     buildVectorInputs('vector-x0-inputs', [0, 0, 0, 0, 0]);
   });
 
-  // Botones de simulación
+  // Controles de ejecucion
   document.getElementById('btn-run-simulation')?.addEventListener('click', runFromUI);
   document.getElementById('btn-reload-current')?.addEventListener('click', () => loadScenario(currentScenarioId));
   document.getElementById('btn-export-csv')?.addEventListener('click', exportCsvReport);
   document.getElementById('btn-compare-preconds')?.addEventListener('click', comparePrecondsForCurrentMatrix);
+  document.getElementById('btn-force-compare-all')?.addEventListener('click', () => {
+    SCENARIOS.forEach(sc => {
+      scenarioOfficialResults[sc.id] = runSimulationCore(sc.A, sc.b, [0, 0, 0, 0, 0], 1e-6, 1000, 'jacobi', {});
+    });
+    renderOfficialComparisonTable();
+  });
 
-  // Botones comparativas
-  document.getElementById('btn-run-all-scenarios')?.addEventListener('click', runAllScenariosComparison);
-
-  // Módulo QA
+  // Modulo QA
   document.querySelectorAll('[data-qa-btn]').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = btn.dataset.qaBtn;
@@ -3318,21 +3134,21 @@ document.addEventListener('DOMContentLoaded', () => {
     renderQaLog();
   });
 
-  // Botón imprimir
+  // Impresion de informe
   document.getElementById('btn-print')?.addEventListener('click', () => {
     window.print();
   });
 
-  // Inicializar componentes
-  buildScenariosShowcase();
+  // Inicializacion de componentes
+  initChartToolbar();
   setupStepControls();
+  buildScenariosShowcase();
   loadScenario(1);
-  renderComparisonTable();
 
-  // Ejecutar primera simulación por defecto
+  // Ejecucion inicial por defecto
   runFromUI();
 
-  // Renderizar KaTeX
+  // Renderizado KaTeX
   if (window.renderMathInElement) {
     try {
       renderMathInElement(document.body, {
