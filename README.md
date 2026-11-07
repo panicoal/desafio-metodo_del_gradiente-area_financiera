@@ -27,16 +27,6 @@ La aplicacion funciona de forma autonoma y autocontenida en **GitHub Pages**:
 
 ---
 
-## Datos Academicos
-
-- **Estudiante:** Joaquin Nicolas Paco Alanoca
-- **Materia:** Metodos Numericos (INF373)
-- **Docente:** Lic. Brigida Alexandra Carvajal Blanco
-- **Gestion:** II / 2026
-- **Carrera y Mencion:** Licenciatura en Informatica / Ingenieria de Sistemas - Universidad Mayor de San Andres (UMSA)
-
----
-
 ## Tabla de Contenidos
 
 1. [Estructura de la Pagina Web segun Consigna](#1-estructura-de-la-pagina-web-segun-consigna)
