@@ -55,21 +55,33 @@ La aplicacion funciona de forma autonoma y autocontenida en **GitHub Pages**:
 
 ## 1. Estructura de la Pagina Web segun Consigna
 
-Cumpliendo con la **Seccion 7** de la consigna del desafio, la pagina web interactiva organiza el contenido en los siguientes modulos obligatorios:
+Cumpliendo con la **Seccion 7** de la consigna del desafio, la pagina web interactiva organiza el contenido mediante una arquitectura de **5 vistas logicas fluidas** que integran los 10 modulos obligatorios sin fragmentacion, facilitando la exploracion y la ejecucion inmediata:
 
-| Modulo / Seccion | Contenido Minimo Desarrollado |
-| :--- | :--- |
-| **1. Inicio** | Titulo del proyecto, datos del estudiante, mencion academica, sintesis del caso financiero y aporte de la mencion. |
-| **2. Caso de estudio** | Contexto financiero, justificacion del modelo con activos compartidos y procedencia de datos del sector logistico. |
-| **3. Formulacion** | Definicion explicita de variables ($n = 5 \ge 4$), sistema lineal $Ax = b$, interpretacion de coeficientes y verificacion SPD (Gershgorin, Cholesky y Autovalores). |
-| **4. Entrada de datos** | Interfaz reactiva para edicion de coeficientes de $A$ y $b$, seleccion de $x_0$, tolerancia, precondicionador (Jacobi, SSOR, IC0) y controles de ejecucion. |
-| **5. Tres escenarios** | Carga rapida y ejecucion de los escenarios: Ideal, Bajo estres y Mal condicionado con sus respectivas descripciones. |
-| **6. Solucion de referencia** | Mapeo y despliegue del metodo directo de Factorizacion de Cholesky ($A = LL^T$), resolviendo $Ly = b$ y $L^T x_{\text{ref}} = y$. |
-| **7. GCP vs GC** | Despliegue de vectores aproximados, numero de iteraciones, residuos finales, diagnosticos dinamicos y visor interactivo paso a paso. |
-| **8. Analisis de errores** | Tabla interactiva de errores absolutos ($E_a$), relativos ($E_r$) y porcentuales ($E_p$) por variable, residuo relativo global y graficos en Chart.js. |
-| **8B. Tabla comparativa** | Matriz comparativa obligatoria de la Seccion 8 con los 11 indicadores en filas y los 3 escenarios en columnas. |
-| **9. Modulo de Pruebas (QA)** | Verificacion automatizada de 4 casos de prueba estructurados (Entrada, Resultado Esperado, Obtenido y Conclusion) con bitacora cronologica. |
-| **10. Conclusiones y Referencias** | Interpretacion tecnica y financiera de resultados, cita del articulo de Suñagua (2020) y fuentes bibliograficas. |
+1. **Pestaña 1: Caso y Formulacion**
+   - **Modulo 1: Inicio:** Titulo del proyecto, mencion academica, sintesis del caso financiero y aporte de la mencion.
+   - **Modulo 2: Caso de estudio:** Contexto financiero, justificacion del modelo con activos compartidos y procedencia de datos del sector logistico.
+   - **Modulo 3: Formulacion:** Definicion explicita de variables ($n = 5 \ge 4$), sistema lineal $Ax = b$, interpretacion de coeficientes y verificacion SPD (Gershgorin, Cholesky y Autovalores).
+
+2. **Pestaña 2: Simulador Interactivo (Flujo Priorizado y Sin Sobrecarga)**
+   - **Modulo 5: Tres escenarios:** Carga rapida y ejecucion de los escenarios: Ideal, Bajo estres y Mal condicionado.
+   - **Modulo 4: Entrada de datos:** Interfaz reactiva para edicion de coeficientes de $A$ y $b$, seleccion de $x_0$, tolerancia, precondicionador (Jacobi, SSOR, IC0) y controles de ejecucion.
+   - **Resultados Inmediatos Priorizados:** Al presionar *Ejecutar GCP y GC*, se presentan de inmediato al frente:
+     * **KPIs Clave y Diagnostico:** Iteraciones GCP vs GC, factor de aceleracion, numeros de condicion $\kappa(A)$ y $\kappa(M^{-1}A)$, y analisis cualitativo de liquidez.
+     * **Graficos Dinamicos Interactivos (Chart.js):** Curvas de convergencia, asignacion de capital, errores por variable, ganancia iterativa y espectro de autovalores directamente visibles.
+     * **Modulo 8: Solucion Optima y Analisis de Errores:** Tabla comparativa de $x_{\text{ref}}$, $x_{\text{GCP}}$, $x_{\text{GC}}$ con errores $E_a$, $E_r$, $E_p$ y barra de distribucion porcentual de capital.
+   - **Auditoria Tecnica Desplegable (Sin saturar la vista):**
+     * **Modulo 6: Solucion de referencia:** Descomposicion de Cholesky ($A = LL^T$), pasos de sustitucion directa ($Ly = b$, $L^T x = y$) y chequeo de residuo.
+     * **Modulo 7: Inspector Paso a Paso:** Algoritmo de Suñagua (2020: $Mz = r$) con reproductor interactivo y slider por iteracion.
+     * **Historial Completo de Residuos:** Registro numerico iteracion por iteracion de GC vs GCP.
+
+3. **Pestaña 3: Tabla Comparativa Oficial**
+   - **Seccion 8 (Consigna):** Matriz comparativa obligatoria con los 11 indicadores en filas y los 3 escenarios en columnas.
+
+4. **Pestaña 4: Modulo de Pruebas QA**
+   - **Modulo 9 (Consigna):** Verificacion automatizada de 4 casos de prueba estructurados (Entrada, Resultado Esperado, Obtenido y Conclusion) con bitacora cronologica.
+
+5. **Pestaña 5: Conclusiones y Referencias**
+   - **Modulo 10 (Consigna):** Interpretacion tecnica y financiera de resultados, cita formal del articulo de Suñagua (2020) y fuentes bibliograficas.
 
 ---
 

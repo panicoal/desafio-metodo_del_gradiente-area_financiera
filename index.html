@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,17 +24,16 @@
 
 <style>
   /* ============================================================
-     SISTEMA DE VARIABLES DE DISENO (MODO CLARO Y OSCURO)
+     SISTEMA DE VARIABLES DE DISENO (MODO CLARO UNICO)
      ============================================================ */
   :root {
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
     
-    /* Modo Claro (Predeterminado) */
     --bg-app: #f8fafc;
     --bg-card: #ffffff;
     --bg-card-subtle: #f1f5f9;
-    --bg-hover: #f8fafc;
+    --bg-hover: #f1f5f9;
     --text-main: #0f172a;
     --text-muted: #475569;
     --text-subtle: #64748b;
@@ -69,42 +68,6 @@
     --radius-lg: 12px;
   }
 
-  [data-theme="dark"] {
-    --bg-app: #0b0f19;
-    --bg-card: #131b2e;
-    --bg-card-subtle: #1e293b;
-    --bg-hover: #1e293b;
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --text-subtle: #64748b;
-    --border-color: #1e293b;
-    --border-strong: #334155;
-    
-    --primary: #3b82f6;
-    --primary-hover: #60a5fa;
-    --primary-soft: rgba(59, 130, 246, 0.15);
-    --primary-border: #2563eb;
-    
-    --accent: #8b5cf6;
-    --accent-soft: rgba(139, 92, 246, 0.15);
-    --accent-hover: #a78bfa;
-    
-    --success: #10b981;
-    --success-soft: rgba(16, 185, 129, 0.15);
-    --success-border: #059669;
-    
-    --warning: #f59e0b;
-    --warning-soft: rgba(245, 158, 11, 0.15);
-    --warning-border: #d97706;
-    
-    --danger: #ef4444;
-    --danger-soft: rgba(239, 68, 68, 0.15);
-    --danger-border: #b91c1c;
-    
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
-  }
-
   /* ============================================================
      RESET Y ESTILOS BASE
      ============================================================ */
@@ -118,7 +81,6 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   /* ============================================================
@@ -190,7 +152,7 @@
   }
 
   /* ============================================================
-     BARRA DE NAVEGACION STICKY (10 MODULOS DE LA CONSIGNA)
+     BARRA DE NAVEGACION ORGANIZADA Y FLUIDA (5 VISTAS LOGICAS)
      ============================================================ */
   nav.main-nav {
     position: sticky;
@@ -206,8 +168,8 @@
     margin: 0 auto;
     display: flex;
     align-items: center;
-    gap: 0.25rem;
-    padding: 0.45rem 1.2rem;
+    gap: 0.35rem;
+    padding: 0.5rem 1.5rem;
     overflow-x: auto;
     scrollbar-width: thin;
   }
@@ -218,15 +180,15 @@
     background: transparent;
     border: 1px solid transparent;
     color: var(--text-muted);
-    padding: 0.5rem 0.8rem;
+    padding: 0.55rem 0.95rem;
     border-radius: var(--radius-md);
     cursor: pointer;
-    font-size: 0.88rem;
+    font-size: 0.92rem;
     font-weight: 600;
     white-space: nowrap;
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.45rem;
     transition: all 0.15s ease;
   }
   nav button.nav-btn:hover {
@@ -239,9 +201,9 @@
   }
   nav button.nav-btn .pill-num {
     background: rgba(0,0,0,0.08);
-    padding: 0.1rem 0.35rem;
-    border-radius: 3px;
-    font-size: 0.76rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.78rem;
     font-family: var(--font-mono);
   }
   nav button.nav-btn.active .pill-num {
@@ -557,6 +519,63 @@
   }
 
   /* ============================================================
+     ACORDEONES DE DETALLES TECNICOS (MODULOS 6 Y 7)
+     ============================================================ */
+  .detail-accordion {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    margin-top: 0.9rem;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: all 0.2s ease;
+  }
+  .detail-accordion[open] {
+    border-color: var(--primary-light);
+    box-shadow: var(--shadow-md);
+  }
+  .detail-accordion-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 1.2rem;
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--text-main);
+    cursor: pointer;
+    background: var(--bg-card);
+    user-select: none;
+    list-style: none;
+  }
+  .detail-accordion-summary::-webkit-details-marker {
+    display: none;
+  }
+  .detail-accordion-summary:hover {
+    background: var(--bg-card-subtle);
+    color: var(--primary);
+  }
+  .detail-accordion-summary .toggle-indicator {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--primary);
+    padding: 0.2rem 0.55rem;
+    background: var(--primary-soft);
+    border-radius: var(--radius-sm);
+    margin-left: 0.5rem;
+  }
+  .detail-accordion[open] .detail-accordion-summary .toggle-indicator::after {
+    content: 'Ocultar';
+  }
+  .detail-accordion:not([open]) .detail-accordion-summary .toggle-indicator::after {
+    content: 'Desplegar';
+  }
+  .detail-accordion-content {
+    padding: 1.25rem;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-body);
+  }
+
+  /* ============================================================
      GRAFICOS INTERACTIVOS (CHART.JS)
      ============================================================ */
   .chart-container-card {
@@ -678,19 +697,6 @@
   }
 
   /* ============================================================
-     FOOTER
-     ============================================================ */
-  footer {
-    background: var(--bg-card);
-    border-top: 1px solid var(--border-color);
-    padding: 1.8rem 1.5rem;
-    text-align: center;
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    margin-top: auto;
-  }
-
-  /* ============================================================
      ESTILOS DE IMPRESION FORMAL
      ============================================================ */
   @media print {
@@ -714,58 +720,37 @@
         <span class="header-badge"><strong>Materia:</strong> Metodos Numericos (INF373)</span>
         <span class="header-badge"><strong>Docente:</strong> Lic. Brigida Alexandra Carvajal Blanco</span>
         <span class="header-badge"><strong>Gestion:</strong> II / 2026</span>
-        <span class="header-badge"><strong>Mencion:</strong> Ingenieria de Sistemas / Informatica - UMSA</span>
-        <span class="header-badge"><strong>Sistema:</strong> 5x5 Simetrico y Definido Positivo (n = 5 &ge; 4)</span>
-      </div>
+       </div>
     </div>
     <div class="header-actions">
-      <button class="btn-header" id="btn-print" title="Imprimir o generar informe">
-        Imprimir Informe
+      <button class="btn-header" id="btn-print" title="Imprimir o exportar reporte">
+        Imprimir Reporte
       </button>
     </div>
   </div>
 </header>
 
-<!-- BARRA DE NAVEGACION POR MODULOS (10 SECCIONES SEGUN CONSIGNA) -->
+<!-- BARRA DE NAVEGACION FLUIDA Y ORGANIZADA (5 VISTAS LOGICAS QUE CUMPLEN LA CONSIGNA) -->
 <nav class="main-nav" id="main-nav">
   <div class="nav-inner">
-    <button class="nav-btn active" data-tab="sec-1-inicio"><span class="pill-num">1</span> Inicio</button>
-    <button class="nav-btn" data-tab="sec-2-caso"><span class="pill-num">2</span> Caso de estudio</button>
-    <button class="nav-btn" data-tab="sec-3-formulacion"><span class="pill-num">3</span> Formulacion</button>
-    <button class="nav-btn" data-tab="sec-4-entrada"><span class="pill-num">4</span> Entrada de datos</button>
-    <button class="nav-btn" data-tab="sec-5-escenarios"><span class="pill-num">5</span> Tres escenarios</button>
-    <button class="nav-btn" data-tab="sec-6-referencia"><span class="pill-num">6</span> Solucion de referencia</button>
-    <button class="nav-btn" data-tab="sec-7-gcp-gc"><span class="pill-num">7</span> GCP vs GC</button>
-    <button class="nav-btn" data-tab="sec-8-errores"><span class="pill-num">8</span> Analisis de errores</button>
-    <button class="nav-btn" data-tab="sec-tabla-comparativa"><span class="pill-num">8B</span> Tabla comparativa</button>
-    <button class="nav-btn" data-tab="sec-9-qa"><span class="pill-num">9</span> Modulo QA</button>
-    <button class="nav-btn" data-tab="sec-10-conclusiones"><span class="pill-num">10</span> Conclusiones y Referencias</button>
+    <button class="nav-btn active" data-tab="tab-caso-formulacion"><span class="pill-num">1</span> Caso y Formulacion</button>
+    <button class="nav-btn" data-tab="tab-simulador"><span class="pill-num">2</span> Simulador Interactivo</button>
+    <button class="nav-btn" data-tab="tab-tabla-comparativa"><span class="pill-num">3</span> Tabla Comparativa Oficial</button>
+    <button class="nav-btn" data-tab="tab-qa"><span class="pill-num">4</span> Modulo de Pruebas QA</button>
+    <button class="nav-btn" data-tab="tab-conclusiones"><span class="pill-num">5</span> Conclusiones y Referencias</button>
   </div>
 </nav>
 
 <main>
 
 <!-- ============================================================
-     SECCION 1: INICIO (CONSIGNA SECCION 7.1)
+     PESTAÑA 1: CASO Y FORMULACIÓN (MODULOS 1, 2 Y 3 DE LA CONSIGNA)
      ============================================================ -->
-<section id="sec-1-inicio" class="tab-panel active">
-  <h2 class="section-title">1. Inicio</h2>
+<section id="tab-caso-formulacion" class="tab-panel active">
+  <h2 class="section-title">Modulo 1: Inicio y Sintesis del Caso Financiero</h2>
   <p class="lead-text">
     Este proyecto implementa una aplicacion web interactiva de calculo cientifico para resolver el problema de <strong>asignacion optima de capital de trabajo</strong> entre cinco lineas de servicio de una empresa de transporte, logistica y almacenamiento en el eje troncal. Se aplica el <strong>Metodo de Gradientes Conjugados Precondicionado (GCP)</strong> descrito por <strong>Suñagua S. (2020)</strong>, contrastandolo con el algoritmo de Gradientes Conjugados simple (GC) y la solucion numerica directa de referencia mediante Factorizacion de Cholesky.
   </p>
-
-  <div class="grid-3">
-    <div class="card">
-      <h3 class="card-title">Datos del Estudiante y Mencion</h3>
-      <p style="font-size:0.92rem; line-height:1.8;">
-        <strong>Estudiante:</strong> Joaquin Nicolas Paco Alanoca<br>
-        <strong>Materia:</strong> Metodos Numericos (INF373)<br>
-        <strong>Docente:</strong> Lic. Brigida Alexandra Carvajal Blanco<br>
-        <strong>Gestion Academica:</strong> II / 2026<br>
-        <strong>Carrera:</strong> Licenciatura en Informatica - UMSA<br>
-        <strong>Mencion Academica:</strong> Ingenieria de Sistemas / Ingenieria de Software
-      </p>
-    </div>
 
     <div class="card">
       <h3 class="card-title">Sintesis del Caso Financiero</h3>
@@ -774,46 +759,9 @@
       </p>
     </div>
 
-    <div class="card">
-      <h3 class="card-title">Aporte Especifico de la Mencion</h3>
-      <p style="font-size:0.92rem;">
-        Desarrollo de una arquitectura SPA (Single Page Application) reactiva sin dependencias de backend, con renderizado dinamico con Chart.js, formulas matematicas tipograficas con KaTeX, auditoria de condicionamiento espectral, verificacion de pruebas de software automatizadas (QA) y exportacion estructurada a CSV e impresion.
-      </p>
-    </div>
-  </div>
+    
 
-  <div class="card">
-    <h3 class="card-title">Guia de Navegacion del Simulador</h3>
-    <div class="grid-2">
-      <div>
-        <h4 class="sub-title">Secciones de Modelado y Teoria</h4>
-        <ul style="margin-left: 1.2rem; font-size: 0.92rem; line-height: 1.8;">
-          <li><strong>2. Caso de estudio:</strong> Contexto logistico y procedencia de datos.</li>
-          <li><strong>3. Formulacion:</strong> Definicion de variables \(x_1 \dots x_5\) y verificacion SPD.</li>
-          <li><strong>5. Tres escenarios:</strong> Carga rapida de Ideal, Bajo estres y Mal condicionado.</li>
-          <li><strong>10. Conclusiones y Referencias:</strong> Analisis tecnico y cita formal de Suñagua (2020).</li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="sub-title">Secciones de Simulacion y Pruebas</h4>
-        <ul style="margin-left: 1.2rem; font-size: 0.92rem; line-height: 1.8;">
-          <li><strong>4. Entrada de datos:</strong> Edicion interactiva de coeficientes y parametros.</li>
-          <li><strong>6. Solucion de referencia:</strong> Despliegue del metodo directo de Cholesky.</li>
-          <li><strong>7. GCP vs GC:</strong> Comparacion iterativa y visor paso a paso del algoritmo Mz.</li>
-          <li><strong>8. Analisis de errores:</strong> Tabla y graficos de \(E_a, E_r, E_p\) y convergencia.</li>
-          <li><strong>8B. Tabla comparativa:</strong> Matriz obligatoria con los 11 indicadores de la consigna.</li>
-          <li><strong>9. Modulo QA:</strong> Ejecucion de los cuatro casos de prueba de software.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     SECCION 2: CASO DE ESTUDIO (CONSIGNA SECCION 7.2)
-     ============================================================ -->
-<section id="sec-2-caso" class="tab-panel">
-  <h2 class="section-title">2. Caso de Estudio</h2>
+  <h2 class="section-title" style="margin-top:2rem;">Modulo 2: Caso de Estudio (Contexto y Procedencia de Datos)</h2>
   <p class="lead-text">
     Una corporacion de transporte y logistica intermodal opera en el eje troncal conectando centros de distribucion y clientes finales. La toma de decisiones financieras sobre el capital de trabajo inmovilizado no puede realizarse de forma fragmentada debido a la <strong>fungibilidad e interdependencia de activos</strong>.
   </p>
@@ -824,7 +772,7 @@
   </figure>
 
   <div class="card">
-    <h3 class="card-title">2.1 Contexto Financiero y Decision Operativa</h3>
+    <h3 class="card-title">Contexto Financiero y Decision Operativa</h3>
     <p>
       El <strong>capital de trabajo</strong> (\(x_i\)) es la liquidez requerida para financiar el ciclo operativo corriente: combustible diésel, peajes interdepartamentales, salarios de choferes y estibadores, mantenimiento mecanico de flota, suministro electrico continuo para refrigeracion y provision para mermas en devoluciones.
     </p>
@@ -835,7 +783,7 @@
 
   <div class="grid-2">
     <div class="card">
-      <h3 class="card-title">2.2 Justificacion del Modelo</h3>
+      <h3 class="card-title">Justificacion del Modelo</h3>
       <p style="font-size:0.92rem; line-height:1.8;">
         • <strong>Acoplamiento operativo:</strong> Si se incrementa el transporte pesado (\(x_1\)), se satura la recepcion en almacen seco (\(x_3\)) y se requieren furgonetas de ultima milla (\(x_2\)) para evacuar carga.<br>
         • <strong>Flota fungible:</strong> Los conductores y talleres de mantenimiento atienden tanto a unidades pesadas como ligeras.<br>
@@ -844,27 +792,22 @@
     </div>
 
     <div class="card">
-      <h3 class="card-title">2.3 Procedencia de los Datos</h3>
+      <h3 class="card-title">Procedencia de los Datos</h3>
       <p style="font-size:0.92rem; line-height:1.8;">
         Los parametros de costos (\(a_{ii}\)) y coeficientes de friccion (\(a_{ij}\)) provienen de ratios de estructura de costos del sector logistico nacional:
         reportes de consumo de combustible por tonelada-kilometro, tarifas de peaje de Vias Bolivia, costos promedio de mantenimiento por kilometro y tarifas de bodegaje por metro cubico refrigerado. El vector \(b\) refleja el volumen de demanda contractual acordado para el periodo operativo.
       </p>
     </div>
   </div>
-</section>
 
-<!-- ============================================================
-     SECCION 3: FORMULACION (CONSIGNA SECCION 7.3)
-     ============================================================ -->
-<section id="sec-3-formulacion" class="tab-panel">
-  <h2 class="section-title">3. Formulacion Matematica</h2>
+  <h2 class="section-title" style="margin-top:2rem;">Modulo 3: Formulacion Matematica y Demostracion SPD</h2>
   <p class="lead-text">
     El equilibrio financiero de asignacion se formula como un sistema lineal de ecuaciones de orden \(n = 5\) (\(n \ge 4\)):
     \[ A x = b, \quad A \in \mathbb{R}^{5 \times 5}, \quad x, b \in \mathbb{R}^5 \]
   </p>
 
   <div class="card">
-    <h3 class="card-title">3.1 Definicion Explicita de las Variables de Decision (\(x_i\))</h3>
+    <h3 class="card-title">Definicion Explicita de las Variables de Decision (\(x_i\))</h3>
     <div class="table-responsive">
       <table>
         <thead>
@@ -912,17 +855,17 @@
   </div>
 
   <div class="card">
-    <h3 class="card-title">3.2 Interpretacion de los Coeficientes del Sistema</h3>
+    <h3 class="card-title">Interpretacion de los Coeficientes del Sistema</h3>
     <p>La ecuacion para la linea \(i\) se expresa como: \(a_{ii} x_i + \sum_{j \neq i} a_{ij} x_j = b_i\)</p>
     <ul style="margin-left: 1.3rem; margin-top: 0.5rem; line-height: 1.8; font-size: 0.92rem;">
       <li><strong>Coeficiente diagonal (\(a_{ii}\)):</strong> Costo unitario propio y directo de inmovilizacion de capital en la linea \(i\). Integra la tasa de costo de capital, depreciacion acelerada de activos especificos y gastos directos fijos. Es positivo y dominante.</li>
-      <li><strong>Coeficiente fuera de la diagonal (\(a_{ij} = a_{ji}\)):</strong> Tasa de acoplamiento operativo entre las lineas \(i\) y \(j\). Cuantifica el requerimiento adicional de capital inducido por la operacion conjunta de activos compartidos (muelles de carga compartidos, personal cruzado y rutas combinadas).</li>
+      <li><strong>Coeficiente fuera de la diagonal (\(a_{ij} = a_{ji}\)):</strong> Tasa de acoplamiento operativo entre las lineas \(i\) y \(j\). Cuantifica el requerimiento adicional de capital inducido por la operacion conjunta de activos compartidos.</li>
       <li><strong>Termino independiente (\(b_i\)):</strong> Cobertura operativa minima requerida por contrato para satisfacer la demanda de servicio proyectada para el ciclo corriente.</li>
     </ul>
   </div>
 
   <div class="card">
-    <h3 class="card-title">3.3 Demostracion de Propiedades de la Matriz A (Simetrica y Definida Positiva)</h3>
+    <h3 class="card-title">Demostracion de Propiedades de la Matriz A (Simetrica y Definida Positiva)</h3>
     <p style="font-size:0.92rem; margin-bottom:0.8rem;">
       Para que el funcional cuadratico \(\phi(x) = \frac{1}{2}x^T A x - b^T x\) posea un unico minimo global y los metodos de gradiente conjugado converjan monótonamente, la matriz \(A\) debe ser simetrica y definida positiva (SPD). Se verifica mediante tres vias independientes:
     </p>
@@ -958,16 +901,39 @@
 </section>
 
 <!-- ============================================================
-     SECCION 4: ENTRADA DE DATOS (CONSIGNA SECCION 7.4)
+     PESTAÑA 2: SIMULADOR INTERACTIVO COMPLETO (MODULOS 4, 5, 6, 7 Y 8)
      ============================================================ -->
-<section id="sec-4-entrada" class="tab-panel">
-  <h2 class="section-title">4. Entrada de Datos y Parametros de Ejecucion</h2>
+<section id="tab-simulador" class="tab-panel">
+  <!-- MODULO 5: SELECCION DE ESCENARIOS OFICIALES -->
+  <h2 class="section-title">Modulo 5: Seleccion de los Tres Escenarios Oficiales</h2>
   <p class="lead-text">
-    Interfaz reactiva para editar en tiempo real los coeficientes de la matriz \(A\) y el vector \(b\) (\(n = 5 \ge 4\)), configurar el vector inicial \(x_0\), tolerancia y precondicionador utilizado.
+    Haga clic en cualquiera de los tres escenarios para cargarlo instantaneamente con sus matrices y coberturas correspondientes.
+  </p>
+
+  <div class="scenario-btn-group" id="scenario-selector-group">
+    <div class="scenario-btn-card active" data-scenario="1">
+      <div class="sc-title"><span>1. Escenario Ideal</span> <span class="badge ok">Estable</span></div>
+      <div class="sc-desc">Costos equilibrados y acoplamientos moderados. Matriz estrictamente diagonal dominante (\(\kappa \approx 1.55\)).</div>
+    </div>
+    <div class="scenario-btn-card" data-scenario="2">
+      <div class="sc-title"><span>2. Bajo Estres Financiero</span> <span class="badge warn">Alza de Costos</span></div>
+      <div class="sc-desc">Incremento en costos operativos (+2I en diagonal) y mayor demanda de servicio (\(\kappa \approx 1.48\)).</div>
+    </div>
+    <div class="scenario-btn-card" data-scenario="3">
+      <div class="sc-title"><span>3. Mal Condicionado</span> <span class="badge err">Escalas Dispares</span></div>
+      <div class="sc-desc">Asimetria severa de activos: cadena de frio intensiva frente a logistica ligera (\(\kappa \approx 498.2\)).</div>
+    </div>
+  </div>
+
+  <div id="scenario-banner-info" class="msg-box info"></div>
+
+  <!-- MODULO 4: ENTRADA DE DATOS Y PARAMETROS DE EJECUCION -->
+  <h2 class="section-title" style="margin-top:2rem;">Modulo 4: Entrada de Datos y Parametros de Ejecucion</h2>
+  <p class="lead-text">
+    Edite interactivamente los coeficientes de la matriz \(A\) y el vector \(b\) (\(n = 5 \ge 4\)), configure \(x_0\), tolerancia y precondicionador. Al pulsar <strong>Ejecutar GCP y GC</strong>, los resultados de la simulacion se despliegan inmediatamente abajo.
   </p>
 
   <div class="card">
-    <h3 class="card-title">4.1 Edicion de la Matriz A (5x5) y Vector de Coberturas b</h3>
     <div class="grid-2">
       <div>
         <h4 class="sub-title">Matriz de Costos y Acoplamientos A (5x5)</h4>
@@ -993,7 +959,7 @@
   </div>
 
   <div class="card">
-    <h3 class="card-title">4.2 Parametros del Metodo y Controles de Ejecucion</h3>
+    <h3 class="card-title">Parametros de los Metodos y Controles de Ejecucion</h3>
     <div class="form-row">
       <div class="form-group">
         <label>Tolerancia Relativa (||r||_2 / ||b||_2)</label>
@@ -1030,209 +996,181 @@
 
     <div id="simulation-status-msg"></div>
   </div>
-</section>
 
-<!-- ============================================================
-     SECCION 5: TRES ESCENARIOS (CONSIGNA SECCION 7.5)
-     ============================================================ -->
-<section id="sec-5-escenarios" class="tab-panel">
-  <h2 class="section-title">5. Tres Escenarios Oficiales</h2>
-  <p class="lead-text">
-    Carga rapida y evaluacion comparativa de los tres escenarios financieros obligatorios: Ideal, Bajo estres y Mal condicionado.
-  </p>
-
-  <div class="scenario-btn-group" id="scenario-selector-group">
-    <div class="scenario-btn-card active" data-scenario="1">
-      <div class="sc-title"><span>1. Escenario Ideal</span> <span class="badge ok">Estable</span></div>
-      <div class="sc-desc">Costos equilibrados y acoplamientos moderados. Matriz estrictamente diagonal dominante (\(\kappa \approx 1.55\)).</div>
-    </div>
-    <div class="scenario-btn-card" data-scenario="2">
-      <div class="sc-title"><span>2. Bajo Estres Financiero</span> <span class="badge warn">Alza de Costos</span></div>
-      <div class="sc-desc">Incremento en costos operativos (+2I en diagonal) y mayor demanda de servicio (\(\kappa \approx 1.48\)).</div>
-    </div>
-    <div class="scenario-btn-card" data-scenario="3">
-      <div class="sc-title"><span>3. Mal Condicionado</span> <span class="badge err">Escalas Dispares</span></div>
-      <div class="sc-desc">Asimetria severa de activos: cadena de frio intensiva frente a logistica ligera (\(\kappa \approx 498.2\)).</div>
-    </div>
-  </div>
-
-  <div id="scenario-banner-info" class="msg-box info"></div>
-
-  <div class="grid-3" id="scenarios-showcase-grid" style="margin-top:1.2rem;"></div>
-</section>
-
-<!-- ============================================================
-     SECCION 6: SOLUCION DE REFERENCIA (CONSIGNA SECCION 7.6)
-     ============================================================ -->
-<section id="sec-6-referencia" class="tab-panel">
-  <h2 class="section-title">6. Solucion Numerica de Referencia (Metodo Directo de Cholesky)</h2>
-  <p class="lead-text">
-    Mapeo y despliegue del metodo directo de Factorizacion de Cholesky (\(A = L L^T\)) utilizado para obtener la solucion exacta de referencia \(x_{\text{ref}}\) y contrastar la precision de los algoritmos iterativos.
-  </p>
-
-  <div class="card">
-    <h3 class="card-title">6.1 Descomposicion de Cholesky: A = L L^T</h3>
-    <p style="font-size:0.92rem; margin-bottom:0.75rem;">
-      Dado que \(A\) es simetrica y definida positiva, se factoriza de forma exacta en una matriz triangular inferior \(L\) con diagonal estrictamente positiva:
+  <!-- RESULTADOS COMPLETOS DE LA SIMULACION (SE DESPLIEGAN INMEDIATAMENTE AL EJECUTAR) -->
+  <div id="simulation-results-container" style="margin-top:2rem;">
+    <h2 class="section-title">Resultados Clave y Visualizacion de la Simulacion</h2>
+    <p class="lead-text">
+      Evaluacion del comportamiento del sistema bajo el escenario seleccionado. Los graficos dinamicos y la tabla de soluciones se recalculan de forma reactiva.
     </p>
-    <div id="cholesky-matrix-display" class="table-responsive"></div>
-  </div>
+    
+    <!-- 1. KPIS INMEDIATOS -->
+    <div id="gcp-vs-gc-kpis" class="kpi-grid"></div>
 
-  <div class="grid-2">
+    <!-- 2. DIAGNOSTICO DINAMICO -->
+    <div id="gcp-vs-gc-insights"></div>
+
+    <!-- 3. VISUALIZACION GRAFICA INTERACTIVA (PRIORIZADA FRONT & CENTER) -->
+    <div class="chart-container-card">
+      <div class="chart-toolbar">
+        <div class="chart-nav-pills">
+          <button class="chart-pill active" data-chart-tab="conv">Curva de Convergencia</button>
+          <button class="chart-pill" data-chart-tab="alloc">Asignacion de Capital</button>
+          <button class="chart-pill" data-chart-tab="errors">Errores por Variable</button>
+          <button class="chart-pill" data-chart-tab="gain">Ganancia (GC - GCP)</button>
+          <button class="chart-pill" data-chart-tab="spectrum">Espectro de Autovalores</button>
+        </div>
+        <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+          <button class="btn btn-secondary btn-sm" id="btn-chart-scale-toggle">Escala Logaritmica</button>
+          <button class="btn btn-secondary btn-sm" id="btn-download-chart">Descargar PNG</button>
+        </div>
+      </div>
+
+      <div class="chart-canvas-box">
+        <canvas id="mainChartCanvas"></canvas>
+      </div>
+    </div>
+
+    <!-- 4. MODULO 8: TABLA PRINCIPAL DE ASIGNACION DE CAPITAL Y ERRORES -->
     <div class="card">
-      <h3 class="card-title">6.2 Sustitucion hacia Adelante: L y = b</h3>
-      <p style="font-size:0.92rem;">Resolucion del sistema triangular inferior intermedio:</p>
-      <div id="cholesky-forward-display" style="margin-top:0.5rem; font-family:var(--font-mono); font-size:0.92rem;"></div>
+      <h3 class="card-title">Modulo 8: Asignacion Optima de Capital y Analisis de Errores por Variable</h3>
+      <p style="font-size:0.92rem; color:var(--text-muted); margin-bottom:1rem;">
+        Comparacion directa de la solucion de referencia (Cholesky), GCP y GC simple, junto con los errores absoluto (\(E_a\)), relativo (\(E_r\)) y porcentual (\(E_p\)) para cada una de las 5 lineas operativas.
+      </p>
+      <div class="table-responsive">
+        <table id="table-errors-detail">
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Linea Operativa</th>
+              <th class="num">x_ref (Cholesky)</th>
+              <th class="num">x_GCP</th>
+              <th class="num">x_GC</th>
+              <th class="num">E_a (Absoluto)</th>
+              <th class="num">E_r (Relativo)</th>
+              <th class="num">E_p (%)</th>
+              <th>Participacion</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
     </div>
 
-    <div class="card">
-      <h3 class="card-title">6.3 Sustitucion hacia Atras: L^T x_ref = y</h3>
-      <p style="font-size:0.92rem;">Resolucion del sistema triangular superior para hallar el vector solucion de referencia:</p>
-      <div id="cholesky-backward-display" style="margin-top:0.5rem; font-family:var(--font-mono); font-size:0.92rem;"></div>
-    </div>
-  </div>
+    <!-- 5. DETALLES TECNICOS Y AUDITORIA (MODULOS 6 Y 7 EN ACORDEONES LIMPIOS) -->
+    <div style="margin-top: 1.5rem;">
+      <h3 class="sub-title" style="margin-bottom:0.6rem; color:var(--text-muted);">Auditoria Tecnica y Metodos Numericos Avanzados</h3>
 
-  <div class="card">
-    <h3 class="card-title">6.4 Vector Solucion de Referencia y Comprobacion de Residuo</h3>
-    <div class="table-responsive">
-      <table id="table-cholesky-summary">
-        <thead>
-          <tr>
-            <th>Variable</th>
-            <th>Linea Operativa</th>
-            <th class="num">x_ref (miles USD)</th>
-            <th class="num">b_calculado (A x_ref)</th>
-            <th class="num">b_objetivo</th>
-            <th class="num">Residuo Directo |b_calc - b_obj|</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+      <!-- DESPLEGABLE: MODULO 6 CHOLESKY -->
+      <details class="detail-accordion">
+        <summary class="detail-accordion-summary">
+          <span>Modulo 6: Solucion Directa de Referencia (Factorizacion de Cholesky \(A = L L^T\))</span>
+          <span class="toggle-indicator"></span>
+        </summary>
+        <div class="detail-accordion-content">
+          <p style="font-size:0.92rem; margin-bottom:0.75rem;">
+            Matriz triangular inferior \(L\) obtenida mediante el algoritmo de Cholesky (\(A = L L^T\)):
+          </p>
+          <div id="cholesky-matrix-display" class="table-responsive" style="margin-bottom:1rem;"></div>
+
+          <div class="grid-2" style="margin-bottom:1rem;">
+            <div class="card" style="margin:0;">
+              <h4 class="sub-title">Sustitucion hacia Adelante: \(L y = b\)</h4>
+              <div id="cholesky-forward-display" style="font-family:var(--font-mono); font-size:0.92rem;"></div>
+            </div>
+            <div class="card" style="margin:0;">
+              <h4 class="sub-title">Sustitucion hacia Atras: \(L^T x_{ref} = y\)</h4>
+              <div id="cholesky-backward-display" style="font-family:var(--font-mono); font-size:0.92rem;"></div>
+            </div>
+          </div>
+
+          <h4 class="sub-title">Verificacion de Residuo Directo (\(|A x_{ref} - b|\))</h4>
+          <div class="table-responsive">
+            <table id="table-cholesky-summary">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Linea Operativa</th>
+                  <th class="num">x_ref (miles USD)</th>
+                  <th class="num">b_calculado (A x_ref)</th>
+                  <th class="num">b_objetivo</th>
+                  <th class="num">Residuo Directo |b_calc - b_obj|</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <!-- DESPLEGABLE: MODULO 7 STEPPER -->
+      <details class="detail-accordion">
+        <summary class="detail-accordion-summary">
+          <span>Modulo 7: Inspector Paso a Paso del Algoritmo GCP (Suñagua, 2020: \(M z = r\))</span>
+          <span class="toggle-indicator"></span>
+        </summary>
+        <div class="detail-accordion-content">
+          <p style="font-size:0.92rem; color:var(--text-muted); margin-bottom:0.75rem;">
+            Evolucion detallada paso a paso del sistema precondicionado \(M z_k = r_k\), actualizacion de coeficientes \(\alpha_k\), \(\beta_k\) y direcciones conjugadas \(p_k\).
+          </p>
+          <div class="stepper-controls">
+            <div style="display: flex; gap: 0.4rem; align-items: center; flex-wrap:wrap;">
+              <button class="btn btn-secondary btn-sm" id="step-btn-first">Primero</button>
+              <button class="btn btn-secondary btn-sm" id="step-btn-prev">Anterior</button>
+              <button class="btn btn-secondary btn-sm" id="step-btn-play">Reproducir</button>
+              <button class="btn btn-secondary btn-sm" id="step-btn-next">Siguiente</button>
+              <button class="btn btn-secondary btn-sm" id="step-btn-last">Ultimo</button>
+            </div>
+
+            <div class="stepper-slider-wrap">
+              <span style="font-weight: 700; font-size: 0.88rem;">Iteracion: <strong id="step-display-num" style="color:var(--primary); font-family:var(--font-mono);">0</strong> / <span id="step-display-max" style="font-family:var(--font-mono);">0</span></span>
+              <input type="range" id="step-slider" min="0" max="0" value="0">
+            </div>
+          </div>
+
+          <div id="step-details-container"></div>
+        </div>
+      </details>
+
+      <!-- DESPLEGABLE: HISTORIAL DE RESIDUOS -->
+      <details class="detail-accordion">
+        <summary class="detail-accordion-summary">
+          <span>Historial Completo de Residuos por Iteracion (\(r_k\): GC vs GCP)</span>
+          <span class="toggle-indicator"></span>
+        </summary>
+        <div class="detail-accordion-content">
+          <div style="max-height: 280px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+            <table id="table-iterations-history">
+              <thead style="position: sticky; top: 0; z-index: 2;">
+                <tr>
+                  <th class="num">Iteracion k</th>
+                  <th class="num">Residuo GC Simple</th>
+                  <th class="num">Residuo GCP (Precond.)</th>
+                  <th class="num">Ganancia (GC - GCP)</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </details>
     </div>
   </div>
 </section>
 
 <!-- ============================================================
-     SECCION 7: GCP VS GC (CONSIGNA SECCION 7.7)
+     PESTAÑA 3: TABLA COMPARATIVA OFICIAL (CONSIGNA SECCION 8)
      ============================================================ -->
-<section id="sec-7-gcp-gc" class="tab-panel">
-  <h2 class="section-title">7. Comparacion GCP vs GC y Visor Paso a Paso</h2>
-  <p class="lead-text">
-    Despliegue de vectores aproximados, numero de iteraciones, residuos finales y diagnósticos comparativos entre Gradientes Conjugados Precondicionado (Suñagua, 2020) y GC simple.
-  </p>
-
-  <div id="gcp-vs-gc-kpis" class="kpi-grid"></div>
-
-  <div id="gcp-vs-gc-insights"></div>
-
-  <!-- VISOR PASO A PASO DEL ALGORITMO MZ -->
-  <div class="card">
-    <h3 class="card-title">Evolucion Iterativa Paso a Paso del Algoritmo GCP (Suñagua, 2020)</h3>
-    <p style="font-size:0.92rem; color:var(--text-muted);">
-      Use los controles o la barra de desplazamiento para examinar las operaciones vectoriales microscopicas en cada iteracion \(k\).
-    </p>
-
-    <div class="stepper-controls">
-      <div style="display: flex; gap: 0.4rem; align-items: center;">
-        <button class="btn btn-secondary btn-sm" id="step-btn-first">Primero</button>
-        <button class="btn btn-secondary btn-sm" id="step-btn-prev">Anterior</button>
-        <button class="btn btn-secondary btn-sm" id="step-btn-play">Reproducir</button>
-        <button class="btn btn-secondary btn-sm" id="step-btn-next">Siguiente</button>
-        <button class="btn btn-secondary btn-sm" id="step-btn-last">Ultimo</button>
-      </div>
-
-      <div class="stepper-slider-wrap">
-        <span style="font-weight: 700; font-size: 0.88rem;">Iteracion: <strong id="step-display-num" style="color:var(--primary); font-family:var(--font-mono);">0</strong> / <span id="step-display-max" style="font-family:var(--font-mono);">0</span></span>
-        <input type="range" id="step-slider" min="0" max="0" value="0">
-      </div>
-    </div>
-
-    <div id="step-details-container"></div>
-  </div>
-</section>
-
-<!-- ============================================================
-     SECCION 8: ANALISIS DE ERRORES (CONSIGNA SECCION 7.8)
-     ============================================================ -->
-<section id="sec-8-errores" class="tab-panel">
-  <h2 class="section-title">8. Analisis de Errores y Graficos Dinamicos</h2>
-  <p class="lead-text">
-    Tabla interactiva de errores absolutos (\(E_a\)), relativos (\(E_r\)) y porcentuales (\(E_p\)) por variable, residuo relativo global y graficos comparativos en Chart.js.
-  </p>
-
-  <div class="card">
-    <h3 class="card-title">8.1 Tabla de Errores por Variable</h3>
-    <div class="table-responsive">
-      <table id="table-errors-detail">
-        <thead>
-          <tr>
-            <th>Variable</th>
-            <th>Linea Operativa</th>
-            <th class="num">x_ref (Cholesky)</th>
-            <th class="num">x_GCP</th>
-            <th class="num">x_GC</th>
-            <th class="num">E_a (Absoluto)</th>
-            <th class="num">E_r (Relativo)</th>
-            <th class="num">E_p (%)</th>
-            <th>Participacion Presupuestaria</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="chart-container-card">
-    <div class="chart-toolbar">
-      <div class="chart-nav-pills">
-        <button class="chart-pill active" data-chart-tab="conv">Curva de Convergencia</button>
-        <button class="chart-pill" data-chart-tab="alloc">Asignacion de Capital</button>
-        <button class="chart-pill" data-chart-tab="errors">Errores por Variable</button>
-        <button class="chart-pill" data-chart-tab="gain">Ganancia (GC - GCP)</button>
-        <button class="chart-pill" data-chart-tab="spectrum">Espectro de Autovalores</button>
-      </div>
-      <div style="display:flex; gap:0.4rem;">
-        <button class="btn btn-secondary btn-sm" id="btn-chart-scale-toggle">Escala Logaritmica</button>
-        <button class="btn btn-secondary btn-sm" id="btn-download-chart">Descargar PNG</button>
-      </div>
-    </div>
-
-    <div class="chart-canvas-box">
-      <canvas id="mainChartCanvas"></canvas>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3 class="card-title">8.2 Detalle de Iteraciones y Residuos</h3>
-    <div style="max-height: 320px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-      <table id="table-iterations-history">
-        <thead style="position: sticky; top: 0; z-index: 2;">
-          <tr>
-            <th class="num">Iteracion k</th>
-            <th class="num">Residuo GC Simple</th>
-            <th class="num">Residuo GCP (Precond.)</th>
-            <th class="num">Ganancia (GC - GCP)</th>
-            <th>Estado</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     SECCION 8B: TABLA COMPARATIVA OBLIGATORIA (CONSIGNA SECCION 8)
-     ============================================================ -->
-<section id="sec-tabla-comparativa" class="tab-panel">
-  <h2 class="section-title">8B. Tabla Comparativa Obligatoria (Consigna Seccion 8)</h2>
+<section id="tab-tabla-comparativa" class="tab-panel">
+  <h2 class="section-title">Seccion 8: Tabla Comparativa Obligatoria</h2>
   <p class="lead-text">
     Estructura comparativa oficial estipulada en la Seccion 8 de la consigna. Presenta los 11 indicadores obligatorios en filas evaluados sobre los tres escenarios en columnas.
   </p>
 
   <div class="card">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.6rem;">
-      <h3 class="card-title" style="margin:0;">Matriz Comparativa de los Tres Escenarios</h3>
+      <h3 class="card-title" style="margin:0;">Matriz Comparativa Oficial de los Tres Escenarios</h3>
       <button class="btn btn-outline btn-sm" id="btn-force-compare-all">Recalcular y Actualizar Todos</button>
     </div>
 
@@ -1261,10 +1199,10 @@
 </section>
 
 <!-- ============================================================
-     SECCION 9: MODULO QA (CONSIGNA SECCION 7.9 Y SECCION 9)
+     PESTAÑA 4: MODULO DE PRUEBAS QA (CONSIGNA SECCION 9)
      ============================================================ -->
-<section id="sec-9-qa" class="tab-panel">
-  <h2 class="section-title">9. Modulo de Pruebas de Software (QA)</h2>
+<section id="tab-qa" class="tab-panel">
+  <h2 class="section-title">Modulo 9: Pruebas de Software Obligatorias (Modulo QA)</h2>
   <p class="lead-text">
     Verificacion y control de calidad de software mediante la ejecucion comprobable de los cuatro casos de prueba obligatorios requeridos por la consigna (Entrada, Resultado Esperado, Resultado Obtenido y Conclusion).
   </p>
@@ -1275,7 +1213,7 @@
 
   <div class="grid-2">
     <div class="card">
-      <h3 class="card-title">9.1 Caso 1: Carga de Escenarios</h3>
+      <h3 class="card-title">Prueba 1: Carga de Escenarios</h3>
       <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:0.75rem;">
         Verificacion de ejecucion correcta de los escenarios Ideal, Bajo Estres y Mal Condicionado, alcanzando la tolerancia sin desbordamientos.
       </p>
@@ -1284,7 +1222,7 @@
     </div>
 
     <div class="card">
-      <h3 class="card-title">9.2 Caso 2: Validacion de Matriz No Valida</h3>
+      <h3 class="card-title">Prueba 2: Validacion de Matriz No Valida</h3>
       <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:0.75rem;">
         Introduccion deliberada de una matriz no simetrica o no definida positiva, comprobando que el sistema captura el error y notifica al usuario sin colapsar.
       </p>
@@ -1293,7 +1231,7 @@
     </div>
 
     <div class="card">
-      <h3 class="card-title">9.3 Caso 3: Edicion Dinamica</h3>
+      <h3 class="card-title">Prueba 3: Edicion Dinamica</h3>
       <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:0.75rem;">
         Modificacion manual de coeficientes en la interfaz y verificacion del recalculo instantaneo de la solucion de referencia, GCP, errores y \(\kappa(A)\).
       </p>
@@ -1302,7 +1240,7 @@
     </div>
 
     <div class="card">
-      <h3 class="card-title">9.4 Caso 4: Comparativa de Precondicionamiento</h3>
+      <h3 class="card-title">Prueba 4: Comparativa de Precondicionamiento</h3>
       <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:0.75rem;">
         Verificacion de que GCP alcance la tolerancia en menor o igual numero de iteraciones que GC simple en el escenario mal condicionado.
       </p>
@@ -1313,7 +1251,7 @@
 
   <div class="card">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
-      <h3 class="card-title" style="margin:0;">9.5 Bitacora Estandar de Control de Calidad</h3>
+      <h3 class="card-title" style="margin:0;">Bitacora Estandar de Control de Calidad</h3>
       <button class="btn btn-secondary btn-sm" id="btn-clear-qa-log">Limpiar Bitacora</button>
     </div>
     <div class="table-responsive">
@@ -1335,14 +1273,14 @@
 </section>
 
 <!-- ============================================================
-     SECCION 10: CONCLUSIONES Y REFERENCIAS (CONSIGNA SECCION 7.10)
+     PESTAÑA 5: CONCLUSIONES Y REFERENCIAS (MODULO 10 DE LA CONSIGNA)
      ============================================================ -->
-<section id="sec-10-conclusiones" class="tab-panel">
-  <h2 class="section-title">10. Conclusiones y Referencias</h2>
+<section id="tab-conclusiones" class="tab-panel">
+  <h2 class="section-title">Modulo 10: Conclusiones y Referencias</h2>
 
   <div class="grid-2">
     <div class="card">
-      <h3 class="card-title">10.1 Interpretacion Tecnica y Matematica</h3>
+      <h3 class="card-title">Interpretacion Tecnica y Matematica</h3>
       <ul style="margin-left: 1.2rem; line-height: 1.8; font-size: 0.92rem;">
         <li><strong>Convergencia de Suñagua (2020):</strong> La implementacion del algoritmo Mz precondicionado verifica que no se requiere invertir explícitamente la matriz \(M\); dos sustituciones triangulares por iteracion bastan para reducir el residuo relativo por debajo de \(10^{-6}\).</li>
         <li><strong>Efecto del precondicionador diagonal (Jacobi):</strong> En el Escenario 3, el mal escalamiento diagonal eleva \(\kappa(A)\) a 498.2. Al escalar por \(1/\sqrt{a_{ii}}\), el condicionamiento efectivo se comprime a \(\kappa(M^{-1}A) \approx 1.15\), reduciendo las iteraciones a la cota teorica minima.</li>
@@ -1351,7 +1289,7 @@
     </div>
 
     <div class="card">
-      <h3 class="card-title">10.2 Interpretacion Financiera de los Resultados</h3>
+      <h3 class="card-title">Interpretacion Financiera de los Resultados</h3>
       <ul style="margin-left: 1.2rem; line-height: 1.8; font-size: 0.92rem;">
         <li><strong>Fungibilidad y costo cruzado:</strong> Decidir el capital de trabajo de forma aislada subestima el costo de liquidez; el acoplamiento (\(a_{ij}\)) refleja fielmente los cuellos de botella de la infraestructura compartida.</li>
         <li><strong>Resiliencia frente al estres:</strong> En el Escenario 2, un aumento del 19.8% en el requerimiento total de capital (de 580k a 695k USD) no deteriora el condicionamiento (\(\kappa \approx 1.48\)), demostrando que la inflacion de costos operativos preserva la solvencia matematica del modelo.</li>
@@ -1361,7 +1299,7 @@
   </div>
 
   <div class="card">
-    <h3 class="card-title">10.3 Referencias Academicas y Fuentes de Datos</h3>
+    <h3 class="card-title">Referencias Academicas y Fuentes de Datos</h3>
     <ul style="margin-left: 1.2rem; line-height: 1.9; font-size: 0.92rem;">
       <li><strong>Suñagua S., P. (2020).</strong> <em>Metodo de Gradientes Conjugados Precondicionado</em>. Revista Boliviana de Matematica, Carrera de Matematica, Universidad Mayor de San Andres (UMSA), Vol. 04, pp. 2–7.</li>
       <li><strong>Golub, G. H., & Van Loan, C. F. (2013).</strong> <em>Matrix Computations</em> (4th ed.). Johns Hopkins University Press.</li>
@@ -1374,15 +1312,9 @@
 
 </main>
 
-<footer>
-  <p><strong>Simulador GCP - Metodos Numericos INF373</strong> - Carrera de Informatica - Universidad Mayor de San Andres (UMSA)</p>
-  <p style="margin-top: 0.25rem; font-size: 0.82rem; color: var(--text-subtle);">Gestion II / 2026 - Despliegue autocontenido para GitHub Pages</p>
-</footer>
-
 <!-- ============================================================
      MOTOR NUMERICO Y CONTROLADOR DE INTERFAZ
-     ============================================================ */
--->
+     ============================================================ -->
 <script>
 'use strict';
 
@@ -1776,13 +1708,12 @@ function runSimulationCore(A, b, x0, tol, maxIter, precondType, precondParams) {
 }
 
 /* ============================================================
-   9. AUDITORIA SPD EN VIVO (SECCION 3)
+   9. AUDITORIA SPD EN VIVO
    ============================================================ */
 function updateSpdLiveAudit(A) {
   const container = document.getElementById('spd-live-audit');
   if (!container) return;
 
-  const isSymm = isSymmetric(A);
   let gershOk = true;
   for (let i = 0; i < A.length; i++) {
     let off = 0;
@@ -1826,15 +1757,92 @@ function updateSpdLiveAudit(A) {
 }
 
 /* ============================================================
-   10. DESPLIEGUE DE SOLUCION DE REFERENCIA (SECCION 6)
+   10. DESPLIEGUE COMPLETO DE RESULTADOS EN EL SIMULADOR
    ============================================================ */
-function renderReferenceSection(res) {
-  const L = res.cholesky.L;
-  const y = res.cholesky.y;
-  const xref = res.ref;
-  const b = res.b;
+function renderSimulationResults(res) {
+  const gc = res.gc;
+  const gcp = res.gcp;
+  const speedup = gc.iterations / gcp.iterations;
+  const kappaRed = ((res.kappaA - res.kappaMA) / res.kappaA) * 100;
+  const totalCap = res.ref.reduce((a, b) => a + b, 0);
 
-  // 6.1 Matriz L
+  // 1. KPIs
+  const kpisWrap = document.getElementById('gcp-vs-gc-kpis');
+  if (kpisWrap) {
+    kpisWrap.innerHTML = `
+      <div class="kpi-card highlight">
+        <div class="kpi-label">Iteraciones GCP</div>
+        <div class="kpi-value">${gcp.iterations}</div>
+        <div class="kpi-sub">vs ${gc.iterations} de GC simple</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Factor Aceleracion</div>
+        <div class="kpi-value">${speedup.toFixed(2)}x</div>
+        <div class="kpi-sub">${speedup > 1 ? 'GCP reduce iteraciones' : 'Rendimiento parejo'}</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">kappa(A) Original</div>
+        <div class="kpi-value">${fmt(res.kappaA, 3)}</div>
+        <div class="kpi-sub">${res.kappaA > 100 ? 'Mal condicionado' : 'Bien condicionado'}</div>
+      </div>
+      <div class="kpi-card ${res.kappaMA < res.kappaA ? 'success-highlight' : ''}">
+        <div class="kpi-label">kappa(M^-1 A) Precond.</div>
+        <div class="kpi-value">${fmt(res.kappaMA, 3)}</div>
+        <div class="kpi-sub">${kappaRed > 0 ? 'Compresion de ' + kappaRed.toFixed(1) + '%' : 'Sin reduccion'}</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Residuo Final GCP</div>
+        <div class="kpi-value" style="font-size:1.15rem;">${gcp.residual.toExponential(3)}</div>
+        <div class="kpi-sub">${gcp.residual < res.tol ? 'Tolerancia alcanzada' : 'No convergio'}</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Capital Total</div>
+        <div class="kpi-value" style="font-size:1.15rem;">${fmtMoney(totalCap)}</div>
+        <div class="kpi-sub">Sumatoria de asignacion</div>
+      </div>
+    `;
+  }
+
+  // 2. Diagnóstico Dinámico
+  const insightsWrap = document.getElementById('gcp-vs-gc-insights');
+  if (insightsWrap) {
+    let maxIdx = 0;
+    for (let i = 1; i < res.ref.length; i++) if (res.ref[i] > res.ref[maxIdx]) maxIdx = i;
+    const lineNames = [
+      'Transporte de carga pesada',
+      'Distribucion urbana',
+      'Almacenaje seco',
+      'Cadena de frio',
+      'Logistica inversa'
+    ];
+    const maxShare = (res.ref[maxIdx] / totalCap) * 100;
+
+    insightsWrap.innerHTML = `
+      <div class="insight-panel">
+        <h4>Diagnostico Tecnico y Financiero de la Simulacion</h4>
+        <div class="insight-list">
+          <div class="insight-item">
+            <strong>Gestion Financiera de Activos y Liquidez</strong>
+            <p>
+              El capital de trabajo total asciende a <strong>${fmtMoney(totalCap)}</strong>. La unidad con mayor absorcion de recursos es <strong>${lineNames[maxIdx]} (x_${maxIdx+1})</strong> concentrando el <strong>${maxShare.toFixed(1)}%</strong> del presupuesto corporativo.
+            </p>
+          </div>
+          <div class="insight-item">
+            <strong>Analisis de Eficiencia Numerica (GCP vs GC)</strong>
+            <p>
+              GCP alcanzo la tolerancia requerida (\(10^{-6}\)) en <strong>${gcp.iterations} iteraciones</strong>, frente a <strong>${gc.iterations} de GC</strong> (aceleracion de <strong>${speedup.toFixed(2)}x</strong>). El precondicionador redujo el numero de condicion de \(${fmt(res.kappaA, 2)}\) a \(${fmt(res.kappaMA, 2)}\).
+            </p>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // 3. Modulo 7: GCP vs GC y Visor Paso a Paso
+  initStepInspector(res.gcp.steps, res.tol);
+
+  // 4. Modulo 6: Cholesky
+  const L = res.cholesky.L;
   const lWrap = document.getElementById('cholesky-matrix-display');
   if (lWrap) {
     let html = '<table><thead><tr><th>Fila</th>';
@@ -1851,20 +1859,13 @@ function renderReferenceSection(res) {
     html += '</tbody></table>';
     lWrap.innerHTML = html;
   }
-
-  // 6.2 y 6.3 Sustituciones
   const fwd = document.getElementById('cholesky-forward-display');
-  if (fwd) {
-    fwd.innerHTML = y.map((val, idx) => `y_${idx+1} = ${fmt(val, 5)}`).join('<br>');
-  }
+  if (fwd) fwd.innerHTML = res.cholesky.y.map((val, idx) => `y_${idx+1} = ${fmt(val, 5)}`).join('<br>');
   const bwd = document.getElementById('cholesky-backward-display');
-  if (bwd) {
-    bwd.innerHTML = xref.map((val, idx) => `x_ref,${idx+1} = ${fmt(val, 5)} miles USD`).join('<br>');
-  }
+  if (bwd) bwd.innerHTML = res.ref.map((val, idx) => `x_ref,${idx+1} = ${fmt(val, 5)} miles USD`).join('<br>');
 
-  // 6.4 Resumen
-  const tbody = document.querySelector('#table-cholesky-summary tbody');
-  if (tbody) {
+  const cholTbody = document.querySelector('#table-cholesky-summary tbody');
+  if (cholTbody) {
     const lineNames = [
       'Transporte de carga pesada',
       'Distribucion urbana / ultima milla',
@@ -1872,106 +1873,105 @@ function renderReferenceSection(res) {
       'Cadena de frio',
       'Logistica inversa y devoluciones'
     ];
-    const bcalc = matVec(res.A, xref);
-    tbody.innerHTML = xref.map((val, idx) => {
-      const diff = Math.abs(bcalc[idx] - b[idx]);
+    const bcalc = matVec(res.A, res.ref);
+    cholTbody.innerHTML = res.ref.map((val, idx) => {
+      const diff = Math.abs(bcalc[idx] - res.b[idx]);
       return `
         <tr>
           <td><strong>x_${idx+1}</strong></td>
           <td>${lineNames[idx]}</td>
           <td class="num cell-highlight">${fmtMoney(val)}</td>
           <td class="num">${fmt(bcalc[idx], 4)}</td>
-          <td class="num">${fmt(b[idx], 4)}</td>
+          <td class="num">${fmt(res.b[idx], 4)}</td>
           <td class="num">${diff.toExponential(3)}</td>
         </tr>
       `;
     }).join('');
   }
+
+  // 5. Modulo 8: Errores y Graficos
+  const errTbody = document.querySelector('#table-errors-detail tbody');
+  if (errTbody) {
+    const lineNames = [
+      'Transporte de carga pesada',
+      'Distribucion urbana / ultima milla',
+      'Almacenaje seco y bodegaje',
+      'Cadena de frio',
+      'Logistica inversa y devoluciones'
+    ];
+    errTbody.innerHTML = res.errors.map((e, idx) => {
+      const share = (e.ref / totalCap) * 100;
+      return `
+        <tr>
+          <td><strong>x_${e.i}</strong></td>
+          <td>${lineNames[idx]}</td>
+          <td class="num cell-highlight">${fmtMoney(e.ref)}</td>
+          <td class="num">${fmtMoney(e.gcp)}</td>
+          <td class="num">${fmtMoney(e.gc)}</td>
+          <td class="num">${e.ea.toExponential(3)}</td>
+          <td class="num">${e.er === null ? 'no def.' : e.er.toExponential(3)}</td>
+          <td class="num">${e.ep === null ? 'no def.' : e.ep.toFixed(4) + '%'}</td>
+          <td style="min-width:140px;">
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <div style="flex:1; height:8px; background:var(--border-color); border-radius:4px; overflow:hidden;">
+                <div style="width:${Math.min(100, Math.max(0, share))}%; height:100%; background:var(--primary);"></div>
+              </div>
+              <span style="font-size:0.78rem; font-family:var(--font-mono);">${share.toFixed(1)}%</span>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  const histTbody = document.querySelector('#table-iterations-history tbody');
+  if (histTbody) {
+    const maxLen = Math.max(res.gc.history.length, res.gcp.history.length);
+    let rows = '';
+    for (let k = 0; k < maxLen; k++) {
+      const rGC = k < res.gc.history.length ? res.gc.history[k] : null;
+      const rGCP = k < res.gcp.history.length ? res.gcp.history[k] : null;
+      const diff = (rGC !== null && rGCP !== null) ? (rGC - rGCP) : null;
+      const ahead = diff !== null && diff > 0;
+      rows += `
+        <tr>
+          <td class="num">k = ${k}</td>
+          <td class="num">${rGC !== null ? rGC.toExponential(3) : '—'}</td>
+          <td class="num cell-highlight">${rGCP !== null ? rGCP.toExponential(3) : '—'}</td>
+          <td class="num" style="color:${ahead ? 'var(--success)' : 'inherit'};">
+            ${diff !== null ? (diff >= 0 ? '+' : '') + diff.toExponential(3) : '—'}
+          </td>
+          <td>
+            ${k === 0 ? '<span class="badge info">Inicial</span>' :
+              (rGCP !== null && rGCP < res.tol) ? '<span class="badge ok">GCP Convergio</span>' :
+              (rGC !== null && rGC < res.tol) ? '<span class="badge ok">GC Convergio</span>' :
+              ahead ? '<span class="badge ok">GCP Adelante</span>' : '<span class="badge info">Iterando</span>'}
+          </td>
+        </tr>
+      `;
+    }
+    histTbody.innerHTML = rows;
+  }
+
+  renderActiveChart(activeChartType);
+
+  // KaTeX re-render
+  if (window.renderMathInElement) {
+    try {
+      renderMathInElement(document.getElementById('simulation-results-container'), {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        throwOnError: false
+      });
+    } catch (e) {}
+  }
 }
 
 /* ============================================================
-   11. DESPLIEGUE GCP VS GC (SECCION 7)
-   ============================================================ */
-function renderGcpVsGcSection(res) {
-  const kpisWrap = document.getElementById('gcp-vs-gc-kpis');
-  const insightsWrap = document.getElementById('gcp-vs-gc-insights');
-  if (!kpisWrap || !insightsWrap) return;
-
-  const gc = res.gc;
-  const gcp = res.gcp;
-  const speedup = gc.iterations / gcp.iterations;
-  const kappaRed = ((res.kappaA - res.kappaMA) / res.kappaA) * 100;
-  const totalCap = res.ref.reduce((a, b) => a + b, 0);
-
-  kpisWrap.innerHTML = `
-    <div class="kpi-card highlight">
-      <div class="kpi-label">Iteraciones GCP</div>
-      <div class="kpi-value">${gcp.iterations}</div>
-      <div class="kpi-sub">vs ${gc.iterations} de GC simple</div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">Factor Aceleracion</div>
-      <div class="kpi-value">${speedup.toFixed(2)}x</div>
-      <div class="kpi-sub">${speedup > 1 ? 'GCP reduce iteraciones' : 'Rendimiento parejo'}</div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">kappa(A) Original</div>
-      <div class="kpi-value">${fmt(res.kappaA, 3)}</div>
-      <div class="kpi-sub">${res.kappaA > 100 ? 'Mal condicionado' : 'Bien condicionado'}</div>
-    </div>
-    <div class="kpi-card ${res.kappaMA < res.kappaA ? 'success-highlight' : ''}">
-      <div class="kpi-label">kappa(M^-1 A) Precond.</div>
-      <div class="kpi-value">${fmt(res.kappaMA, 3)}</div>
-      <div class="kpi-sub">${kappaRed > 0 ? 'Compresion de ' + kappaRed.toFixed(1) + '%' : 'Sin reduccion'}</div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">Residuo Final GCP</div>
-      <div class="kpi-value" style="font-size:1.15rem;">${gcp.residual.toExponential(3)}</div>
-      <div class="kpi-sub">${gcp.residual < res.tol ? 'Tolerancia alcanzada' : 'No convergio'}</div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">Capital Total</div>
-      <div class="kpi-value" style="font-size:1.15rem;">${fmtMoney(totalCap)}</div>
-      <div class="kpi-sub">Sumatoria de asignacion</div>
-    </div>
-  `;
-
-  let maxIdx = 0;
-  for (let i = 1; i < res.ref.length; i++) if (res.ref[i] > res.ref[maxIdx]) maxIdx = i;
-  const lineNames = [
-    'Transporte de carga pesada',
-    'Distribucion urbana',
-    'Almacenaje seco',
-    'Cadena de frio',
-    'Logistica inversa'
-  ];
-  const maxShare = (res.ref[maxIdx] / totalCap) * 100;
-
-  insightsWrap.innerHTML = `
-    <div class="insight-panel">
-      <h4>Diagnostico Tecnico y Financiero del Escenario</h4>
-      <div class="insight-list">
-        <div class="insight-item">
-          <strong>Gestion Financiera de Activos y Liquidez</strong>
-          <p>
-            El capital de trabajo total asciende a <strong>${fmtMoney(totalCap)}</strong>. La unidad con mayor absorcion de recursos es <strong>${lineNames[maxIdx]} (x_${maxIdx+1})</strong> concentrando el <strong>${maxShare.toFixed(1)}%</strong> del presupuesto corporativo.
-          </p>
-        </div>
-        <div class="insight-item">
-          <strong>Analisis de Eficiencia Numerica (GCP vs GC)</strong>
-          <p>
-            GCP alcanzo la tolerancia requerida (\(10^{-6}\)) en <strong>${gcp.iterations} iteraciones</strong>, frente a <strong>${gc.iterations} de GC</strong> (aceleracion de <strong>${speedup.toFixed(2)}x</strong>). El precondicionador redujo el numero de condicion de \(${fmt(res.kappaA, 2)}\) a \(${fmt(res.kappaMA, 2)}\).
-          </p>
-        </div>
-      </div>
-    </div>
-  `;
-
-  initStepInspector(res.gcp.steps, res.tol);
-}
-
-/* ============================================================
-   12. VISOR PASO A PASO (ALGORITMO MZ DE SUÑAGUA)
+   11. VISOR PASO A PASO (ALGORITMO MZ DE SUÑAGUA)
    ============================================================ */
 function initStepInspector(steps, tol) {
   stepperSteps = steps || [];
@@ -2122,80 +2122,7 @@ function setupStepControls() {
 }
 
 /* ============================================================
-   13. DESPLIEGUE DE ERRORES Y GRAFICOS (SECCION 8)
-   ============================================================ */
-function renderErrorsSection(res) {
-  const tbody = document.querySelector('#table-errors-detail tbody');
-  if (tbody) {
-    const lineNames = [
-      'Transporte de carga pesada',
-      'Distribucion urbana / ultima milla',
-      'Almacenaje seco y bodegaje',
-      'Cadena de frio',
-      'Logistica inversa y devoluciones'
-    ];
-    const totalCap = res.ref.reduce((a, b) => a + b, 0);
-
-    tbody.innerHTML = res.errors.map((e, idx) => {
-      const share = (e.ref / totalCap) * 100;
-      return `
-        <tr>
-          <td><strong>x_${e.i}</strong></td>
-          <td>${lineNames[idx]}</td>
-          <td class="num cell-highlight">${fmtMoney(e.ref)}</td>
-          <td class="num">${fmtMoney(e.gcp)}</td>
-          <td class="num">${fmtMoney(e.gc)}</td>
-          <td class="num">${e.ea.toExponential(3)}</td>
-          <td class="num">${e.er === null ? 'no def.' : e.er.toExponential(3)}</td>
-          <td class="num">${e.ep === null ? 'no def.' : e.ep.toFixed(4) + '%'}</td>
-          <td style="min-width:140px;">
-            <div style="display:flex; align-items:center; gap:0.5rem;">
-              <div style="flex:1; height:8px; background:var(--border-color); border-radius:4px; overflow:hidden;">
-                <div style="width:${Math.min(100, Math.max(0, share))}%; height:100%; background:var(--primary);"></div>
-              </div>
-              <span style="font-size:0.78rem; font-family:var(--font-mono);">${share.toFixed(1)}%</span>
-            </div>
-          </td>
-        </tr>
-      `;
-    }).join('');
-  }
-
-  // Historial de iteraciones
-  const histTbody = document.querySelector('#table-iterations-history tbody');
-  if (histTbody) {
-    const maxLen = Math.max(res.gc.history.length, res.gcp.history.length);
-    let rows = '';
-    for (let k = 0; k < maxLen; k++) {
-      const rGC = k < res.gc.history.length ? res.gc.history[k] : null;
-      const rGCP = k < res.gcp.history.length ? res.gcp.history[k] : null;
-      const diff = (rGC !== null && rGCP !== null) ? (rGC - rGCP) : null;
-      const ahead = diff !== null && diff > 0;
-      rows += `
-        <tr>
-          <td class="num">k = ${k}</td>
-          <td class="num">${rGC !== null ? rGC.toExponential(3) : '—'}</td>
-          <td class="num cell-highlight">${rGCP !== null ? rGCP.toExponential(3) : '—'}</td>
-          <td class="num" style="color:${ahead ? 'var(--success)' : 'inherit'};">
-            ${diff !== null ? (diff >= 0 ? '+' : '') + diff.toExponential(3) : '—'}
-          </td>
-          <td>
-            ${k === 0 ? '<span class="badge info">Inicial</span>' :
-              (rGCP !== null && rGCP < res.tol) ? '<span class="badge ok">GCP Convergio</span>' :
-              (rGC !== null && rGC < res.tol) ? '<span class="badge ok">GC Convergio</span>' :
-              ahead ? '<span class="badge ok">GCP Adelante</span>' : '<span class="badge info">Iterando</span>'}
-          </td>
-        </tr>
-      `;
-    }
-    histTbody.innerHTML = rows;
-  }
-
-  renderActiveChart(activeChartType);
-}
-
-/* ============================================================
-   14. GRAFICOS CON CHART.JS O FALLBACK SVG
+   12. GRAFICOS CON CHART.JS O FALLBACK SVG
    ============================================================ */
 function initChartToolbar() {
   document.querySelectorAll('.chart-pill').forEach(btn => {
@@ -2237,9 +2164,8 @@ function renderActiveChart(type) {
   if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
 
   const res = currentSimulationResult;
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  const textColor = isDark ? '#94a3b8' : '#475569';
-  const gridColor = isDark ? '#1e293b' : '#e2e8f0';
+  const textColor = '#475569';
+  const gridColor = '#e2e8f0';
 
   if (type === 'conv') {
     const maxLen = Math.max(res.gc.history.length, res.gcp.history.length);
@@ -2287,7 +2213,7 @@ function renderActiveChart(type) {
           title: {
             display: true,
             text: `Curva de Convergencia de Residuos Relativos (Escenario ${currentScenarioId})`,
-            color: isDark ? '#f8fafc' : '#0f172a',
+            color: '#0f172a',
             font: { size: 14, weight: '700' }
           },
           tooltip: {
@@ -2332,7 +2258,7 @@ function renderActiveChart(type) {
           title: {
             display: true,
             text: 'Asignacion de Capital por Linea Operativa (miles USD)',
-            color: isDark ? '#f8fafc' : '#0f172a',
+            color: '#0f172a',
             font: { size: 14, weight: '700' }
           },
           legend: { labels: { color: textColor } }
@@ -2366,7 +2292,7 @@ function renderActiveChart(type) {
           title: {
             display: true,
             text: 'Magnitud de Errores Numéricos de GCP',
-            color: isDark ? '#f8fafc' : '#0f172a',
+            color: '#0f172a',
             font: { size: 14, weight: '700' }
           },
           legend: { labels: { color: textColor } }
@@ -2409,7 +2335,7 @@ function renderActiveChart(type) {
           title: {
             display: true,
             text: 'Ganancia por Iteracion lograda por el Precondicionamiento',
-            color: isDark ? '#f8fafc' : '#0f172a',
+            color: '#0f172a',
             font: { size: 14, weight: '700' }
           },
           legend: { labels: { color: textColor } }
@@ -2443,7 +2369,7 @@ function renderActiveChart(type) {
           title: {
             display: true,
             text: 'Compresion Espectral: Autovalores de A frente a M^-1 A',
-            color: isDark ? '#f8fafc' : '#0f172a',
+            color: '#0f172a',
             font: { size: 14, weight: '700' }
           },
           legend: { labels: { color: textColor } }
@@ -2480,10 +2406,9 @@ function renderSvgFallback(container, type) {
   };
   const path = h => h.map((v, i) => `${i ? 'L' : 'M'}${xS(i).toFixed(2)},${yS(v).toFixed(2)}`).join(' ');
 
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  const bgSvg = isDark ? '#131b2e' : '#ffffff';
-  const textClr = isDark ? '#94a3b8' : '#475569';
-  const gridClr = isDark ? '#1e293b' : '#e2e8f0';
+  const bgSvg = '#ffffff';
+  const textClr = '#475569';
+  const gridClr = '#e2e8f0';
 
   let svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="background:${bgSvg}; width:100%; height:auto; border-radius:8px; border:1px solid var(--border-color);">`;
   svg += `<line x1="${m.left}" y1="${m.top+ih}" x2="${m.left+iw}" y2="${m.top+ih}" stroke="${textClr}" stroke-width="1.5"/>`;
@@ -2521,7 +2446,7 @@ function renderSvgFallback(container, type) {
 }
 
 /* ============================================================
-   15. TABLA COMPARATIVA OBLIGATORIA (SECCION 8 DE LA CONSIGNA)
+   13. TABLA COMPARATIVA OBLIGATORIA (SECCION 8 DE LA CONSIGNA)
    ============================================================ */
 function ensureAllScenariosComputed() {
   SCENARIOS.forEach(sc => {
@@ -2675,11 +2600,11 @@ function comparePrecondsForCurrentMatrix() {
   html += '</tbody></table>';
   wrap.innerHTML = html;
   card.style.display = 'block';
-  document.querySelector('[data-tab="sec-tabla-comparativa"]').click();
+  document.querySelector('[data-tab="tab-tabla-comparativa"]').click();
 }
 
 /* ============================================================
-   16. MODULO DE PRUEBAS DE SOFTWARE (QA)
+   14. MODULO DE PRUEBAS DE SOFTWARE (QA)
    ============================================================ */
 const qaLogData = [];
 function logQa(prueba, entrada, esperado, obtenido, conclusion) {
@@ -2833,7 +2758,7 @@ function runQa4() {
 }
 
 /* ============================================================
-   17. GESTION DE ESCENARIOS Y EJECUCION DESDE LA UI
+   15. GESTION DE ESCENARIOS Y EJECUCION DESDE LA UI
    ============================================================ */
 function loadScenario(id) {
   currentScenarioId = id;
@@ -2942,11 +2867,9 @@ function runFromUI() {
     scenarioOfficialResults[currentScenarioId] = res;
 
     statusMsg.className = 'msg-box ok';
-    statusMsg.innerHTML = `<strong>Simulacion Exitosa:</strong> GCP alcanzo la tolerancia en ${res.gcp.iterations} iteraciones y GC en ${res.gc.iterations} iteraciones (Tiempo: ${res.elapsedMs.toFixed(2)} ms).`;
+    statusMsg.innerHTML = `<strong>Simulacion Exitosa:</strong> GCP alcanzo la tolerancia en ${res.gcp.iterations} iteraciones y GC en ${res.gc.iterations} iteraciones (Tiempo: ${res.elapsedMs.toFixed(2)} ms). Los resultados se desplegaron inmediatamente abajo.`;
 
-    renderReferenceSection(res);
-    renderGcpVsGcSection(res);
-    renderErrorsSection(res);
+    renderSimulationResults(res);
     renderOfficialComparisonTable();
   } catch (err) {
     statusMsg.className = 'msg-box err';
@@ -2982,79 +2905,11 @@ function exportCsvReport() {
   link.click();
 }
 
-function buildScenariosShowcase() {
-  const container = document.getElementById('scenarios-showcase-grid');
-  if (!container) return;
-  container.innerHTML = '';
-
-  SCENARIOS.forEach(sc => {
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = `
-      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.4rem;">
-        <h4 style="margin:0; font-size:1.05rem; color:var(--primary);">${sc.id}. ${sc.name}</h4>
-        <span class="badge ${sc.id === 1 ? 'ok' : sc.id === 2 ? 'warn' : 'err'}">${sc.tag}</span>
-      </div>
-      <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:0.75rem;">${sc.desc}</p>
-      
-      <h4 class="sub-title">Matriz A (5x5)</h4>
-      <div class="table-responsive">
-        <table>
-          <tbody>
-            ${sc.A.map(row => `<tr>${row.map(v => `<td class="num">${fmt(v, 4)}</td>`).join('')}</tr>`).join('')}
-          </tbody>
-        </table>
-      </div>
-
-      <div class="kpi-grid" style="margin-top:0.6rem;">
-        <div class="kpi-card">
-          <div class="kpi-label">kappa(A)</div>
-          <div class="kpi-value" style="font-size:1.15rem;">${fmt(sc.kappa, 2)}</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Capital Total</div>
-          <div class="kpi-value" style="font-size:1.15rem;">${fmtMoney(sc.xref.reduce((a,b)=>a+b, 0))}</div>
-        </div>
-      </div>
-
-      <button class="btn btn-outline btn-sm" style="width:100%; margin-top:0.75rem;" onclick="loadScenario(${sc.id}); document.querySelector('[data-tab=\\'sec-4-entrada\\']').click(); runFromUI();">
-        Cargar y Simular Escenario ${sc.id}
-      </button>
-    `;
-    container.appendChild(card);
-  });
-}
-
 /* ============================================================
-   18. TEMA VISUAL (MODO OSCURO / CLARO)
-   ============================================================ */
-function initTheme() {
-  const saved = localStorage.getItem('gcp-sim-theme') || 'light';
-  document.documentElement.setAttribute('data-theme', saved);
-  updateThemeButtonUI(saved);
-
-  document.getElementById('btn-theme-toggle')?.addEventListener('click', () => {
-    const cur = document.documentElement.getAttribute('data-theme');
-    const nxt = cur === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', nxt);
-    localStorage.setItem('gcp-sim-theme', nxt);
-    updateThemeButtonUI(nxt);
-    if (currentSimulationResult) renderActiveChart(activeChartType);
-  });
-}
-
-function updateThemeButtonUI(theme) {
-  const text = document.getElementById('theme-text');
-  if (text) text.textContent = theme === 'dark' ? 'Modo Claro' : 'Modo Oscuro';
-}
-
-/* ============================================================
-   19. INICIALIZACION INTEGRAL AL CARGAR EL DOM
+   16. INICIALIZACION INTEGRAL
    ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
-  initTheme();
-
-  // Navegacion de pestañas
+  // Navegacion de pestañas principales (5 vistas logicas)
   document.querySelectorAll('nav.main-nav button.nav-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('nav.main-nav button.nav-btn').forEach(b => b.classList.remove('active'));
@@ -3064,6 +2919,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (target) {
         target.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (btn.dataset.tab === 'tab-simulador') {
+          setTimeout(() => {
+            if (chartInstance) chartInstance.resize();
+            renderActiveChart(activeChartType);
+          }, 60);
+        }
       }
     });
   });
@@ -3142,7 +3003,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inicializacion de componentes
   initChartToolbar();
   setupStepControls();
-  buildScenariosShowcase();
   loadScenario(1);
 
   // Ejecucion inicial por defecto
